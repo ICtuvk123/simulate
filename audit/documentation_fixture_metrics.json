@@ -1,0 +1,159 @@
+{
+  "evidence": "documentation_example_and_explicit_test_statuses",
+  "mode": "contract_test",
+  "run_id": "published-timing-example",
+  "seed": null,
+  "strategy_hash": "0514ca5ec4d8467d0e946e43cf65b0918f35ec32d31e152e46d9841c4ddcee5a",
+  "strategy_version": "protocol-smoke-v1",
+  "raw_log_path": "D:\\computer_learning\\jammer_search_q3\\audit\\documentation_fixture.jsonl",
+  "jammer_count": null,
+  "clear_count": 0,
+  "clear_ratio": null,
+  "total_time": 199,
+  "move_time": 180.0,
+  "RF_detection_time": 15,
+  "channel_switch_time": 1,
+  "optical_time": 3,
+  "clear_time": 0,
+  "accounted_total_time": 199.0,
+  "mean_time_per_clear": null,
+  "move_distance": 900.0,
+  "RF_detection_count": 3,
+  "channel_switch_count": 1,
+  "optical_count": 1,
+  "failed_action_count": 1,
+  "rejected_action_count": 0,
+  "optical_failed_count": 1,
+  "network_retry_count": 0,
+  "trajectory": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      300,
+      400
+    ],
+    [
+      300,
+      400
+    ],
+    [
+      300,
+      0
+    ],
+    [
+      300,
+      0
+    ]
+  ],
+  "per_channel_events": {
+    "1": [
+      {
+        "path": "/measure",
+        "request_id": "fixture-1",
+        "position": [
+          300,
+          400
+        ],
+        "channel": 1,
+        "rf_channel_after": 1,
+        "result": "no_signal",
+        "svd_deg": null,
+        "virtual_time_s": 105,
+        "move_distance": 500.0,
+        "move_time": 100.0,
+        "RF_detection_time": 5.0,
+        "channel_switch_time": 0,
+        "optical_time": 0.0,
+        "clear_time": 0.0,
+        "time_drift_s": 0.0
+      }
+    ],
+    "2": [
+      {
+        "path": "/measure",
+        "request_id": "fixture-2",
+        "position": [
+          300,
+          400
+        ],
+        "channel": 2,
+        "rf_channel_after": 2,
+        "result": "no_signal",
+        "svd_deg": null,
+        "virtual_time_s": 111,
+        "move_distance": 0.0,
+        "move_time": 0.0,
+        "RF_detection_time": 5.0,
+        "channel_switch_time": 1,
+        "optical_time": 0.0,
+        "clear_time": 0.0,
+        "time_drift_s": 0.0
+      },
+      {
+        "path": "/measure",
+        "request_id": "fixture-4",
+        "position": [
+          300,
+          0
+        ],
+        "channel": 2,
+        "rf_channel_after": 2,
+        "result": "no_signal",
+        "svd_deg": null,
+        "virtual_time_s": 199,
+        "move_distance": 0.0,
+        "move_time": 0.0,
+        "RF_detection_time": 5.0,
+        "channel_switch_time": 0,
+        "optical_time": 0.0,
+        "clear_time": 0.0,
+        "time_drift_s": 0.0
+      }
+    ],
+    "3": [
+      {
+        "path": "/clear",
+        "request_id": "fixture-3",
+        "position": [
+          300,
+          0
+        ],
+        "channel": 3,
+        "rf_channel_after": 2,
+        "result": "no_target_in_range",
+        "svd_deg": null,
+        "virtual_time_s": 194,
+        "move_distance": 400.0,
+        "move_time": 80.0,
+        "RF_detection_time": 0.0,
+        "channel_switch_time": 0,
+        "optical_time": 3.0,
+        "clear_time": 0.0,
+        "time_drift_s": 0.0
+      }
+    ],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": [],
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": [],
+    "17": [],
+    "18": [],
+    "19": [],
+    "20": []
+  },
+  "accounting_warnings": [],
+  "run_status": "exited",
+  "completion_proved": false,
+  "protocol_errors": []
+}
