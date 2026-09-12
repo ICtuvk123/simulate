@@ -21,6 +21,22 @@ ANGLE_PAD=1e-9
 DISTANCE_PAD=1e-5
 
 
+def valid_convex_polygon(poly):
+    try:
+        if len(poly)<3 or len(set(tuple(p) for p in poly))<3:return False
+        if any(len(p)!=2 or not all(math.isfinite(v) for v in p) for p in poly):return False
+        origin=poly[0]
+        area2=sum((a[0]-origin[0])*(b[1]-origin[1])-(a[1]-origin[1])*(b[0]-origin[0])
+                  for a,b in zip(poly,poly[1:]+poly[:1]))
+        if area2<=1e-12:return False
+        for a,b in zip(poly,poly[1:]+poly[:1]):
+            ex,ey=b[0]-a[0],b[1]-a[1];length=math.hypot(ex,ey)
+            if length<=1e-10:return False
+            if any(ex*(v[1]-a[1])-ey*(v[0]-a[0])<-1e-8*max(1.,length) for v in poly):return False
+        return True
+    except (TypeError,ValueError,IndexError):return False
+
+
 def merge(intervals):
     out=[]
     for lo,hi in sorted(intervals):
@@ -86,6 +102,7 @@ def partition(poly,axis,count):
 
 def contract(poly,positives,negatives,count=24):
     if not poly or not positives or not negatives:return None
+    if not valid_convex_polygon(poly):return None
     count=max(1,min(64,int(count)))
     angle=math.radians(positives[0][1]);axis=(math.cos(angle),math.sin(angle))
     positive_stations=[tuple(p) for p,_ in positives]
@@ -98,7 +115,7 @@ def contract(poly,positives,negatives,count=24):
     if not removed:return None
     if not kept:raise ValueError('All position cells contradicted legal history')
     result=hull(kept)
-    if len(result)<3:return None
+    if not valid_convex_polygon(result):return None
     # Taking an outer convex hull is safe. Interior holes may be deliberately
     # reintroduced here; unlike optical exclusions these are not marked absent.
     return dict(polygon=result,witness=dict(before_polygon=poly,positives=positives,
@@ -148,6 +165,7 @@ def independently_rejected(cell,positive_stations,range_witnesses):
 def verify_contraction(witness,polygon,positive_history,negative_history):
     try:
         if witness['method']!='continuous_heading_relaxation_v1':return False
+        if not valid_convex_polygon(witness['before_polygon']) or not valid_convex_polygon(polygon):return False
         positives=witness['positives'];negatives=witness['negatives']
         if not positives or not negatives:return False
         for s,beta in positives:

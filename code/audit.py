@@ -48,7 +48,7 @@ def audit_pair_witness(w,positive,negative):
 def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
-    positive={};negative={};region_checks=0;witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
+    positive={};negative={};prior_regions={};region_checks=0;witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
     for row in records:
         if row['event']=='response' and row['http_status']==200:
             response=json.loads(row['response_body'])
@@ -76,6 +76,9 @@ def postcheck(journal_path,evaluation):
             optical_covers+=1
         if row.get('reason')=='q4_negative_history_clip':
             ch=row['channel']
+            before=row['witness']['before_polygon'];prior=prior_regions.get(ch,[])
+            if len(before)!=len(prior) or any(math.dist(a,b)>1e-8 for a,b in zip(before,prior)):
+                errors.append('negative_contraction_region_chain_mismatch')
             if not verify_contraction(row['witness'],row['polygon'],positive.get(ch,[]),negative.get(ch,[])):
                 errors.append('invalid_continuous_negative_contraction')
             negative_contractions+=1
@@ -84,6 +87,7 @@ def postcheck(journal_path,evaluation):
             if ch not in truth or not contains(row['polygon'],truth[ch],tolerance=1e-3):
                 errors.append('truth_excluded_channel_'+str(ch))
             region_checks+=1
+            prior_regions[ch]=row['polygon']
     return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,
                 compact_optical_covers=optical_covers,negative_contractions=negative_contractions)
 

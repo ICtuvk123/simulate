@@ -25,6 +25,14 @@ class NegativeCellsTests(unittest.TestCase):
         w=range_witness(c,(250,20),[(0,0)])
         self.assertEqual(w['kind'],'positive_radius')
 
+    def test_degenerate_or_nonfinite_output_cannot_pass_witness(self):
+        positives=[((0.,0.),0.)];negatives=[(700.,60.),(830.,-40.)]
+        result=contract(clip_bearing(outer_disk(),(0,0),0),positives,negatives)
+        for bad in ([result['polygon'][0]]*3,[(0,0),(1,0),(2,0)],
+                    [(0,0),(1,0),(float('nan'),1)],list(reversed(result['polygon']))):
+            self.assertFalse(verify_contraction(result['witness'],bad,positives,negatives))
+        self.assertFalse(valid_convex_polygon([(0,0),(2,2),(0,2),(2,0)]))
+
     def test_conservative_boundary_headings_and_radius_extremes(self):
         rng=random.Random(719)
         retained=0
