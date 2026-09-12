@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
 from geometry import outer_disk,clip_bearing,contains
 from directional_geometry import paired_probe
-from lookahead import hypotheses,predicted_feedback,pair_cost,choose_pair,receives
+from lookahead import hypotheses,predicted_feedback,pair_cost,choose_pair,receives,shared_information_value
 
 
 class LookaheadTests(unittest.TestCase):
@@ -44,6 +44,12 @@ class LookaheadTests(unittest.TestCase):
         self.assertEqual(a,b);self.assertTrue(a['probe']['geometry_valid'])
         self.assertEqual(poly,before)
         self.assertTrue(a['assumptions_only_for_ranking'])
+    def test_shared_scan_far_away_has_cost_and_no_information_gain(self):
+        poly=clip_bearing(outer_disk(),(0,0),0);before=list(poly)
+        value=shared_information_value(poly,(-2000,0),[((0,0),0)],[])
+        self.assertAlmostEqual(value['branches']['no_signal'],1.)
+        self.assertAlmostEqual(value['estimated_gain_s'],-6.)
+        self.assertEqual(poly,before)
 
 
 if __name__=='__main__':unittest.main()

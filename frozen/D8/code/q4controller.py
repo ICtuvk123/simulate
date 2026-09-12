@@ -7,7 +7,7 @@ from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
 from q3client import ProtocolError
-from lookahead import choose_pair,shared_information_value
+from lookahead import choose_pair
 
 
 class Q4Controller:
@@ -89,28 +89,7 @@ class Q4Controller:
         for ch in channels:
             if len(set(self.polygons)|self.cleared)==16:break
             if (ch,tuple(point)) not in self.measured:self.measure(point,ch,'search')
-        self.share_at_actual_station(point)
         self.refresh()
-
-    def share_at_actual_station(self,point):
-        if not self.options.get('shared_bearing'):return
-        # Unknown-channel scanning leaves us at this actual station. Never use
-        # a forecast stop as an observation or a certificate station.
-        if math.dist(point,self.client.ledger.position)>1e-8:return
-        for _ in range(self.options.get('shared_limit_per_stop',3)):
-            candidates=[]
-            for ch in sorted(set(self.polygons)-self.cleared):
-                if (ch,tuple(point)) in self.measured or self.info(ch)[1]<=20:continue
-                value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch])
-                if value and value['estimated_gain_s']>self.options.get('shared_gain_s',10.):
-                    candidates.append((value['estimated_gain_s'],ch,value))
-            if not candidates:break
-            _,ch,value=max(candidates,key=lambda item:(item[0],-item[1]))
-            self.record('q4_shared_information_rank',channel=ch,point=point,**value)
-            self.measure(point,ch,'shared_bearing')
-            if ch not in self.cleared and all(math.dist(point,v)<=20-1e-5 for v in self.polygons[ch]):
-                if not self.clear(point,ch,'shared_in_place'):
-                    raise ProtocolError('Q4 shared in-place guarantee failed')
 
     def other_tasks(self,ch):
         return list(self.remaining)+[self.info(j)[0] for j in sorted(set(self.polygons)-self.cleared-{ch})]

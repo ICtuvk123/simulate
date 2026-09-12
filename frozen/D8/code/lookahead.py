@@ -5,7 +5,7 @@ still needs actual observations before the controller changes its region.
 This is a two-RF-action heuristic, not an exact stochastic value function.
 """
 import math
-from geometry import clip, clip_bearing, minimum_circle, cross, sub
+from geometry import clip, minimum_circle, cross, sub
 from local_geometry import nearest_operating_point
 from directional_geometry import paired_probe, apply_paired_negative
 
@@ -149,25 +149,3 @@ def choose_pair(poly,current,positives,negatives,measured,options,anchor=None):
     return dict(probe=probe,endpoints=order,estimated_remaining_s=score,
                 model_count=len(models),candidate_count=len(candidates),branches=branches,
                 assumptions_only_for_ranking=True)
-
-
-def shared_information_value(poly,q,positives,negatives,count=7):
-    """Expected local remainder reduction at an ALREADY reached station.
-
-    No reception guarantee is inferred from distance. A failed reception keeps
-    the complete polygon in the prediction, and pays the radio/switch cost.
-    """
-    models=hypotheses(poly,positives,negatives,count)
-    if not models:return None
-    baseline=remaining_cost(poly,q);after=0.;branches={'direction':0.,'near':0.,'no_signal':0.}
-    distance_bounded=all(math.dist(q,p)<=1500-1e-5 for p in poly)
-    for model in models:
-        kind,beta=predicted_feedback(model,q);branches[kind]+=model['weight']
-        if kind=='no_signal':cost=baseline
-        elif kind=='near':cost=5.
-        else:
-            updated=predicted_region(poly,q,beta) if distance_bounded else clip_bearing(poly,q,beta)
-            cost=remaining_cost(updated,q) if updated else baseline+1000
-        after+=model['weight']*cost
-    return dict(estimated_gain_s=baseline-after-6.,model_count=len(models),branches=branches,
-                no_signal_branch_included=True,assumptions_only_for_ranking=True)
