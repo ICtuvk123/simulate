@@ -2,7 +2,7 @@
 import math
 from geometry import outer_disk,clip_bearing,minimum_circle
 from local_geometry import nearest_operating_point
-from routing import open_route,route_length,through_operating_point
+from routing import open_route,refined_open_route,route_length,through_operating_point
 from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
@@ -33,6 +33,61 @@ class Q4Controller:
 
     def info(self,ch):return minimum_circle(self.polygons[ch])
 
+    def plan_route(self,p,points):
+        solver=refined_open_route if self.options.get('route_refine') else open_route
+        return solver(p,points)
+
+    def route_source_point(self,ch,p):
+        safe=nearest_operating_point(self.polygons[ch],p)
+        if safe is not None:return safe
+        if self.options.get('route_probe'):
+            other=self.other_tasks(ch)
+            anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
+            selected=choose_pair(self.polygons[ch],p,self.positives[ch],self.negatives[ch],
+                                 [q for j,q in self.measured if j==ch],self.options,anchor)
+            if selected:return selected['endpoints'][0]
+        return self.info(ch)[0]
+
+    def scan_for_forecast_complement(self):
+        """Invest an actual scan when known future stops could jointly save a site.
+
+        Forecast centers never remove fallback stations and never enter the
+        negative history. Only later real observations can justify removal.
+        """
+        if not self.options.get('forecast_search') or not self.remaining:return
+        self.refresh();unknown=self.unknown()
+        if not unknown or not self.remaining:return
+        p=tuple(self.client.ledger.position)
+        forecasts=[self.info(ch)[0] for ch in sorted(set(self.polygons)-self.cleared)
+                   if self.info(ch)[1]<=self.options.get('forecast_radius',120.)]
+        forecasts=sorted(forecasts,key=lambda q:math.dist(p,q))[:3]
+        if not forecasts:return
+        points=self.remaining+forecasts
+        before=route_length(p,points,self.plan_route(p,points))/5
+        needed=[ch for ch in unknown if (ch,p) not in self.measured]
+        if not needed:return
+        near=sorted(range(len(self.remaining)),key=lambda i:math.dist(p,self.remaining[i]))[:4]
+        selected=None
+        for count in (1,2):
+            for indices in combinations(near,count):
+                others=[q for i,q in enumerate(self.remaining) if i not in indices]
+                proposed=others+forecasts
+                gain=before-route_length(p,proposed,self.plan_route(p,proposed))/5
+                # Pay for scans at current AND all proposed future stops. The
+                # saved dedicated scans also count; this is planning only.
+                gain+=6*(len(unknown)*count-len(needed)-len(unknown)*len(forecasts))
+                if gain<=0 or (selected is not None and gain<=selected[0]):continue
+                if all(self.coverage.prove(self.negatives[ch]+others+[p]+forecasts)['complete']
+                       for ch in unknown):selected=(gain,indices)
+        if selected is None:return
+        self.record('q4_forecast_scan_plan',point=p,forecasts=forecasts,
+                    tentative_removed=[self.remaining[i] for i in selected[1]],
+                    predicted_saved_s=selected[0],fallback_stations_retained=True)
+        for ch in sorted(needed,key=lambda ch:(ch!=self.client.ledger.channel,ch)):
+            if len(set(self.polygons)|self.cleared)==16:break
+            if ch in self.unknown():self.measure(p,ch,'forecast_investment_scan')
+        self.refresh()
+
     def orient_initial_skeleton(self):
         if not self.options.get('adapt_rotation') or not self.remaining:return
         p=self.client.ledger.position
@@ -41,11 +96,11 @@ class Q4Controller:
         angles=[k*step for k in range(math.ceil(period/step)) if k*step<period]
         angles+= [math.degrees(math.atan2(q[1],q[0]))%period for q in targets]
         points=self.remaining+targets
-        baseline=route_length(p,points,open_route(p,points));best=(baseline,0.,self.remaining)
+        baseline=route_length(p,points,self.plan_route(p,points));best=(baseline,0.,self.remaining)
         for angle in sorted(set(angles)):
             a=math.radians(angle);c,s=math.cos(a),math.sin(a)
             proposal=[(x*c-y*s,x*s+y*c) for x,y in self.remaining]
-            combined=proposal+targets;length=route_length(p,combined,open_route(p,combined))
+            combined=proposal+targets;length=route_length(p,combined,self.plan_route(p,combined))
             if length<best[0]-1e-6 and all(self.coverage.prove(self.negatives[ch]+proposal)['complete'] for ch in self.unknown()):
                 best=(length,angle,proposal)
         self.remaining=list(best[2])
@@ -127,7 +182,7 @@ class Q4Controller:
         p=tuple(self.client.ledger.position)
         pending=[self.info(ch)[0] for ch in sorted(set(self.polygons)-self.cleared)]
         points=self.remaining+pending
-        baseline=route_length(p,points,open_route(p,points))/5+6*len(unknown)*len(self.remaining)
+        baseline=route_length(p,points,self.plan_route(p,points))/5+6*len(unknown)*len(self.remaining)
         near=sorted(range(len(self.remaining)),key=lambda i:math.dist(p,self.remaining[i]))[:self.options.get('replacement_candidates',4)]
         best=None
         for count in range(1,self.options.get('replacement_group',1)+1):
@@ -141,7 +196,7 @@ class Q4Controller:
                             valid=False;break
                 if not valid:continue
                 proposed=others+pending
-                cost=route_length(p,proposed,open_route(p,proposed))/5+6*(len(unknown)*len(others)+len(needed))
+                cost=route_length(p,proposed,self.plan_route(p,proposed))/5+6*(len(unknown)*len(others)+len(needed))
                 if cost<baseline-1e-6 and (best is None or cost<best[0]):best=(cost,indices,others,needed)
         if best is None:return
         _,indices,others,needed=best
@@ -164,7 +219,7 @@ class Q4Controller:
         if q is None:return False
         if self.options['through_clear']:
             other=self.other_tasks(ch)
-            if other:q=through_operating_point(poly,p,other[open_route(q,other)[0]])
+            if other:q=through_operating_point(poly,p,other[self.plan_route(q,other)[0]])
         if not self.clear(q,ch,'guaranteed'):
             raise ProtocolError('Q4 guaranteed clearing certificate failed')
         return True
@@ -265,9 +320,9 @@ class Q4Controller:
             points=list(self.remaining)
             if not force_search:
                 tasks += [('source',ch) for ch in pending]
-                points += [nearest_operating_point(self.polygons[ch],p) or self.info(ch)[0] for ch in pending]
+                points += [self.route_source_point(ch,p) for ch in pending]
             if not tasks:raise ProtocolError('Q4 no legal progress task')
-            first=open_route(p,points)[0];kind,index=tasks[first]
+            first=self.plan_route(p,points)[0];kind,index=tasks[first]
             self.record('q4_route_decision',decision=decision,kind=kind,index=index,
                         sources=len(pending),search_stops=len(self.remaining),forced_search=bool(force_search))
             if kind=='scan':self.scan(self.remaining.pop(index))
@@ -275,5 +330,6 @@ class Q4Controller:
                 self.since_search+=1;self.phase='localization';self.localize(index)
                 if self.options.get('shared_after_localize'):
                     self.share_at_actual_station(tuple(self.client.ledger.position))
+                self.scan_for_forecast_complement()
                 self.replace_from_actual_stop()
         raise ProtocolError('Q4 finite planning guard reached')

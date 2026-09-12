@@ -79,3 +79,25 @@ def through_operating_point(poly,p,b):
                 q,best=candidate,value;improved=True;break
         if not improved:break
     return q
+
+
+def refined_open_route(start, points):
+    """Improve the existing open route by relocating one or two adjacent stops.
+
+    This only ranks planned stops. Every accepted change shortens the same
+    full open route, and no return-to-origin edge is introduced.
+    """
+    order=list(open_route(start,points));n=len(order)
+    if n<=9:return order
+    for _ in range(12):
+        old=route_length(start,points,order);best=(old,order)
+        for width in (1,2):
+            for i in range(n-width+1):
+                block=order[i:i+width];rest=order[:i]+order[i+width:]
+                for j in range(len(rest)+1):
+                    proposed=rest[:j]+block+rest[j:]
+                    cost=route_length(start,points,proposed)
+                    if cost<best[0]-1e-6:best=(cost,proposed)
+        if best[0]>=old-1e-6:break
+        order=best[1]
+    return order
