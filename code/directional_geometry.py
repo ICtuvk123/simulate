@@ -105,19 +105,52 @@ class DirectionalCoverage:
         return result
 
 
-def paired_probe(poly, station, bearing, b=80., fraction=.5):
+def paired_probe(poly, station, bearing, b=80., fraction=.5, narrow_probe=False):
     a=math.radians(bearing);d=(math.cos(a),math.sin(a));n=(-d[1],d[0])
     projections=[sum((v[k]-station[k])*d[k] for k in (0,1)) for v in poly]
     l,u=min(projections),max(projections);t=l+fraction*(u-l)
     q=[tuple(station[k]+t*d[k]+sign*b*n[k] for k in (0,1)) for sign in (1,-1)]
-    valid=(t>=0 and b>=t*math.tan(ALPHA)+MARGIN and
-           all(math.dist(p,v)<=1000-MARGIN for p in q for v in poly))
+    tau=math.tan(ALPHA)
+    spanning=(t>=0 and b>=t*tau+MARGIN)
+    uniform_radius=(spanning and all(math.dist(p,v)<=1000-MARGIN for p in q for v in poly))
+    # The first real positive proves R >= |g-station|. For x>=t in that
+    # bearing sector, each endpoint is closer whenever this squared gap is
+    # positive. Only the far side needs this bound; near-side range may fail.
+    gap=t*t-b*b-2*t*b*tau
+    positive_radius=(narrow_probe and spanning and t>0 and gap>=MARGIN)
+    valid=uniform_radius or positive_radius
     return dict(station=tuple(station),bearing=bearing,d=d,n=n,l=l,u=u,t=t,b=b,
-                plus=q[0],minus=q[1],geometry_valid=valid)
+                plus=q[0],minus=q[1],geometry_valid=valid,
+                radius_witness=('positive_station_radius' if positive_radius else 'minimum_radius_all_region'),
+                positive_radius_gap_sq_m2=gap,alpha_rad=ALPHA,geometry_margin=MARGIN)
+
+
+def verify_paired_geometry(poly,witness):
+    """Recompute a geometry witness; the serialized valid flag is not proof.
+
+    This checks geometry only. Actual positive/two negative response provenance
+    is enforced by the controller and independently checked after the run.
+    """
+    try:
+        s=witness['station'];a=math.radians(witness['bearing'])
+        d=(math.cos(a),math.sin(a));n=(-d[1],d[0]);t=witness['t'];b=witness['b']
+        if not poly or not all(math.isfinite(v) for v in [*s,a,t,b]):return False
+        if not (t>=0 and b>=t*math.tan(ALPHA)+MARGIN):return False
+        if any(math.dist(witness[k],v)>1e-9 for k,v in [('d',d),('n',n)]):return False
+        ends=[tuple(s[k]+t*d[k]+sign*b*n[k] for k in (0,1)) for sign in (1,-1)]
+        if any(math.dist(witness[k],v)>1e-8 for k,v in zip(('plus','minus'),ends)):return False
+        kind=witness.get('radius_witness','minimum_radius_all_region')
+        if kind=='positive_station_radius':
+            return t>0 and t*t-b*b-2*t*b*math.tan(ALPHA)>=MARGIN
+        if kind=='minimum_radius_all_region':
+            return all(math.dist(q,v)<=1000-MARGIN for q in ends for v in poly)
+        return False
+    except (KeyError,ValueError,TypeError,OverflowError):return False
 
 
 def apply_paired_negative(poly,witness):
-    if not witness.get('geometry_valid') or witness.get('results')!=['no_signal','no_signal']:
+    if (not witness.get('geometry_valid') or witness.get('results')!=['no_signal','no_signal']
+        or not verify_paired_geometry(poly,witness)):
         raise ValueError('Two actual negative responses and valid geometry required')
     d=witness['d'];s=witness['station'];t=witness['t']
     return clip(poly,d,sum(d[k]*s[k] for k in (0,1))+t)

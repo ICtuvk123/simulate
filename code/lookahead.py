@@ -7,7 +7,7 @@ This is a two-RF-action heuristic, not an exact stochastic value function.
 import math
 from geometry import clip, clip_bearing, minimum_circle, cross, sub
 from local_geometry import nearest_operating_point
-from directional_geometry import paired_probe, apply_paired_negative
+from directional_geometry import paired_probe, apply_paired_negative, ALPHA, MARGIN
 
 
 def quadrature(poly, count=9):
@@ -77,7 +77,7 @@ def predicted_feedback(model,q):
 
 
 def predicted_region(poly,q,beta):
-    # Candidate endpoints already have a full-region 1000 m distance check.
+    # Fast bearing-only update for candidates with an explicit range bound.
     lo,hi=map(math.radians,(beta-1.01,beta+1.01))
     for n in ((math.sin(lo),-math.cos(lo)),(-math.sin(hi),math.cos(hi))):
         poly=clip(poly,n,sum(n[k]*q[k] for k in (0,1)))
@@ -107,7 +107,8 @@ def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=
                 cost+=5+(math.dist(p,anchor)/5 if anchor is not None else 0)
                 done=True;break
             if kind=='direction':
-                region=predicted_region(region,q,beta)
+                region=(clip_bearing(region,q,beta) if probe.get('radius_witness')=='positive_station_radius'
+                        else predicted_region(region,q,beta))
                 if not region:cost+=1000;done=True;break
                 center,r=minimum_circle(region)
                 if r<=20:
@@ -134,8 +135,14 @@ def choose_pair(poly,current,positives,negatives,measured,options,anchor=None):
     candidates=[]
     for s,beta in (positives[:1] if not options.get('lookahead_history') else positives[-3:]):
         for fraction in options.get('lookahead_fractions',[.35,.5,.65]):
-            for b in options.get('lookahead_spacings',[40.,80.,120.]):
-                probe=paired_probe(poly,s,beta,b,fraction)
+            spacings=list(options.get('lookahead_spacings',[40.,80.,120.]))
+            narrow=options.get('narrow_probe',False)
+            if narrow:
+                midpoint=paired_probe(poly,s,beta,80.,fraction)
+                lower=max(0.,midpoint['t']*math.tan(ALPHA)+MARGIN)
+                spacings += [max(1.,float(math.ceil(lower))),max(1.,float(math.ceil(1.5*lower)))]
+            for b in dict.fromkeys(spacings):
+                probe=paired_probe(poly,s,beta,b,fraction,narrow_probe=narrow)
                 if not probe['geometry_valid']:continue
                 ends=[probe['plus'],probe['minus']]
                 if any(any(math.dist(q,p)<.05 for p in measured) for q in ends):continue
@@ -181,7 +188,9 @@ def single_probe_cost(poly,current,q,models,anchor=None,first_result=None,probe=
         kind,beta=predicted_feedback(model,q);branches[kind]+=model['weight']
         if kind=='near':cost+=5+(math.dist(q,anchor)/5 if anchor is not None else 0.)
         else:
-            if kind=='direction':region=predicted_region(region,q,beta)
+            if kind=='direction':
+                region=(clip_bearing(region,q,beta) if probe and probe.get('radius_witness')=='positive_station_radius'
+                        else predicted_region(region,q,beta))
             elif first_result=='no_signal' and probe is not None:
                 region=apply_paired_negative(region,dict(probe,results=['no_signal','no_signal']))
             cost+=remaining_cost(region,q,anchor) if region else 10000.

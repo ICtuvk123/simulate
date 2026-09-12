@@ -263,7 +263,8 @@ class Q4Controller:
         if self.rounds[ch]>self.options['max_local_rounds']:
             return self.fallback(ch)
         before=list(self.polygons[ch]);station,bearing=self.positives[ch][0]
-        probe=paired_probe(before,station,bearing,self.options['probe_b'],self.options['probe_fraction'])
+        probe=paired_probe(before,station,bearing,self.options['probe_b'],self.options['probe_fraction'],
+                           narrow_probe=self.options.get('narrow_probe',False))
         selected=None
         if self.options.get('lookahead'):
             other=self.other_tasks(ch)

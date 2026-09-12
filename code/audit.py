@@ -17,6 +17,33 @@ def hook(event,args):
 sys.addaudithook(hook)
 
 
+def audit_pair_witness(w,positive,negative):
+    """Independent reconstruction from accepted chronological observations.
+
+    Deliberately does not call paired_probe/verify_paired_geometry, nor trust
+    geometry_valid or the recorded squared gap. Future/planned stations cannot
+    supply either the positive reception premise or the two negative endpoints.
+    """
+    try:
+        ch=w['channel'];s=w['station'];angle=math.radians(w['bearing'])
+        d=(math.cos(angle),math.sin(angle));n=(-d[1],d[0]);t=w['t'];b=w['b']
+        if not all(math.isfinite(v) for v in [*s,angle,t,b]):return False
+        ends=[tuple(s[k]+t*d[k]+sign*b*n[k] for k in (0,1)) for sign in (1,-1)]
+        geometry=(t>=0 and b>=t*math.tan(ALPHA)+MARGIN and bool(w['before_polygon'])
+                  and math.dist(w['d'],d)<=1e-9 and math.dist(w['n'],n)<=1e-9
+                  and math.dist(w['plus'],ends[0])<=1e-8 and math.dist(w['minus'],ends[1])<=1e-8)
+        kind=w.get('radius_witness','minimum_radius_all_region')
+        if kind=='positive_station_radius':
+            geometry=geometry and t>0 and b*b+2*t*b*math.tan(ALPHA)<=t*t-MARGIN
+        elif kind=='minimum_radius_all_region':
+            geometry=geometry and all(math.dist(q,v)<=1000-MARGIN+1e-8 for q in ends for v in w['before_polygon'])
+        else:return False
+        return (geometry and any(math.dist(p,s)<1e-9 and beta==w['bearing'] for p,beta in positive.get(ch,[]))
+                and all(any(math.dist(q,p)<1e-8 for p in negative.get(ch,[])) for q in ends)
+                and w.get('results')==['no_signal','no_signal'])
+    except (KeyError,ValueError,TypeError,OverflowError):return False
+
+
 def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
@@ -29,14 +56,7 @@ def postcheck(journal_path,evaluation):
                 if response['measure_result']=='direction':positive.setdefault(ch,[]).append((q,response['svd_deg']))
                 elif response['measure_result']=='no_signal':negative.setdefault(ch,[]).append(q)
         if row.get('reason')=='q4_paired_negative_clip':
-            w=row['witness'];ch=w['channel'];s=w['station'];a=math.radians(w['bearing'])
-            d=(math.cos(a),math.sin(a));n=(-d[1],d[0]);t=w['t'];b=w['b']
-            ends=[tuple(s[k]+t*d[k]+sign*b*n[k] for k in (0,1)) for sign in (1,-1)]
-            valid=(any(math.dist(p,s)<1e-9 and beta==w['bearing'] for p,beta in positive.get(ch,[]))
-                   and t>=0 and b>=t*math.tan(ALPHA)+MARGIN
-                   and all(math.dist(q,v)<=1000-MARGIN+1e-8 for q in ends for v in w['before_polygon'])
-                   and all(any(math.dist(q,p)<1e-8 for p in negative.get(ch,[])) for q in ends)
-                   and w.get('results')==['no_signal','no_signal'])
+            w=row['witness'];valid=audit_pair_witness(w,positive,negative)
             if not valid:errors.append('invalid_pair_witness')
             witnesses+=1
         if row.get('reason')=='q4_compact_optical_cover':
