@@ -25,7 +25,9 @@ def setup(count=4):
         else:
             common=Path(git(worker,'rev-parse','--git-common-dir'))
             if not common.is_absolute():common=worker/common
-            if common.resolve()!=(ROOT/'.git').resolve():raise RuntimeError('Existing directory belongs to another repository')
+            expected_common=Path(git(ROOT,'rev-parse','--git-common-dir'))
+            if not expected_common.is_absolute():expected_common=ROOT/expected_common
+            if common.resolve()!=expected_common.resolve():raise RuntimeError('Existing directory belongs to another repository')
             if git(worker,'status','--porcelain'):raise RuntimeError('Worker contains changes: '+str(worker))
             git(worker,'checkout','--detach',revision)
         git(worker,'checkout-index','--force','--all')

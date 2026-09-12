@@ -1,0 +1,22 @@
+{
+  "round": "Q4 action optimization round 2",
+  "started_utc": "2026-09-12T12:35:00Z",
+  "development_deadline_utc": "2026-09-12T16:35:00Z",
+  "new_structure_cutoff_utc": "2026-09-12T15:40:00Z",
+  "baseline": "frozen/D_COMPACT",
+  "official_tests_authorized": false,
+  "development_seed_range": [500001, 500600],
+  "validation_seed_range": [510001, 511000],
+  "final_holdout_seed_range": [520001, 520200],
+  "pressure_seed_range": [530001, 530100],
+  "smoke_seed_ranges": {"narrow": [1001,1010], "partial_optical": [1101,1110], "certificate_replacement": [1201,1210], "integration": [1301,1399]},
+  "previous_final_holdout_forbidden_for_selection": [420001,420200],
+  "gate": {"minimum_mean_per_source_improvement_percent": 1.0, "maximum_p95_total_increase_percent": 2.0, "failures_allowed": 0, "pure_feedback_replay_required": true, "independent_exit_required": true},
+  "first_screening_seeds": [500001,500030],
+  "evaluation": "paired complete scenes, identical sources and fixed spatial error field; mean of per-scene T/source_count; failures retained",
+  "hypotheses": {
+    "A": "positive-station radius witness allows narrow paired probes and broader valid interception positions",
+    "B": "bounded partial optical trials avoid expensive residual localization while retaining a reliable fallback",
+    "C": "actual task stops jointly replace dedicated search stations with continuous future-coverage witnesses"
+  }
+}
