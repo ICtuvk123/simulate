@@ -92,7 +92,7 @@ def choose_reused_probe(poly,current,positives,negatives,measured,options,anchor
     if not candidates:return None
     models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),
                       joint=options.get('joint_model_weights',False),spatial_errors=options.get('planning_spatial_errors',False),
-                      balanced_errors=options.get('planning_balanced_errors',False))
+                      balanced_errors=options.get('planning_balanced_errors',False),stable=options.get('stable_quadrature',False))
     if not models:return None
     count=len(candidates);evaluated=[]
     candidates.sort(key=lambda item:(item[0],item[1]['new_station']))

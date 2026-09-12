@@ -10,6 +10,7 @@ from geometry import clip, clip_bearing, minimum_circle, cross, sub
 from local_geometry import nearest_operating_point
 from directional_geometry import paired_probe, apply_paired_negative, ALPHA, MARGIN
 from joint_models import build_joint_models
+from region_quadrature import stable_quadrature
 
 
 def quadrature(poly, count=9):
@@ -57,14 +58,16 @@ def finish_error_models(models,spatial_errors=False,balanced_errors=False):
     return attach_error_fields(models) if spatial_errors else models
 
 
-def hypotheses(poly, positives, negatives, count=9, exclusions=(),joint=False,spatial_errors=False,balanced_errors=False):
+def hypotheses(poly, positives, negatives, count=9, exclusions=(),joint=False,spatial_errors=False,balanced_errors=False,stable=False):
+    points=stable_quadrature(poly,count) if stable else quadrature(poly,count)
+    if stable:points=[g for g in points if math.hypot(*g)<=1800+1e-8]
     if joint:
-        weighted=build_joint_models(quadrature(poly,count),positives,negatives,exclusions)
+        weighted=build_joint_models(points,positives,negatives,exclusions)
         if weighted:return finish_error_models(weighted,spatial_errors,balanced_errors)
         # The experimental continuous prior may assign zero mass to a legal
         # boundary case. Fall back to the old finite ranking, never delete P.
     models=[]
-    for g in quadrature(poly,count):
+    for g in points:
         if any(math.dist(g,item['point'])<item['radius'] for item in exclusions):continue
         low=max([1000.]+[math.dist(g,s) for s,_ in positives])
         if low>1500+1e-6:continue
@@ -163,7 +166,7 @@ def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=
 def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,exclusions=()):
     models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),exclusions,
                       joint=options.get('joint_model_weights',False),spatial_errors=options.get('planning_spatial_errors',False),
-                      balanced_errors=options.get('planning_balanced_errors',False))
+                      balanced_errors=options.get('planning_balanced_errors',False),stable=options.get('stable_quadrature',False))
     if not models:return None
     candidates=[]
     for s,beta in (positives[:1] if not options.get('lookahead_history') else positives[-3:]):
@@ -191,13 +194,13 @@ def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,ex
                 assumptions_only_for_ranking=True)
 
 
-def shared_information_value(poly,q,positives,negatives,count=7,exclusions=(),joint=False,spatial_errors=False,balanced_errors=False):
+def shared_information_value(poly,q,positives,negatives,count=7,exclusions=(),joint=False,spatial_errors=False,balanced_errors=False,stable=False):
     """Expected local remainder reduction at an ALREADY reached station.
 
     No reception guarantee is inferred from distance. A failed reception keeps
     the complete polygon in the prediction, and pays the radio/switch cost.
     """
-    models=hypotheses(poly,positives,negatives,count,exclusions,joint=joint,spatial_errors=spatial_errors,balanced_errors=balanced_errors)
+    models=hypotheses(poly,positives,negatives,count,exclusions,joint=joint,spatial_errors=spatial_errors,balanced_errors=balanced_errors,stable=stable)
     if not models:return None
     baseline=remaining_cost(poly,q);after=0.;branches={'direction':0.,'near':0.,'no_signal':0.}
     distance_bounded=all(math.dist(q,p)<=1500-1e-5 for p in poly)

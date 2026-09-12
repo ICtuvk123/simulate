@@ -199,7 +199,7 @@ class Q4Controller:
                                                exclusions=self.optical_exclusions.get(ch,[]),
                                                joint=self.options.get('joint_model_weights',False),
                                                spatial_errors=self.options.get('planning_spatial_errors',False),
-                                               balanced_errors=self.options.get('planning_balanced_errors',False))
+                                               balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
                 if value and value['estimated_gain_s']>self.options.get('shared_gain_s',10.):
                     candidates.append((value['estimated_gain_s'],ch,value))
             if not candidates:break
@@ -324,7 +324,7 @@ class Q4Controller:
                           self.options.get('partial_optical_positions',25),exclusions,
                           joint=self.options.get('joint_model_weights',False),
                           spatial_errors=self.options.get('planning_spatial_errors',False),
-                          balanced_errors=self.options.get('planning_balanced_errors',False))
+                          balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
         plan=choose_partial(self.polygons[ch],self.client.ledger.position,selected,models,
                             exclusions,self.options,anchor,int(ch!=self.client.ledger.channel))
         if plan is None:return False
@@ -350,7 +350,7 @@ class Q4Controller:
                                        exclusions=self.optical_exclusions.get(ch,[]),
                                        joint=self.options.get('joint_model_weights',False),
                                        spatial_errors=self.options.get('planning_spatial_errors',False),
-                                       balanced_errors=self.options.get('planning_balanced_errors',False))
+                                       balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
         if value is None or value['estimated_gain_s']<=self.options.get('shared_gain_s',10.):return False
         self.record('q4_selected_inplace_probe_rank',channel=ch,point=point,**value)
         self.measure(point,ch,'selected_inplace_probe')
@@ -404,7 +404,7 @@ class Q4Controller:
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
                               self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
                               spatial_errors=self.options.get('planning_spatial_errors',False),
-                              balanced_errors=self.options.get('planning_balanced_errors',False))
+                              balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
             rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
         if reused:return self.execute_reused_probe(ch,reused,before)
@@ -432,7 +432,7 @@ class Q4Controller:
                 models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
                                   self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
                                   spatial_errors=self.options.get('planning_spatial_errors',False),
-                                  balanced_errors=self.options.get('planning_balanced_errors',False))
+                                  balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
                 if models:
                     radio_cost,branches=single_probe_cost(self.polygons[ch],self.client.ledger.position,
                                                           endpoints[1],models,anchor,kind,probe)
