@@ -1,0 +1,76 @@
+{
+  "name": "F_stress",
+  "cases": [
+    {
+      "seed": 8201,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 16
+    },
+    {
+      "seed": 8202,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 8203,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 8204,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 8205,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 8206,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 8207,
+      "scenario": "clustered",
+      "reception": "mixed",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 8208,
+      "scenario": "boundary",
+      "reception": "mixed",
+      "error_mode": "smooth",
+      "count": 16
+    }
+  ],
+  "variants": [
+    {
+      "name": "frozen_E",
+      "strategy": "E"
+    },
+    {
+      "name": "frozen_F",
+      "strategy": "F"
+    }
+  ],
+  "reserved_final_validation_seeds": null,
+  "independent_workers": 4,
+  "objective": "100 percent clear and full task virtual time",
+  "data_origin": "self_written_simulator",
+  "physical_rules_changed": false
+}

@@ -1,0 +1,268 @@
+{
+  "cases": [
+    {
+      "seed": 301,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 302,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 303,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 304,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 305,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 306,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 307,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 308,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "frozen_D",
+      "strategy": "D",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14
+      }
+    },
+    {
+      "name": "reception_rollout",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": false,
+        "adaptive_reception": true
+      }
+    },
+    {
+      "name": "reception_replan",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": true,
+        "adaptive_reception": true
+      }
+    },
+    {
+      "name": "reception_area",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": false,
+        "adaptive_reception": true,
+        "area_rollout": true
+      }
+    },
+    {
+      "name": "replace_scan",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": false,
+        "replacement_scan": true
+      }
+    },
+    {
+      "name": "replace_scan30",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.3,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": false,
+        "replacement_scan": true
+      }
+    },
+    {
+      "name": "shared1000",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": false,
+        "shared_limit": 1000
+      }
+    },
+    {
+      "name": "replan_scan30",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.3,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "replan_measurements": true
+      }
+    }
+  ],
+  "holdout_seeds": [
+    6001,
+    6002,
+    6003,
+    6004,
+    6005,
+    6006,
+    6007,
+    6008,
+    6009,
+    6010,
+    6011,
+    6012,
+    6013,
+    6014,
+    6015,
+    6016,
+    6017,
+    6018,
+    6019,
+    6020,
+    6021,
+    6022,
+    6023,
+    6024,
+    6025,
+    6026,
+    6027,
+    6028,
+    6029,
+    6030
+  ]
+}

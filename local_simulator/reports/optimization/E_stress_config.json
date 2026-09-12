@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "seed": 6101,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 16
+    },
+    {
+      "seed": 6102,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 6103,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 6104,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    }
+  ],
+  "variants": [
+    {
+      "name": "frozen_D",
+      "strategy": "D",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14
+      }
+    },
+    {
+      "name": "frozen_E",
+      "strategy": "E",
+      "policy_options": {
+        "mode": "joint",
+        "ring_radius": 1130,
+        "scan_gain": 0.18,
+        "known_scan": true,
+        "max_region": 1000,
+        "opportunistic_clear": true,
+        "optical_trial": 40,
+        "ring_rotation": 0,
+        "prune_stations": false,
+        "adaptive_plan": false,
+        "future_stops": true,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14,
+        "adaptive_reception": true,
+        "replan_measurements": true,
+        "commit_radius": 120,
+        "adaptive_rotation": false,
+        "route_centroid": false,
+        "area_rollout": false,
+        "lateral": 1,
+        "replacement_scan": false,
+        "shared_limit": 1200,
+        "route_hysteresis": 0,
+        "eager_count_stop": true
+      }
+    }
+  ],
+  "workers": 4
+}

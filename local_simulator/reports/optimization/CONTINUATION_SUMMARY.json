@@ -1,0 +1,82 @@
+{
+  "validation_pairs": 100,
+  "mean_D_s": 3111.69817226,
+  "mean_E_s": 3002.13576445,
+  "saved_mean_s": 109.56240780999997,
+  "improvement_percent": 3.520984418949147,
+  "paired_bootstrap_95_percent_interval": [
+    2.8393093593128387,
+    4.238149415230348
+  ],
+  "E_faster_cases": 88,
+  "all_validation_clear_and_proved": true,
+  "all_stress_pass": true,
+  "recommended_default": "E",
+  "original_D_unchanged": true,
+  "summaries": [
+    {
+      "variant": "frozen_E",
+      "n": 100,
+      "mean_s": 3002.13576445,
+      "median_s": 2996.9816535,
+      "p90_s": 3294.9641216000005,
+      "p95_s": 3381.9340762,
+      "worst_s": 3580.391488,
+      "all_pass": true,
+      "mean_move_time": 2298.03576432983,
+      "mean_RF_detection_time": 535.95,
+      "mean_channel_switch_time": 100.45,
+      "mean_optical_time": 41.04,
+      "mean_clear_time": 26.66
+    },
+    {
+      "variant": "frozen_D",
+      "n": 100,
+      "mean_s": 3111.69817226,
+      "median_s": 3121.446185,
+      "p90_s": 3414.5939272,
+      "p95_s": 3507.97917475,
+      "worst_s": 3651.14483,
+      "all_pass": true,
+      "mean_move_time": 2382.578172552398,
+      "mean_RF_detection_time": 561.4,
+      "mean_channel_switch_time": 99.6,
+      "mean_optical_time": 41.46,
+      "mean_clear_time": 26.66
+    }
+  ],
+  "stress": [
+    {
+      "variant": "frozen_E",
+      "n": 4,
+      "mean_s": 3448.32309675,
+      "median_s": 3764.963616,
+      "p90_s": 4024.4071476,
+      "p95_s": 4037.2965078,
+      "worst_s": 4050.185868,
+      "all_pass": true,
+      "mean_move_time": 2687.0730969501465,
+      "mean_RF_detection_time": 576.25,
+      "mean_channel_switch_time": 105,
+      "mean_optical_time": 48,
+      "mean_clear_time": 32
+    },
+    {
+      "variant": "frozen_D",
+      "n": 4,
+      "mean_s": 3555.49770125,
+      "median_s": 3881.2956569999997,
+      "p90_s": 4080.6249829,
+      "p95_s": 4087.79383945,
+      "worst_s": 4094.962696,
+      "all_pass": true,
+      "mean_move_time": 2755.247700237149,
+      "mean_RF_detection_time": 613.75,
+      "mean_channel_switch_time": 105,
+      "mean_optical_time": 49.5,
+      "mean_clear_time": 32
+    }
+  ],
+  "additional_local_runs": 508,
+  "all_additional_runs_clear_and_proved": true
+}

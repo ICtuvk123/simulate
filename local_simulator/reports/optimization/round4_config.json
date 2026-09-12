@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {
+      "seed": 301,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 302,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 303,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 304,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 305,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 306,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 307,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 308,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "baseline_B",
+      "strategy": "B"
+    },
+    {
+      "name": "early08",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40
+      }
+    },
+    {
+      "name": "adaptive1000",
+      "strategy": "D",
+      "policy_options": {
+        "adaptive_plan": true,
+        "max_region": 1000,
+        "optical_trial": 40
+      }
+    },
+    {
+      "name": "exact_K",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true
+      }
+    },
+    {
+      "name": "q2_time",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "cases": [
+    {
+      "seed": 101,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 102,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 103,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 104,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "early08",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40
+      }
+    },
+    {
+      "name": "joint_optical",
+      "strategy": "D",
+      "policy_options": {
+        "optical_trial": 40
+      }
+    },
+    {
+      "name": "adaptive120",
+      "strategy": "D",
+      "policy_options": {
+        "adaptive_plan": true,
+        "max_region": 120,
+        "optical_trial": 40,
+        "scan_gain": 0.08
+      }
+    },
+    {
+      "name": "adaptive1000",
+      "strategy": "D",
+      "policy_options": {
+        "adaptive_plan": true,
+        "max_region": 1000,
+        "optical_trial": 40,
+        "scan_gain": 0.08
+      }
+    },
+    {
+      "name": "adaptive03",
+      "strategy": "D",
+      "policy_options": {
+        "adaptive_plan": true,
+        "max_region": 1000,
+        "optical_trial": 40,
+        "scan_gain": 0.03
+      }
+    },
+    {
+      "name": "adaptive_without_future",
+      "strategy": "D",
+      "policy_options": {
+        "adaptive_plan": true,
+        "future_stops": false,
+        "max_region": 1000,
+        "optical_trial": 40,
+        "scan_gain": 0.08
+      }
+    }
+  ]
+}

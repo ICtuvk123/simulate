@@ -1,0 +1,165 @@
+{
+  "name": "round5",
+  "cases": [
+    {
+      "seed": 301,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 302,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 303,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 304,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 305,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 306,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 307,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 308,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "q2_no_trial",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 0,
+        "exact_neighborhood": true,
+        "local_rollout": true
+      }
+    },
+    {
+      "name": "q2_trial60",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 60,
+        "exact_neighborhood": true,
+        "local_rollout": true
+      }
+    },
+    {
+      "name": "q2_gain12",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.12
+      }
+    },
+    {
+      "name": "q2_gain18",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18
+      }
+    },
+    {
+      "name": "q2_less_bearing",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "bearing_factor": 0.25,
+        "near_prediction": 14
+      }
+    },
+    {
+      "name": "q2_radius1200",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "ring_radius": 1200
+      }
+    },
+    {
+      "name": "q2_defer400",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 400,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true
+      }
+    },
+    {
+      "name": "q2_trial25",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 25,
+        "exact_neighborhood": true,
+        "local_rollout": true
+      }
+    }
+  ],
+  "untouched_validation_seeds": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020
+  ],
+  "objective": "100 percent clear and full task virtual time",
+  "data_origin": "self_written_simulator",
+  "physical_rules_changed": false
+}

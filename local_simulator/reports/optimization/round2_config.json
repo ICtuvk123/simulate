@@ -1,0 +1,123 @@
+{
+  "cases": [
+    {
+      "seed": 101,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 102,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 103,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 104,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "prune08",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true
+      }
+    },
+    {
+      "name": "prune03",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03
+      }
+    },
+    {
+      "name": "optical40",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40
+      }
+    },
+    {
+      "name": "optical60",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 60
+      }
+    },
+    {
+      "name": "radius1200",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "ring_radius": 1200
+      }
+    },
+    {
+      "name": "radius1150",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "ring_radius": 1150
+      }
+    },
+    {
+      "name": "defer60",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "max_region": 60
+      }
+    },
+    {
+      "name": "early250",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "max_region": 250
+      }
+    },
+    {
+      "name": "early1000",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "max_region": 1000
+      }
+    },
+    {
+      "name": "no_known_rf",
+      "strategy": "D",
+      "policy_options": {
+        "prune_stations": true,
+        "scan_gain": 0.03,
+        "optical_trial": 40,
+        "known_scan": false
+      }
+    }
+  ]
+}

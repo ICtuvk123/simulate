@@ -1,0 +1,118 @@
+{
+  "name": "G_stress",
+  "cases": [
+    {
+      "seed": 10201,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 16
+    },
+    {
+      "seed": 10202,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 10203,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 10204,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 10205,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 10206,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 10207,
+      "scenario": "clustered",
+      "reception": "mixed",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 10208,
+      "scenario": "boundary",
+      "reception": "mixed",
+      "error_mode": "smooth",
+      "count": 16
+    }
+  ],
+  "variants": [
+    {
+      "name": "frozen_F",
+      "strategy": "F"
+    },
+    {
+      "name": "frozen_G",
+      "strategy": "G",
+      "policy_options": {
+        "adaptive_plan": false,
+        "adaptive_reception": true,
+        "adaptive_rotation": false,
+        "area_rollout": false,
+        "bearing_factor": 0.25,
+        "commit_radius": 120,
+        "eager_count_stop": true,
+        "exact_neighborhood": true,
+        "flexible_search": true,
+        "forecast_budget": true,
+        "future_stops": true,
+        "joint_history": true,
+        "known_scan": true,
+        "lateral": 1,
+        "local_rollout": true,
+        "max_region": 1000,
+        "mode": "joint",
+        "near_prediction": 14,
+        "negative_disks": false,
+        "negative_halfplanes": true,
+        "opportunistic_clear": true,
+        "optical_exclusions": false,
+        "optical_trial": 40,
+        "prune_stations": false,
+        "replacement_scan": false,
+        "replan_measurements": true,
+        "ring_radius": 1130,
+        "ring_rotation": 0,
+        "route_centroid": false,
+        "route_hysteresis": 0,
+        "safe_shared": false,
+        "scan_gain": 0.18,
+        "shared_limit": 1200,
+        "strip_fallback": true,
+        "tail_cost": false,
+        "task_search": true,
+        "via_clear": true,
+        "rotate_search": false,
+        "bend_search": true,
+        "refine_bend": false,
+        "robust_bend": true
+      }
+    }
+  ],
+  "workers": 4,
+  "executor": "independent_process_workers",
+  "data_origin": "self_written_simulator",
+  "physical_rules_changed": false
+}

@@ -1,4 +1,12 @@
+# 最新结果：G 路线优化
+
+本轮全部 444 局结果及核验见 [G_RESULTS.md](optimization/G_RESULTS.md)。对应数据图表为 `figures/G_validation_comparison.pdf`，逐场数据为 `reports/optimization/G_validation_paired.csv`；完整离线过程为 `reports/optimization/G_replay.html`。当前默认 G，保留 F。
+
+以下为历史结果。
+
 # 本地模拟器计算与验收结果
+
+> 本文件记录初始 A/B/C 验收。后续六轮优化、D 策略、独立验证和纯反馈审计见 [最新优化报告](optimization/RESULTS_REPORT.md)。下文默认策略、待办事项和 Goal 状态均为历史记录。
 
 ## 运行环境
 

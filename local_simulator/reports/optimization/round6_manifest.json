@@ -1,0 +1,172 @@
+{
+  "name": "round6",
+  "cases": [
+    {
+      "seed": 301,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 302,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 303,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 304,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 305,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 306,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 307,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    },
+    {
+      "seed": 308,
+      "scenario": "uniform",
+      "reception": "mixed",
+      "error_mode": "fixed_hash"
+    }
+  ],
+  "variants": [
+    {
+      "name": "refine_gain14",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.14
+      }
+    },
+    {
+      "name": "refine_gain22",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.22
+      }
+    },
+    {
+      "name": "refine_gain30",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.3
+      }
+    },
+    {
+      "name": "refine_bearing",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18,
+        "bearing_factor": 0.25,
+        "near_prediction": 14
+      }
+    },
+    {
+      "name": "refine_prune",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18,
+        "prune_stations": true
+      }
+    },
+    {
+      "name": "refine_radius1140",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 40,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18,
+        "ring_radius": 1140
+      }
+    },
+    {
+      "name": "refine_trial35",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 35,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18
+      }
+    },
+    {
+      "name": "refine_trial45",
+      "strategy": "D",
+      "policy_options": {
+        "max_region": 1000,
+        "optical_trial": 45,
+        "exact_neighborhood": true,
+        "local_rollout": true,
+        "scan_gain": 0.18
+      }
+    }
+  ],
+  "untouched_validation_seeds": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020
+  ],
+  "objective": "100 percent clear and full task virtual time",
+  "data_origin": "self_written_simulator",
+  "physical_rules_changed": false
+}
