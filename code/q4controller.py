@@ -13,6 +13,7 @@ from task_routing import area_centroid,open_task_route
 from negative_cells import contract as contract_negative_history
 from reused_negative import choose_reused_probe,apply_reused_negative
 from partial_optical import choose_partial,EXCLUSION_RADIUS
+from certificate_search import CertificateSearch
 
 
 class Q4Controller:
@@ -27,6 +28,8 @@ class Q4Controller:
         if not self.coverage.prove(self.sites)['complete']:
             raise ProtocolError('Q4 skeleton lacks a directional coverage certificate')
         self.remaining=self.sites[1:];self.since_search=0;self.phase='initial'
+        self.certificate_search=(CertificateSearch(self.sites,self.options)
+                                 if self.options.get('certificate_replace') else None)
 
     @property
     def cleared(self):return self.client.ledger.cleared
@@ -140,6 +143,9 @@ class Q4Controller:
                 self.polygons[ch]=contraction['polygon']
                 self.record('q4_negative_history_clip',channel=ch,**contraction,
                             virtual_time_s=self.client.ledger.virtual_time)
+        if self.certificate_search:
+            self.certificate_search.observe(ch,point)
+            if role=='paired_probe':self.certificate_search.at_actual_stop(self)
         return kind
 
     def clear(self,point,ch,role):
@@ -155,6 +161,8 @@ class Q4Controller:
             self.record('q4_actual_optical_exclusion',channel=ch,role=role,
                         positive_version=len(self.positives.get(ch,[])),
                         convex_outer_region_unchanged=True,**exclusion)
+        if self.certificate_search and role in ('guaranteed','compact_optical','optical_trial','lookahead_optical'):
+            self.certificate_search.at_actual_stop(self)
         return success
 
     def refresh(self):
@@ -170,6 +178,10 @@ class Q4Controller:
         channels.sort(key=lambda ch:(ch!=self.client.ledger.channel,ch))
         for ch in channels:
             if len(set(self.polygons)|self.cleared)==16:break
+            if self.certificate_search and not self.certificate_search.needs(ch,point):
+                self.record('q4_certificate_search_scan_skipped',channel=ch,point=point,
+                            future_stations_only_in_plan=True)
+                continue
             if (ch,tuple(point)) not in self.measured:self.measure(point,ch,'search')
         self.share_at_actual_station(point)
         self.refresh()
@@ -466,4 +478,5 @@ class Q4Controller:
                     self.share_at_actual_station(tuple(self.client.ledger.position))
                 self.scan_for_forecast_complement()
                 self.replace_from_actual_stop()
+                if self.certificate_search:self.certificate_search.at_actual_stop(self)
         raise ProtocolError('Q4 finite planning guard reached')
