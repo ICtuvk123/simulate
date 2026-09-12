@@ -105,6 +105,21 @@ class DirectionalCoverage:
         return result
 
 
+def sector_consistent(poly,station,d,n,tolerance=1e-6):
+    """Check the stored outer region agrees with its real positive sector.
+
+    Clipping adds 1e-8 m outward slack. The 1e-6 m check tolerance audits this
+    numerical representation; the real positive independently proves the
+    exact 1-degree sector, strictly inside the theorem's 1.01-degree sector.
+    """
+    tau=math.tan(ALPHA)
+    for v in poly:
+        x=sum((v[k]-station[k])*d[k] for k in (0,1))
+        y=sum((v[k]-station[k])*n[k] for k in (0,1))
+        if x < -tolerance or abs(y)>tau*x+tolerance:return False
+    return bool(poly)
+
+
 def paired_probe(poly, station, bearing, b=80., fraction=.5, narrow_probe=False):
     a=math.radians(bearing);d=(math.cos(a),math.sin(a));n=(-d[1],d[0])
     projections=[sum((v[k]-station[k])*d[k] for k in (0,1)) for v in poly]
@@ -117,7 +132,7 @@ def paired_probe(poly, station, bearing, b=80., fraction=.5, narrow_probe=False)
     # bearing sector, each endpoint is closer whenever this squared gap is
     # positive. Only the far side needs this bound; near-side range may fail.
     gap=t*t-b*b-2*t*b*tau
-    positive_radius=(narrow_probe and spanning and t>0 and gap>=MARGIN)
+    positive_radius=(narrow_probe and spanning and t>0 and gap>=MARGIN and sector_consistent(poly,station,d,n))
     valid=uniform_radius or positive_radius
     return dict(station=tuple(station),bearing=bearing,d=d,n=n,l=l,u=u,t=t,b=b,
                 plus=q[0],minus=q[1],geometry_valid=valid,
@@ -141,7 +156,8 @@ def verify_paired_geometry(poly,witness):
         if any(math.dist(witness[k],v)>1e-8 for k,v in zip(('plus','minus'),ends)):return False
         kind=witness.get('radius_witness','minimum_radius_all_region')
         if kind=='positive_station_radius':
-            return t>0 and t*t-b*b-2*t*b*math.tan(ALPHA)>=MARGIN
+            return (t>0 and t*t-b*b-2*t*b*math.tan(ALPHA)>=MARGIN
+                    and sector_consistent(poly,s,d,n))
         if kind=='minimum_radius_all_region':
             return all(math.dist(q,v)<=1000-MARGIN for q in ends for v in poly)
         return False

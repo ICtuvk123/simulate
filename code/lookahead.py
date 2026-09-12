@@ -98,6 +98,8 @@ def remaining_cost(poly,q,anchor=None):
 
 def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=0.):
     expected=0.;branches={'no_signal':0.,'direction':0.,'near':0.,'optical_failure':0.,'optical_success':0.}
+    needs_disk=(probe.get('radius_witness')=='positive_station_radius' and
+                not all(math.dist(q,v)<=1500-MARGIN for q in endpoints for v in poly))
     for model in models:
         p=current;region=list(poly);cost=0.;results=[];done=False
         for q in endpoints:
@@ -107,7 +109,7 @@ def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=
                 cost+=5+(math.dist(p,anchor)/5 if anchor is not None else 0)
                 done=True;break
             if kind=='direction':
-                region=(clip_bearing(region,q,beta) if probe.get('radius_witness')=='positive_station_radius'
+                region=(clip_bearing(region,q,beta) if needs_disk
                         else predicted_region(region,q,beta))
                 if not region:cost+=1000;done=True;break
                 center,r=minimum_circle(region)
@@ -183,13 +185,15 @@ def shared_information_value(poly,q,positives,negatives,count=7):
 def single_probe_cost(poly,current,q,models,anchor=None,first_result=None,probe=None):
     """Cost of the remaining second RF, including a possible valid double-no cut."""
     total=0.;branches={'no_signal':0.,'direction':0.,'near':0.}
+    needs_disk=(probe is not None and probe.get('radius_witness')=='positive_station_radius' and
+                not all(math.dist(q,v)<=1500-MARGIN for v in poly))
     for model in models:
         region=list(poly);cost=math.dist(current,q)/5+5
         kind,beta=predicted_feedback(model,q);branches[kind]+=model['weight']
         if kind=='near':cost+=5+(math.dist(q,anchor)/5 if anchor is not None else 0.)
         else:
             if kind=='direction':
-                region=(clip_bearing(region,q,beta) if probe and probe.get('radius_witness')=='positive_station_radius'
+                region=(clip_bearing(region,q,beta) if needs_disk
                         else predicted_region(region,q,beta))
             elif first_result=='no_signal' and probe is not None:
                 region=apply_paired_negative(region,dict(probe,results=['no_signal','no_signal']))

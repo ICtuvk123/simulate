@@ -36,6 +36,10 @@ def audit_pair_witness(w,positive,negative):
         kind=w.get('radius_witness','minimum_radius_all_region')
         if kind=='positive_station_radius':
             geometry=geometry and t>0 and b*b+2*t*b*math.tan(ALPHA)<=t*t-MARGIN
+            for v in w['before_polygon']:
+                x=(v[0]-s[0])*d[0]+(v[1]-s[1])*d[1]
+                y=(v[0]-s[0])*n[0]+(v[1]-s[1])*n[1]
+                geometry=geometry and x>=-1e-6 and abs(y)<=math.tan(ALPHA)*x+1e-6
         elif kind=='minimum_radius_all_region':
             geometry=geometry and all(math.dist(q,v)<=1000-MARGIN+1e-8 for q in ends for v in w['before_polygon'])
         else:return False

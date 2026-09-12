@@ -63,6 +63,14 @@ class NarrowProbeTests(unittest.TestCase):
         forged=dict(w,b=2000.,geometry_valid=True,positive_radius_gap_sq_m2=1e10)
         self.assertFalse(audit_pair_witness(forged,pos,neg))
 
+    def test_positive_sector_premise_is_independently_checked(self):
+        w=dict(self.witness(),channel=1,before_polygon=self.poly,results=['no_signal','no_signal'])
+        outside=list(self.poly)+[(400.,100.)]
+        self.assertFalse(verify_paired_geometry(outside,w))
+        w['before_polygon']=outside
+        self.assertFalse(audit_pair_witness(w,{1:[((0.,0.),0.)]},
+                                          {1:[w['plus'],w['minus']]}))
+
     def test_without_spanning_condition_both_backside_counterexample(self):
         t=750.;b=5.;g=(800.,800.*math.tan(math.radians(1.)))
         norm=math.hypot(*g);heading=(-g[1]/norm,g[0]/norm)
