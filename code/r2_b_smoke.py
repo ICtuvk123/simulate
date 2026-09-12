@@ -1,5 +1,5 @@
 """Pre-registered local paired smoke for the partial optical branch."""
-import csv,hashlib,json,multiprocessing,statistics,time
+import argparse,csv,hashlib,json,multiprocessing,statistics,time
 from datetime import datetime,timezone
 from pathlib import Path
 from run_case import run_case
@@ -10,16 +10,20 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
-    phase=ROOT/'reports/R2_B_smoke10';phase.mkdir(exist_ok=False)
-    seeds=list(range(1101,1111));variants={'compact':'D_compact_optical.json','partial':'R2_B_partial.json'}
+    p=argparse.ArgumentParser();p.add_argument('--phase',default='R2_B_smoke10')
+    p.add_argument('--variants',type=json.loads)
+    args=p.parse_args();phase=ROOT/'reports'/args.phase;phase.mkdir(exist_ok=False)
+    seeds=list(range(1101,1111));variants=args.variants or {'compact':'D_compact_optical.json','partial':'R2_B_partial.json'}
     registration=dict(utc=datetime.now(timezone.utc).isoformat(),purpose='smoke_development_not_validation',
                       seeds=seeds,variants=variants,source_hashes={p.name:hashlib.sha256(p.read_bytes()).hexdigest()
-                      for p in sorted((ROOT/'code').glob('*.py'))},replay=True)
+                      for p in sorted((ROOT/'code').glob('*.py'))},replay=True,
+                      configurations={k:dict(options=json.loads((ROOT/'configs'/v).read_text()),
+                      sha256=hashlib.sha256((ROOT/'configs'/v).read_bytes()).hexdigest()) for k,v in variants.items()})
     (phase/'registration.json').write_text(json.dumps(registration,indent=2),encoding='utf-8')
     with (ROOT/'SEEDS.csv').open('a',newline='',encoding='utf-8') as f:
         w=csv.writer(f)
         for seed in seeds:
-            for variant in variants:w.writerow(['R2_B_smoke10','smoke_development',seed,variant,'','registered_before_run'])
+            for variant in variants:w.writerow([args.phase,'smoke_development',seed,variant,'','registered_before_run'])
     rows=[];start=time.perf_counter()
     for seed in seeds:
         for variant,config in variants.items():

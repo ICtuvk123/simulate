@@ -161,13 +161,13 @@ def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,ex
                 assumptions_only_for_ranking=True)
 
 
-def shared_information_value(poly,q,positives,negatives,count=7):
+def shared_information_value(poly,q,positives,negatives,count=7,exclusions=()):
     """Expected local remainder reduction at an ALREADY reached station.
 
     No reception guarantee is inferred from distance. A failed reception keeps
     the complete polygon in the prediction, and pays the radio/switch cost.
     """
-    models=hypotheses(poly,positives,negatives,count)
+    models=hypotheses(poly,positives,negatives,count,exclusions)
     if not models:return None
     baseline=remaining_cost(poly,q);after=0.;branches={'direction':0.,'near':0.,'no_signal':0.}
     distance_bounded=all(math.dist(q,p)<=1500-1e-5 for p in poly)

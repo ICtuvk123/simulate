@@ -50,7 +50,8 @@ class Q4Controller:
             other=self.other_tasks(ch)
             anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
             selected=choose_pair(self.polygons[ch],p,self.positives[ch],self.negatives[ch],
-                                 [q for j,q in self.measured if j==ch],self.options,anchor)
+                                 [q for j,q in self.measured if j==ch],self.options,anchor,
+                                 self.optical_exclusions.get(ch,[]))
             if selected:return selected['endpoints'][0]
         if self.options.get('route_centroid'):
             return area_centroid(self.polygons[ch])
@@ -182,7 +183,8 @@ class Q4Controller:
             candidates=[]
             for ch in sorted(set(self.polygons)-self.cleared):
                 if (ch,tuple(point)) in self.measured or self.info(ch)[1]<=20:continue
-                value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch])
+                value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch],
+                                               exclusions=self.optical_exclusions.get(ch,[]))
                 if value and value['estimated_gain_s']>self.options.get('shared_gain_s',10.):
                     candidates.append((value['estimated_gain_s'],ch,value))
             if not candidates:break
@@ -300,7 +302,7 @@ class Q4Controller:
                 and self.partial_counts.get(ch,0)<self.options.get('partial_optical_total',4)
                 and self.partial_versions.get((ch,version),0)<self.options.get('partial_optical_per_version',1))
 
-    def try_partial_optical(self,ch,selected,anchor):
+    def try_partial_optical(self,ch,selected,anchor,context='before_pair'):
         if not self.partial_allowed(ch):return False
         exclusions=self.optical_exclusions.get(ch,[])
         models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],
@@ -312,7 +314,7 @@ class Q4Controller:
         self.partial_counts[ch]=self.partial_counts.get(ch,0)+1
         self.partial_versions[key]=self.partial_versions.get(key,0)+1
         self.record('q4_partial_optical_plan',channel=ch,positive_version=version,
-                    trial_number=self.partial_counts[ch],**plan)
+                    trial_number=self.partial_counts[ch],context=context,**plan)
         self.clear(plan['point'],ch,'partial_optical')
         return True
 
@@ -349,7 +351,7 @@ class Q4Controller:
             if reused and selected and reused['estimated_remaining_s']>=selected['estimated_remaining_s']:
                 reused=None
             if reused:self.record('q4_reused_negative_rank',channel=ch,**reused)
-        if selected and not reused and self.try_partial_optical(ch,selected,anchor):
+        if selected and not reused and self.options.get('partial_before_pair',True) and self.try_partial_optical(ch,selected,anchor):
             if ch in self.cleared:return
             # An actual miss changes the current point and exclusion history.
             # Re-rank the original reliable baseline, without a second trial.
@@ -377,10 +379,17 @@ class Q4Controller:
         for q in endpoints:
             kind=self.measure(q,ch,'paired_probe');results.append(kind);observed.append(q)
             if ch in self.cleared or self.guaranteed_clear(ch):return
+            if len(results)==1 and self.options.get('partial_after_first'):
+                other=self.other_tasks(ch)
+                anchor=min(other,key=lambda p:math.dist(p,self.info(ch)[0])) if other else None
+                second=dict(probe=probe,endpoints=[endpoints[1]],first_result=kind)
+                self.try_partial_optical(ch,second,anchor,'after_first_'+kind)
+                if ch in self.cleared:return
             if len(results)==1 and self.options.get('compact_after_first'):
                 other=self.other_tasks(ch)
                 anchor=min(other,key=lambda p:math.dist(p,self.info(ch)[0])) if other else None
-                models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
+                models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
+                                  self.optical_exclusions.get(ch,[]))
                 if models:
                     radio_cost,branches=single_probe_cost(self.polygons[ch],self.client.ledger.position,
                                                           endpoints[1],models,anchor,kind,probe)

@@ -95,6 +95,29 @@ class PartialOpticalTests(unittest.TestCase):
             result=postcheck(path,dict(sources=[dict(channel=2,x=500,y=0)]))
         self.assertFalse(result['valid']);self.assertIn('invalid_optical_exclusion',result['errors'])
 
+    def test_after_first_continuation_is_one_rf_not_repeated_pair(self):
+        poly=[(480,-5),(520,-5),(520,5),(480,5)]
+        probe=paired_probe(poly,(0,0),0,40.,.5)
+        models=[dict(g=(510,0),r=1000,heading=None,weight=1.,error=0.)]
+        expected,_=single_probe_cost(poly,probe['plus'],probe['minus'],models,first_result='direction',probe=probe)
+        cost,kind=continuation_cost(poly,probe['plus'],probe,[probe['minus']],models,None,0,compact_points=0,first_result='direction')
+        self.assertEqual(kind,'paired_rf');self.assertAlmostEqual(cost,expected)
+
+    def test_unsampled_crescent_retains_nonzero_miss_cost(self):
+        models=[dict(g=(0,0),weight=1.)]
+        options=dict(partial_optical_candidates=2,partial_optical_gain_s=0.,partial_optical_miss_reserve=.05)
+        with patch('partial_optical.continuation_cost',return_value=(50.,'paired_rf')):
+            plan=choose_partial([(-30,-5),(30,-5),(30,5),(-30,5)],(0,0),
+                                dict(probe={},endpoints=[(100,0)]),models,[],options)
+        self.assertAlmostEqual(plan['predicted_hit_mass'],.95)
+        self.assertGreater(plan['predicted_miss_remaining_s'],0)
+
+    def test_optional_local_candidates_obey_actual_detour_budget(self):
+        poly=[(20,20),(60,20),(60,30),(20,30)]
+        models=[dict(g=(40,25)),dict(g=(20,20))]
+        points=candidates((0,0),(80,0),models,[],5,poly,30.)
+        self.assertTrue(any(q[1]>0 for q in points))
+        self.assertTrue(all(math.dist((0,0),q)+math.dist(q,(80,0))-80<=30+1e-6 for q in points))
 
 
 if __name__=='__main__':unittest.main()
