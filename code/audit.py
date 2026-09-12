@@ -5,6 +5,7 @@ from geometry import contains
 from directional_geometry import ALPHA,MARGIN
 from q4controller import Q4Controller
 from q3client import Client
+from negative_cells import verify_contraction
 
 GUARDED=False
 
@@ -47,7 +48,7 @@ def audit_pair_witness(w,positive,negative):
 def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
-    positive={};negative={};region_checks=0;witnesses=0;optical_covers=0;errors=[]
+    positive={};negative={};region_checks=0;witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
     for row in records:
         if row['event']=='response' and row['http_status']==200:
             response=json.loads(row['response_body'])
@@ -73,12 +74,18 @@ def postcheck(journal_path,evaluation):
                    and contains(w['before_polygon'],truth[row['channel']],tolerance=1e-3))
             if not valid:errors.append('invalid_compact_optical_cover')
             optical_covers+=1
-        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip'):
+        if row.get('reason')=='q4_negative_history_clip':
+            ch=row['channel']
+            if not verify_contraction(row['witness'],row['polygon'],positive.get(ch,[]),negative.get(ch,[])):
+                errors.append('invalid_continuous_negative_contraction')
+            negative_contractions+=1
+        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip','q4_negative_history_clip'):
             ch=row.get('channel',row.get('witness',{}).get('channel'))
             if ch not in truth or not contains(row['polygon'],truth[ch],tolerance=1e-3):
                 errors.append('truth_excluded_channel_'+str(ch))
             region_checks+=1
-    return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,compact_optical_covers=optical_covers)
+    return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,
+                compact_optical_covers=optical_covers,negative_contractions=negative_contractions)
 
 
 class MemoryJournal:

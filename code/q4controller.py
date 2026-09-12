@@ -10,6 +10,7 @@ from q3client import ProtocolError
 from lookahead import choose_pair,shared_information_value,hypotheses,single_probe_cost
 from compact_optical import choose_cover,verify_cover
 from task_routing import area_centroid,open_task_route
+from negative_cells import contract as contract_negative_history
 
 
 class Q4Controller:
@@ -128,6 +129,13 @@ class Q4Controller:
             self.positives.setdefault(ch,[]).append((point,response['svd_deg']))
             self.record('q4_positive_region',channel=ch,polygon=poly,
                         virtual_time_s=self.client.ledger.virtual_time)
+        if (self.options.get('negative_cells') and ch in self.polygons and ch not in self.cleared):
+            contraction=contract_negative_history(self.polygons[ch],self.positives[ch],self.negatives[ch],
+                                                   self.options.get('negative_cell_count',24))
+            if contraction:
+                self.polygons[ch]=contraction['polygon']
+                self.record('q4_negative_history_clip',channel=ch,**contraction,
+                            virtual_time_s=self.client.ledger.virtual_time)
         return kind
 
     def clear(self,point,ch,role):
