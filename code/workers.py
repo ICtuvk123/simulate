@@ -10,9 +10,13 @@ def engine_main(connection,configuration):
 
 
 def policy_main(connection,options,journal_path,metadata):
-    import sys,time,traceback
+    import sys,time,traceback,array
+    # multiprocessing inherits its parent's CLI by default. Remove seed/job
+    # arguments before loading the policy; the controller gets options only.
+    sys.argv=['q4-feedback-policy']
     from q4controller import Q4Controller
     from q3client import Client,JsonlJournal
+    from decision_guard import DecisionGuard
     assert 'q4engine' not in sys.modules and 'engine' not in sys.modules
     journal=JsonlJournal(journal_path,metadata)
     def transport(path,body,timeout):
@@ -22,7 +26,7 @@ def policy_main(connection,options,journal_path,metadata):
     client=Client('local-robot',journal,transport=transport)
     error=None;start=time.perf_counter()
     try:
-        Q4Controller(client,options).run()
+        with DecisionGuard():Q4Controller(client,options).run()
     except Exception as exc:
         error=f'{type(exc).__name__}: {exc}'
         journal.append(dict(event='client_stop',error=error,traceback=traceback.format_exc()))

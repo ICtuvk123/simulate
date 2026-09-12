@@ -7,6 +7,7 @@ from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
 from q3client import ProtocolError
+from lookahead import choose_pair
 
 
 class Q4Controller:
@@ -173,17 +174,34 @@ class Q4Controller:
             return self.fallback(ch)
         before=list(self.polygons[ch]);station,bearing=self.positives[ch][0]
         probe=paired_probe(before,station,bearing,self.options['probe_b'],self.options['probe_fraction'])
+        selected=None
+        if self.options.get('lookahead'):
+            other=self.other_tasks(ch)
+            anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
+            selected=choose_pair(before,self.client.ledger.position,self.positives[ch],self.negatives[ch],
+                                 [q for j,q in self.measured if j==ch],self.options,anchor)
+            if selected:
+                probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
+                self.record('q4_finite_lookahead_rank',channel=ch,**selected)
         if not probe['geometry_valid']:
             self.record('q4_pair_geometry_rejected',channel=ch,probe=probe)
             return self.fallback(ch)
         endpoints=[probe['plus'],probe['minus']]
         endpoints.sort(key=lambda q:math.dist(q,self.client.ledger.position))
+        if selected:endpoints=selected['endpoints']
         if all((ch,tuple(q)) in self.measured for q in endpoints):
             return self.fallback(ch)
         results=[];observed=[]
         for q in endpoints:
             kind=self.measure(q,ch,'paired_probe');results.append(kind);observed.append(q)
             if ch in self.cleared or self.guaranteed_clear(ch):return
+            if self.options.get('lookahead_optical',0)>20 and kind=='direction':
+                center,radius=self.info(ch)
+                if 20<radius<=self.options['lookahead_optical']:
+                    old=self.optical_tried.get(ch)
+                    if old is None or math.dist(old,center)>10:
+                        self.optical_tried[ch]=center
+                        if self.clear(center,ch,'lookahead_optical'):return
         if results==['no_signal','no_signal']:
             witness={**probe,'results':results,'observed_order':observed,
                      'before_polygon':before,'channel':ch,'positive_station':station}
