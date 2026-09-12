@@ -1,5 +1,9 @@
 # 第四问本地模拟与算法研发包
 
+最终冻结：**D_COMPACT**（执行源码 `239e83e`）。200个未参与选型的本地保留场景全部清除；平均每源 **491.58秒**，平均总时间 **6122.13秒**，P95 **6677.01秒**，最坏 **7127.20秒**，平均策略现实耗时 **7.08秒**。相对同场H0平均每源降低 **16.43%**。独立退出核验及118241个动作的反馈重放全部通过。
+
+新尝试的面积重心和有向进入/离开路线未达到独立晋级标准，未替换默认版本。完整结果见 `reports/RESULTS_REPORT.md`，路线比较见 `examples/route_comparison.html`，14源过程见 `examples/fourteen_sources.html`。
+
 默认入口始终加载 `INCUMBENT.json` 指向的冻结源码和配置。实验候选位于 `code/`、`configs/`；修改实验候选不会替换默认运行的冻结算法。第三问 G 保持独立，不由本包覆盖。
 
 ## 单局运行与回放
@@ -51,3 +55,7 @@ python code/audit.py runs/本次目录/requests.jsonl
 runtime.zip 可以单独解压运行，包含冻结版本、实验源码、回归测试、说明、结果CSV和过程回放。若还需要原始实验记录，将 evidence.zip 解压到相同位置，合并同名 jammer_search_q4 目录。证据包中的场景真值只来自本地引擎的结束后评估。
 
 为控制压缩包大小，重复源码按哈希只保存一次。运行 `python code/restore_evidence.py --verify-only` 核验原始日志和源码对象；运行 `python code/restore_evidence.py` 可恢复每局 `runs/编号/source/` 的完整源码快照。不会覆盖内容不同的已有源码。
+
+## 证据包使用
+
+日常运行只需runtime.zip。需要复核历史原始记录时，将evidence.zip的jammer_search_q4目录合并到运行包同名目录，再运行`python code/restore_evidence.py --verify-only`检查哈希；需要恢复每局源码目录时运行`python code/restore_evidence.py`。配对分析按当前目录的runs/run_id查找，支持换电脑复现。当前53项回归测试通过。

@@ -1,0 +1,57 @@
+{
+  "archive": "D:\\computer_learning\\jammer_search_q4\\tmp\\final_preflight\\Q4_preflight_20260912_runtime.zip",
+  "sha256": "9e93d9d4a0e9bf1683c72f8a0ee00bd0e4f1ecc000a4a0da01219184f6ed6f02",
+  "kind": "runtime",
+  "incumbent": {
+    "status": "validated",
+    "version": "D_COMPACT-validated-20260912",
+    "configuration": "frozen/D_COMPACT/configs/D_compact_optical.json",
+    "code_directory": "frozen/D_COMPACT/code",
+    "freeze": "configs/D_COMPACT_FREEZE.json",
+    "evidence": [
+      "reports/D_COMPACT_validation100"
+    ],
+    "previous": "E_COMBO-validated-20260912"
+  },
+  "verified_files": 408,
+  "extracted": "D:\\computer_learning\\jammer_search_q4\\tmp\\final_preflight\\extracted\\jammer_search_q4",
+  "checks": {
+    "freeze": {
+      "returncode": 0,
+      "stdout": "{\n  \"valid\": true,\n  \"version\": \"D_COMPACT-validated-20260912\",\n  \"commit\": \"239e83ebb98f2737f896a7a5e2dd200ed40fa9ea\",\n  \"source_count\": 39,\n  \"failures\": []\n}\n",
+      "stderr": ""
+    },
+    "unit_tests": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "...................................................\n----------------------------------------------------------------------\nRan 51 tests in 2.345s\n\nOK\n"
+    },
+    "smoke": {
+      "returncode": 0,
+      "stdout": "{\n  \"complete\": true,\n  \"cleared\": 14,\n  \"total_virtual_s\": 6204.968378,\n  \"mean_per_source_s\": 443.212027,\n  \"real_runtime_s\": 8.486911399988458,\n  \"error\": null,\n  \"directory\": \"D:\\\\computer_learning\\\\jammer_search_q4\\\\tmp\\\\final_preflight\\\\extracted\\\\jammer_search_q4\\\\runs\\\\20260912T112823830990Z-0a3d7d51\",\n  \"replay\": \"D:\\\\computer_learning\\\\jammer_search_q4\\\\tmp\\\\final_preflight\\\\extracted\\\\jammer_search_q4\\\\runs\\\\20260912T112823830990Z-0a3d7d51\\\\replay.html\"\n}\n",
+      "stderr": ""
+    }
+  },
+  "smoke": {
+    "complete": true,
+    "cleared": 14,
+    "total_virtual_s": 6204.968378,
+    "mean_per_source_s": 443.212027,
+    "real_runtime_s": 8.486911399988458,
+    "error": null,
+    "directory": "D:\\computer_learning\\jammer_search_q4\\tmp\\final_preflight\\extracted\\jammer_search_q4\\runs\\20260912T112823830990Z-0a3d7d51",
+    "replay": "D:\\computer_learning\\jammer_search_q4\\tmp\\final_preflight\\extracted\\jammer_search_q4\\runs\\20260912T112823830990Z-0a3d7d51\\replay.html"
+  },
+  "feedback_replay": {
+    "valid": true,
+    "actions": 262,
+    "engine_imported": false,
+    "truth_read": false,
+    "seed_received": false
+  },
+  "valid": true,
+  "elapsed_s": 18.094000000011874,
+  "preserved_local_run": "runs/20260912T112823830990Z-0a3d7d51",
+  "unit_test_count": 51,
+  "unit_tests_passed": true
+}

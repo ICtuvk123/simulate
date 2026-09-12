@@ -1,14 +1,15 @@
 # 第四问计算结果与证据索引
 
-更新时间：2026-09-12T10:39:58.125836+00:00。持续开发任务尚未结束，以 INCUMBENT.json 指向的冻结版本为准。
+更新时间：2026-09-12T11:43:43.157530+00:00。本轮已完成最终验收与冻结，以 INCUMBENT.json 指向的冻结版本为准。
 
 ## 当前已验证版本
 
 版本：`D_COMPACT-validated-20260912`；执行源码 commit：`239e83ebb98f2737f896a7a5e2dd200ed40fa9ea`。默认入口从 `frozen/D_COMPACT/code` 加载，不使用正在编辑的实验候选。
 
-| 场景集 | 完整成功 | 平均每源 / s | 平均总时间 / s | P95 总时间 / s | 最坏总时间 / s | 平均现实耗时 / s |
+| 场景集 / 方案 | 完整成功 | 平均每源 / s | 平均总时间 / s | P95 总时间 / s | 最坏总时间 / s | 平均现实耗时 / s |
 |---|---:|---:|---:|---:|---:|---:|
-| D_COMPACT_validation100 | 100/100 | 486.192 | 6042.583 | 6767.264 | 7252.036 | 5.549 |
+| FINAL_holdout200 / H0 | 200/200 | 588.233 | 7361.780 | 8540.626 | 9090.024 | 5.670 |
+| FINAL_holdout200 / compact | 200/200 | 491.580 | 6122.134 | 6677.015 | 7127.204 | 7.080 |
 
 平均每源时间定义为逐场 T/实际源数 的算术平均，不用平均总时间除以平均源数替代。源数只由结束后的评估器提供。P95 使用整场总时间的线性插值经验分位数。现实耗时来自本机并行 worker 中的策略进程，包含决策和日志写入；不同运行批次的系统负载可能不同。
 
@@ -16,9 +17,8 @@
 
 | 方案 | 移动 / s | RF / s | 切频 / s | 光学 / s | 清除 / s | 无信号次数 | 光学失败次数 | 后备次数 | 原始日志平均字节 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| E_combo | 4380.884 | 1412.700 | 262.100 | 38.490 | 25.660 | 242.120 | 0.000 | 0.000 | 325593 |
-| H0 | 5485.903 | 1393.000 | 248.110 | 38.490 | 25.660 | 238.540 | 0.000 | 0.000 | 307351 |
-| compact | 4348.573 | 1366.050 | 254.240 | 48.060 | 25.660 | 240.210 | 3.190 | 0.000 | 323157 |
+| H0 | 5634.920 | 1411.625 | 251.185 | 38.430 | 25.620 | 242.405 | 0.000 | 0.000 | 311290 |
+| compact | 4412.394 | 1379.325 | 256.180 | 48.615 | 25.620 | 242.840 | 3.395 | 0.000 | 327038 |
 
 严格逐动作记账：T = L/5 + 5 N_RF + N_switch + 3 N_optical + 2 N_success。按任务用途划分的 role_cost 是对这些相同秒数的另一种分组，不能与物理分项再次相加。
 
@@ -36,13 +36,17 @@
 | B_shape_dev30 | development | E_combo → inner950 | 30 | True | -0.681% | +0.077% | [-2.912%, 1.346%] | False |
 | B_shape_dev30 | development | E_combo → outer1860 | 30 | True | -1.306% | -1.465% | [-2.800%, -0.099%] | False |
 | B_shape_dev30 | development | E_combo → outerphase | 30 | True | -2.491% | +0.739% | [-5.124%, -0.446%] | False |
+| C_CENTROID_validation100 | validation | compact → centroid | 100 | True | +0.518% | +1.185% | [-0.655%, 1.659%] | False |
 | C_replacement_dev30 | development | H0 → C1 | 30 | True | +0.354% | -0.016% | [-0.249%, 1.357%] | False |
 | C_replacement_dev30 | development | H0 → C2 | 30 | True | +0.354% | -0.016% | [-0.249%, 1.357%] | False |
 | C_route_structure_dev30 | development | E_combo → forecast | 30 | True | -0.097% | +0.000% | [-0.258%, 0.000%] | False |
 | C_route_structure_dev30 | development | E_combo → route_probe | 30 | True | -2.935% | +1.961% | [-4.723%, -1.000%] | False |
 | C_route_structure_dev30 | development | E_combo → route_refine | 30 | True | +0.039% | -0.484% | [-0.309%, 0.358%] | False |
+| C_task_routes_fixed_dev30 | development | compact → centroid | 30 | True | +3.039% | -1.681% | [1.602%, 4.609%] | True |
+| C_task_routes_fixed_dev30 | development | compact → task | 30 | True | +0.093% | +2.037% | [-2.172%, 2.264%] | False |
 | D40_validation100 | validation | H0 → D40 | 100 | True | +0.669% | -0.857% | [-0.440%, 1.801%] | False |
 | D8_validation100 | validation | H0 → D8 | 100 | True | +5.112% | -7.311% | [4.123%, 6.093%] | True |
+| D_adaptive_optical_dev30 | development | compact → adaptive | 30 | True | +0.298% | -0.300% | [0.039%, 0.498%] | False |
 | D_compact_optical_dev30 | development | E_combo → compact | 30 | True | +1.384% | -0.745% | [1.037%, 1.861%] | True |
 | D_COMPACT_validation100 | validation | E_combo → compact | 100 | True | +1.237% | -1.532% | [1.072%, 1.414%] | True |
 | D_COMPACT_validation100 | validation | H0 → compact | 100 | True | +15.553% | -18.229% | [14.428%, 16.736%] | True |
@@ -63,6 +67,7 @@
 | E_interaction_dev30 | development | E_shared → E_combo | 30 | True | +3.390% | -4.761% | [2.459%, 4.354%] | True |
 | E_pair_dev30 | development | D8 → E_pair | 30 | True | +4.429% | -0.996% | [2.749%, 6.305%] | True |
 | E_shared_dev30 | development | D8 → E_shared | 30 | True | +7.113% | -3.689% | [6.002%, 8.191%] | True |
+| FINAL_holdout200 | final | H0 → compact | 200 | True | +16.431% | -21.821% | [15.578%, 17.350%] | True |
 
 完整逐场数据在各阶段 paired_results.csv；EXPERIMENTS.csv 记录假设、代码哈希、配置、命令与采纳决定。开发场景有复用，不把重复运行计为新的独立场景。任何失败都保留；没有通过完整性检查的候选不能以速度晋级。
 
@@ -70,6 +75,7 @@
 
 压力集包含边界向外辐射、发射角边界、1000/1500米半径、0/360度读数、聚集、10/16个源、近距离触发和空频道。全向-only、定向-only与混合场景分别报告，不合并成主随机分布成绩。
 
+- reports/D_COMPACT_frozen_pressure14/PRESSURE_REPORT.md
 - reports/E_COMBO_pressure14/PRESSURE_REPORT.md
 - reports/H0_D8_pressure14/PRESSURE_REPORT.md
 
@@ -88,6 +94,10 @@ H0、D8及后续晋级快照都保留。D8早期清单的LF/CRLF差异已按真�
 ## 图表
 
 图表为矢量PDF，数据清单与SHA-256见各图表目录的SOURCES.json。已渲染检查字体、坐标轴、图例及数据范围。
+- figures/final/paired_total_times.pdf
+- figures/final/per_source_distribution.pdf
+- figures/final/source_count_strata.pdf
+- figures/final/time_components.pdf
 - figures/validation/paired_total_times.pdf
 - figures/validation/per_source_distribution.pdf
 - figures/validation/source_count_strata.pdf
@@ -106,4 +116,14 @@ python code/verify_exit.py runs/本次目录/requests.jsonl
 
 ## 结果边界
 
-数学推导、连续数值几何证书、本地完整任务时间、官方演练及正式成绩相互区分。本轮未运行官方演练或正式测试；官方适配器仅通过模拟连接单测，操作说明见OFFICIAL_PRACTICE.md。最终保留集的结果只有实际完成后才写入报告。当前有限模型与终值近似用于动作排序，不证明全局时间最优。
+数学推导、连续数值几何证书、本地完整任务时间、官方演练及正式成绩相互区分。D_COMPACT 另经用户授权完成一次官方问题4演练，13源全部清除，6813.20秒，每源524.09秒；正式测试0次。详见reports/OFFICIAL_PRACTICE_RESULT.md及OFFICIAL_PRACTICE.md。最终保留集的结果只有实际完成后才写入报告。当前有限模型与终值近似用于动作排序，不证明全局时间最优。
+
+## 逐场收益并非保证
+
+保留集200对中199对更快、1对更慢。场景420154两策略均清除16源：H0为3926.689秒，D_COMPACT为5313.929秒。搜索用途增加约1907.87秒，局部补测用途减少约1311.49秒，净结果仍退步。该场景完整保留在FINAL_SLOWER_CASE.json，不因整体均值改善而隐藏。该分析用于解释验收边界，未据此再次改参数。
+
+## 最终文件与复核
+
+执行源码239e83e；配置frozen/D_COMPACT/configs/D_compact_optical.json；逐文件哈希configs/D_COMPACT_FREEZE.json。最终选择在configs/FINAL_SELECTION_FREEZE.json先行登记。FINAL_ACCEPTANCE.json确认400次真实冻结运行和118241个反馈动作重放；第二独立几何核验不读取真值、不导入控制器几何。
+
+强制后备诊断另外清除10/10边界定向源，9次后备产生715次光学后备动作，后备用时6002.452秒、原始日志1060935字节。这是后备终止性诊断，不并入主随机成绩。

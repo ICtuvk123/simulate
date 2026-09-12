@@ -1,0 +1,158 @@
+{
+  "utc": "2026-09-12T11:42:07.878035+00:00",
+  "phase": "FINAL_holdout200",
+  "n_scenarios": 200,
+  "n_runs": 400,
+  "all_complete": true,
+  "all_feedback_replays_valid": true,
+  "replayed_actions": 118241,
+  "all_independent_exit_checks_valid": true,
+  "exact_frozen_hashes_verified": true,
+  "no_selection_after_holdout": true,
+  "fallbacks": {
+    "H0": 0,
+    "compact": 0
+  },
+  "summary": {
+    "H0": {
+      "n": 200,
+      "complete": 200,
+      "all_success": true,
+      "missing_metrics": 0,
+      "mean_total": 7361.780480925,
+      "mean_per_source": 588.233158353378,
+      "p95": 8540.62627875,
+      "worst": 9090.02357,
+      "mean_wall": 5.670460256499719,
+      "worst_wall": 7.869486600000528,
+      "mean_move_time": 5634.92048108641,
+      "mean_RF_detection_time": 1411.625,
+      "mean_channel_switch_time": 251.185,
+      "mean_optical_time": 38.43,
+      "mean_clear_time": 25.62,
+      "mean_no_signal_count": 242.405,
+      "mean_optical_failed_count": 0,
+      "mean_fallback_count": 0,
+      "mean_journal_bytes": 311289.87,
+      "mean_role_cost": {
+        "search": {
+          "actions": 247.215,
+          "total_time": 4537.457267017658,
+          "move_time": 3067.187267017657,
+          "rf_time": 1236.075,
+          "switch_time": 234.195,
+          "optical_time": 0.0,
+          "clear_time": 0.0
+        },
+        "paired_probe": {
+          "actions": 35.11,
+          "total_time": 2445.2151223675187,
+          "move_time": 2252.6751223675187,
+          "rf_time": 175.55,
+          "switch_time": 16.99,
+          "optical_time": 0.0,
+          "clear_time": 0.0
+        },
+        "guaranteed": {
+          "actions": 12.81,
+          "total_time": 379.1080917012345,
+          "move_time": 315.05809170123456,
+          "rf_time": 0.0,
+          "switch_time": 0.0,
+          "optical_time": 38.43,
+          "clear_time": 25.62
+        }
+      }
+    },
+    "compact": {
+      "n": 200,
+      "complete": 200,
+      "all_success": true,
+      "missing_metrics": 0,
+      "mean_total": 6122.134227195,
+      "mean_per_source": 491.5800688481228,
+      "p95": 6677.01488205,
+      "worst": 7127.204468,
+      "mean_wall": 7.079662895000147,
+      "worst_wall": 10.356266200004029,
+      "mean_move_time": 4412.394227293341,
+      "mean_RF_detection_time": 1379.325,
+      "mean_channel_switch_time": 256.18,
+      "mean_optical_time": 48.615,
+      "mean_clear_time": 25.62,
+      "mean_no_signal_count": 242.84,
+      "mean_optical_failed_count": 3.395,
+      "mean_fallback_count": 0,
+      "mean_journal_bytes": 327038.275,
+      "mean_role_cost": {
+        "search": {
+          "actions": 245.92,
+          "total_time": 4310.560423082591,
+          "move_time": 2846.970423082591,
+          "rf_time": 1229.6,
+          "switch_time": 233.99,
+          "optical_time": 0.0,
+          "clear_time": 0.0
+        },
+        "shared_bearing": {
+          "actions": 16.54,
+          "total_time": 99.24,
+          "move_time": 0.0,
+          "rf_time": 82.7,
+          "switch_time": 16.54,
+          "optical_time": 0.0,
+          "clear_time": 0.0
+        },
+        "compact_optical": {
+          "actions": 10.78,
+          "total_time": 642.9361540993164,
+          "move_time": 595.8261540993163,
+          "rf_time": 0.0,
+          "switch_time": 0.0,
+          "optical_time": 32.34,
+          "clear_time": 14.77
+        },
+        "paired_probe": {
+          "actions": 13.405,
+          "total_time": 763.1344120198934,
+          "move_time": 690.4594120198932,
+          "rf_time": 67.025,
+          "switch_time": 5.65,
+          "optical_time": 0.0,
+          "clear_time": 0.0
+        },
+        "guaranteed": {
+          "actions": 5.425,
+          "total_time": 306.26323809154115,
+          "move_time": 279.13823809154115,
+          "rf_time": 0.0,
+          "switch_time": 0.0,
+          "optical_time": 16.275,
+          "clear_time": 10.85
+        }
+      }
+    }
+  },
+  "comparison": {
+    "phase": "FINAL_holdout200",
+    "baseline": "H0",
+    "candidate": "compact",
+    "pairs": 200,
+    "all_registered_pairs_present": true,
+    "all_success": true,
+    "identical_worlds_verified": 200,
+    "mean_per_source_baseline": 588.233158353378,
+    "mean_per_source_candidate": 491.5800688481228,
+    "improvement_percent": 16.43108487386415,
+    "p95_baseline": 8540.62627875,
+    "p95_candidate": 6677.01488205,
+    "p95_change_percent": -21.820547297999283,
+    "bootstrap_improvement_95_percent": [
+      15.578358184565435,
+      17.34979498991281
+    ],
+    "faster": 199,
+    "slower": 1,
+    "gate_passed": true
+  }
+}

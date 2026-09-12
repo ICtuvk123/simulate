@@ -13,9 +13,9 @@ def build():
     stage='本轮已完成最终验收与冻结' if incumbent.get('status')=='final_frozen' else '持续开发任务尚未结束'
     lines=['# 第四问计算结果与证据索引','',f"更新时间：{datetime.now(timezone.utc).isoformat()}。{stage}，以 INCUMBENT.json 指向的冻结版本为准。",'',
            '## 当前已验证版本','',f"版本：`{incumbent['version']}`；执行源码 commit：`{freeze['commit']}`。默认入口从 `{incumbent.get('code_directory','code')}` 加载，不使用正在编辑的实验候选。",'',
-           '| 场景集 | 完整成功 | 平均每源 / s | 平均总时间 / s | P95 总时间 / s | 最坏总时间 / s | 平均现实耗时 / s |',
+           '| 场景集 / 方案 | 完整成功 | 平均每源 / s | 平均总时间 / s | P95 总时间 / s | 最坏总时间 / s | 平均现实耗时 / s |',
            '|---|---:|---:|---:|---:|---:|---:|',
-           f"| {phase} | {current['complete']}/{current['n']} | {current['mean_per_source']:.3f} | {current['mean_total']:.3f} | {current['p95']:.3f} | {current['worst']:.3f} | {current['mean_wall']:.3f} |",'',
+           '\n'.join(f"| {phase} / {name} | {m['complete']}/{m['n']} | {m['mean_per_source']:.3f} | {m['mean_total']:.3f} | {m['p95']:.3f} | {m['worst']:.3f} | {m['mean_wall']:.3f} |" for name,m in summary.items()),'',
            '平均每源时间定义为逐场 T/实际源数 的算术平均，不用平均总时间除以平均源数替代。源数只由结束后的评估器提供。P95 使用整场总时间的线性插值经验分位数。现实耗时来自本机并行 worker 中的策略进程，包含决策和日志写入；不同运行批次的系统负载可能不同。','',
            '## 当前验证集的实际时间分项','',
            '| 方案 | 移动 / s | RF / s | 切频 / s | 光学 / s | 清除 / s | 无信号次数 | 光学失败次数 | 后备次数 | 原始日志平均字节 |','|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|']

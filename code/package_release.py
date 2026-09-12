@@ -63,7 +63,8 @@ def build(tag,output,with_evidence=True):
                     name=p.relative_to(ROOT).as_posix();data=p.read_bytes()
                     runfiles[name]=sha(data);z.writestr(prefix+'/'+name,data)
             for p in (ROOT/'EXPERIMENTS.csv',ROOT/'SEEDS.csv',ROOT/'code/restore_evidence.py'):
-                z.writestr(prefix+'/'+p.relative_to(ROOT).as_posix(),p.read_bytes())
+                name=p.relative_to(ROOT).as_posix();data=p.read_bytes()
+                runfiles[name]=sha(data);z.writestr(prefix+'/'+name,data)
             evidence_manifest=dict(created_utc=datetime.now(timezone.utc).isoformat(),runs=runs,
                                    source_objects=objects,files=runfiles,
                                    restore_command='python code/restore_evidence.py --verify-only',

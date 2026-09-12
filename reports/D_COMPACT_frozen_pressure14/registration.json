@@ -1,0 +1,720 @@
+{
+  "phase": "D_COMPACT_frozen_pressure14",
+  "utc": "2026-09-12T11:10:04.277326+00:00",
+  "role": "pressure",
+  "seeds": [
+    430001,
+    430002,
+    430003,
+    430004,
+    430005,
+    430006,
+    430007,
+    430008,
+    430009,
+    430010,
+    430011,
+    430012,
+    430013,
+    430014
+  ],
+  "variants": {
+    "compact": "frozen/D_COMPACT/configs/D_compact_optical.json"
+  },
+  "snapshots": {
+    "compact": {
+      "snapshot": "frozen/D_COMPACT",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "freeze": "configs/D_COMPACT_FREEZE.json"
+    }
+  },
+  "tasks": [
+    {
+      "seed": 430001,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430002,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430003,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430004,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430005,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430006,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430007,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "omni",
+        "count": 10,
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430008,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430009,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "outward",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430010,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "directional",
+        "orientation": "inward",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430011,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "angle_boundary",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430012,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430013,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 4.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 600.0,
+            "y": -0.1,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": -525.3288904374105,
+            "y": 1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430014,
+      "variant": "compact",
+      "config": "frozen/D_COMPACT/configs/D_compact_optical.json",
+      "snapshot": "frozen/D_COMPACT",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1800.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 0.0
+          },
+          {
+            "channel": 2,
+            "x": 0.0,
+            "y": 1800.0,
+            "radius": 1500.0,
+            "direction_deg": 90.0
+          },
+          {
+            "channel": 3,
+            "x": 0.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    }
+  ],
+  "worker_provenance": {
+    "compact": [
+      {
+        "worker": 0,
+        "directory": "D:\\computer_learning\\jammer_search_q4_workers\\w0",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_workers\\w0\\frozen\\D_COMPACT",
+        "source_hashes": {
+          "audit.py": "562d8d82fb1641706c723999559283c2cd22d4344b80d2124ff224234500c676",
+          "batch_worker.py": "3ea0534df6da63765dade46f28697cd094159ca87777e490e9181318e4d47c2e",
+          "build_report.py": "4e2afcbf789d37f41a2d95b8fe146b8347e01ef110ef05c6a97383071ec10a67",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_phase.py": "3f4dc8245c64a119978c681c95ab0b8f9dd131e0be3f7365a7c98fd0a9ac6921",
+          "coverage.py": "36f79285287832956cc7dbbe476ae32a3afa42b606bb4377befd329eb3e25abc",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "2701d85bfdb5692ceb68c318f11f2ab54dd8cc7f3aeab736cf73bb4eb32dbcb9",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "a72cb4409daaf21533cbae696ba418ad36d2b88f86ed94e3cec937251797944a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "package_release.py": "fe584a573709eab2f73b83a1e6ece9783df4092ac184fb15aa7ce16949c3b90f",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "9aa960808e315ed260027d28885b88108ca015fcd1a653abbd78eaddc289c553",
+          "q4controller.py": "27a88b4b8bad246ff2fda0d87ef3f2252aa67185cdf52ae3aea4dcc1e5d6d98d",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "e2a490256dfb4b6fa1f8fd193e1d36e5289de1f2f915c56565b0abf07a97d65f",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "8dfedd5e7c16332f1fb7b4af66bd3dffa85d6f2be5defbaa396aae62582d56da",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "0e8d75664b8416b6a9e3c71ecb4295725ceb7b8f0a776bc3f82178adaf65c48e",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "ee065b5ef1d2ab39bf55255af5682ce546f37bd9ed2b70956c42475788e054ff",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629"
+        },
+        "configuration": {
+          "version": "D-compact-optical",
+          "inner_count": 8,
+          "outer_count": 16,
+          "inner_radius": 995.0,
+          "outer_radius": 1840.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "ae914f0a5ad2df30f416b219d3abd9f45cf020c2e03613f206735558a46fa6ab"
+      },
+      {
+        "worker": 1,
+        "directory": "D:\\computer_learning\\jammer_search_q4_workers\\w1",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_workers\\w1\\frozen\\D_COMPACT",
+        "source_hashes": {
+          "audit.py": "562d8d82fb1641706c723999559283c2cd22d4344b80d2124ff224234500c676",
+          "batch_worker.py": "3ea0534df6da63765dade46f28697cd094159ca87777e490e9181318e4d47c2e",
+          "build_report.py": "4e2afcbf789d37f41a2d95b8fe146b8347e01ef110ef05c6a97383071ec10a67",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_phase.py": "3f4dc8245c64a119978c681c95ab0b8f9dd131e0be3f7365a7c98fd0a9ac6921",
+          "coverage.py": "36f79285287832956cc7dbbe476ae32a3afa42b606bb4377befd329eb3e25abc",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "2701d85bfdb5692ceb68c318f11f2ab54dd8cc7f3aeab736cf73bb4eb32dbcb9",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "a72cb4409daaf21533cbae696ba418ad36d2b88f86ed94e3cec937251797944a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "package_release.py": "fe584a573709eab2f73b83a1e6ece9783df4092ac184fb15aa7ce16949c3b90f",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "9aa960808e315ed260027d28885b88108ca015fcd1a653abbd78eaddc289c553",
+          "q4controller.py": "27a88b4b8bad246ff2fda0d87ef3f2252aa67185cdf52ae3aea4dcc1e5d6d98d",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "e2a490256dfb4b6fa1f8fd193e1d36e5289de1f2f915c56565b0abf07a97d65f",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "8dfedd5e7c16332f1fb7b4af66bd3dffa85d6f2be5defbaa396aae62582d56da",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "0e8d75664b8416b6a9e3c71ecb4295725ceb7b8f0a776bc3f82178adaf65c48e",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "ee065b5ef1d2ab39bf55255af5682ce546f37bd9ed2b70956c42475788e054ff",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629"
+        },
+        "configuration": {
+          "version": "D-compact-optical",
+          "inner_count": 8,
+          "outer_count": 16,
+          "inner_radius": 995.0,
+          "outer_radius": 1840.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "ae914f0a5ad2df30f416b219d3abd9f45cf020c2e03613f206735558a46fa6ab"
+      },
+      {
+        "worker": 2,
+        "directory": "D:\\computer_learning\\jammer_search_q4_workers\\w2",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_workers\\w2\\frozen\\D_COMPACT",
+        "source_hashes": {
+          "audit.py": "562d8d82fb1641706c723999559283c2cd22d4344b80d2124ff224234500c676",
+          "batch_worker.py": "3ea0534df6da63765dade46f28697cd094159ca87777e490e9181318e4d47c2e",
+          "build_report.py": "4e2afcbf789d37f41a2d95b8fe146b8347e01ef110ef05c6a97383071ec10a67",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_phase.py": "3f4dc8245c64a119978c681c95ab0b8f9dd131e0be3f7365a7c98fd0a9ac6921",
+          "coverage.py": "36f79285287832956cc7dbbe476ae32a3afa42b606bb4377befd329eb3e25abc",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "2701d85bfdb5692ceb68c318f11f2ab54dd8cc7f3aeab736cf73bb4eb32dbcb9",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "a72cb4409daaf21533cbae696ba418ad36d2b88f86ed94e3cec937251797944a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "package_release.py": "fe584a573709eab2f73b83a1e6ece9783df4092ac184fb15aa7ce16949c3b90f",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "9aa960808e315ed260027d28885b88108ca015fcd1a653abbd78eaddc289c553",
+          "q4controller.py": "27a88b4b8bad246ff2fda0d87ef3f2252aa67185cdf52ae3aea4dcc1e5d6d98d",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "e2a490256dfb4b6fa1f8fd193e1d36e5289de1f2f915c56565b0abf07a97d65f",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "8dfedd5e7c16332f1fb7b4af66bd3dffa85d6f2be5defbaa396aae62582d56da",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "0e8d75664b8416b6a9e3c71ecb4295725ceb7b8f0a776bc3f82178adaf65c48e",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "ee065b5ef1d2ab39bf55255af5682ce546f37bd9ed2b70956c42475788e054ff",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629"
+        },
+        "configuration": {
+          "version": "D-compact-optical",
+          "inner_count": 8,
+          "outer_count": 16,
+          "inner_radius": 995.0,
+          "outer_radius": 1840.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "ae914f0a5ad2df30f416b219d3abd9f45cf020c2e03613f206735558a46fa6ab"
+      },
+      {
+        "worker": 3,
+        "directory": "D:\\computer_learning\\jammer_search_q4_workers\\w3",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_workers\\w3\\frozen\\D_COMPACT",
+        "source_hashes": {
+          "audit.py": "562d8d82fb1641706c723999559283c2cd22d4344b80d2124ff224234500c676",
+          "batch_worker.py": "3ea0534df6da63765dade46f28697cd094159ca87777e490e9181318e4d47c2e",
+          "build_report.py": "4e2afcbf789d37f41a2d95b8fe146b8347e01ef110ef05c6a97383071ec10a67",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_phase.py": "3f4dc8245c64a119978c681c95ab0b8f9dd131e0be3f7365a7c98fd0a9ac6921",
+          "coverage.py": "36f79285287832956cc7dbbe476ae32a3afa42b606bb4377befd329eb3e25abc",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "2701d85bfdb5692ceb68c318f11f2ab54dd8cc7f3aeab736cf73bb4eb32dbcb9",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "a72cb4409daaf21533cbae696ba418ad36d2b88f86ed94e3cec937251797944a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "package_release.py": "fe584a573709eab2f73b83a1e6ece9783df4092ac184fb15aa7ce16949c3b90f",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "9aa960808e315ed260027d28885b88108ca015fcd1a653abbd78eaddc289c553",
+          "q4controller.py": "27a88b4b8bad246ff2fda0d87ef3f2252aa67185cdf52ae3aea4dcc1e5d6d98d",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "e2a490256dfb4b6fa1f8fd193e1d36e5289de1f2f915c56565b0abf07a97d65f",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "8dfedd5e7c16332f1fb7b4af66bd3dffa85d6f2be5defbaa396aae62582d56da",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "0e8d75664b8416b6a9e3c71ecb4295725ceb7b8f0a776bc3f82178adaf65c48e",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "ee065b5ef1d2ab39bf55255af5682ce546f37bd9ed2b70956c42475788e054ff",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629"
+        },
+        "configuration": {
+          "version": "D-compact-optical",
+          "inner_count": 8,
+          "outer_count": 16,
+          "inner_radius": 995.0,
+          "outer_radius": 1840.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "ae914f0a5ad2df30f416b219d3abd9f45cf020c2e03613f206735558a46fa6ab"
+      }
+    ]
+  },
+  "actual_frozen_execution": true,
+  "isolation_wrapper": "frozen_policy_worker.policy_main",
+  "engine_argument_wrapper": "frozen_policy_worker.engine_main",
+  "harness_hashes": {
+    "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+    "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+    "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+    "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e"
+  }
+}

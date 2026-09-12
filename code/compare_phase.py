@@ -9,16 +9,24 @@ ROOT=Path(__file__).resolve().parents[1]
 def compare(phase,baseline,candidate):
     folder=ROOT/'reports'/phase
     rows=[json.loads(s) for s in (folder/'runs.jsonl').read_text().splitlines()]
-    data={}
+    registration=json.loads((folder/'registration.json').read_text())
+    data={};duplicates=False
     for r in rows:
-        if r['task']['variant'] in (baseline,candidate):data.setdefault(r['task']['seed'],{})[r['task']['variant']]=r
-    pair_ok=True;all_success=True;pairs=[];worlds=0
+        if r['task']['variant'] in (baseline,candidate):
+            entry=data.setdefault(r['task']['seed'],{})
+            duplicates|=r['task']['variant'] in entry
+            entry[r['task']['variant']]=r
+    pair_ok=set(data)==set(registration['seeds']) and not duplicates
+    all_success=True;pairs=[];worlds=0
     for seed,pair in sorted(data.items()):
         if set(pair)!={baseline,candidate} or any('metrics' not in r for r in pair.values()):pair_ok=False;continue
         a,b=(pair[k] for k in (baseline,candidate));ma,mb=a['metrics'],b['metrics']
         all_success &= ma['all_success'] and mb['all_success']
-        ea=json.loads((Path(a['directory'])/'evaluation.json').read_text());eb=json.loads((Path(b['directory'])/'evaluation.json').read_text())
-        ca=json.loads((Path(a['directory'])/'manifest.json').read_text())['engine_configuration'];cb=json.loads((Path(b['directory'])/'manifest.json').read_text())['engine_configuration']
+        da=ROOT/'runs'/a['run_id'];db=ROOT/'runs'/b['run_id']
+        for directory in (da,db):
+            if not directory.resolve().is_relative_to((ROOT/'runs').resolve()):raise ValueError('Run path leaves evidence root')
+        ea=json.loads((da/'evaluation.json').read_text());eb=json.loads((db/'evaluation.json').read_text())
+        ca=json.loads((da/'manifest.json').read_text())['engine_configuration'];cb=json.loads((db/'manifest.json').read_text())['engine_configuration']
         if ea['sources']!=eb['sources'] or ca!=cb:raise AssertionError('Paired worlds or fixed error configuration differ')
         worlds+=1;pairs.append((ma['mean_time_per_source'],mb['mean_time_per_source'],ma['total_time'],mb['total_time']))
     if not pairs:raise ValueError('No comparable metrics')

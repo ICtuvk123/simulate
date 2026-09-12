@@ -7,6 +7,9 @@ ROOT=Path(__file__).resolve().parents[1]
 def write():
     incumbent=json.loads((ROOT/'INCUMBENT.json').read_text());freeze=json.loads((ROOT/incumbent['freeze']).read_text())
     options=json.loads((ROOT/incumbent['configuration']).read_text());base=(ROOT/'reports/Q4_ALGORITHM.md').read_text(encoding='utf-8')
+    if options.get('route_centroid'):
+        base=base.replace('否则当前 E_COMBO 用最小包围圆中心作路线代理。',
+                          '否则当前冻结版本用保守位置多边形的面积重心作全局路线代理。重心仅影响任务顺序，不是源位置结论；最小包围圆仍用于定位精度与保证清除判断。')
     header=['# 当前冻结第四问算法','',f"版本：**{incumbent['version']}**。执行控制器源码 commit：`{freeze['commit']}`。",'',
             f"配置：`{incumbent['configuration']}`；源码：`{incumbent['code_directory']}`；逐文件哈希：`{incumbent['freeze']}`。",'',
             '| 功能 | 当前设置 |','|---|---|',
@@ -19,6 +22,8 @@ def write():
             f"| 首端反馈后再比较光学覆盖 | {bool(options.get('compact_after_first'))} |",'',
             '以下完整保留主体规则、几何证明、评分模型与调度方法。末尾补充表中实际开启的光学覆盖模块；未开启的实验候选不属于默认算法。','']
     appendix=[]
+    if options.get('route_centroid'):
+        header.insert(-2,'全局源任务代理已启用面积重心；有限前瞻中的离开方向估计仍沿用原规则，没有把预测重心加入任何位置或退出证书。')
     if options.get('compact_optical'):
         appendix=['','## 当前启用的补充：有完整覆盖保证的少量光学点','',
                   '对已经缩小的保守位置多边形，尝试沿长轴及多边形边方向建立外包矩形。将矩形划分为不超过4个小矩形，在每格中心安排光学点；每格半对角线必须不超过20米减余量。多边形顶点全部位于外包矩形内，每格又完全位于对应光学圆内，因此这些光学点的并集连续覆盖整个保守区域。这是几何保证，不是对少量假设位置进行抽样检查。','',
