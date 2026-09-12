@@ -197,7 +197,9 @@ class Q4Controller:
                 if (ch,tuple(point)) in self.measured or self.info(ch)[1]<=20:continue
                 value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch],
                                                exclusions=self.optical_exclusions.get(ch,[]),
-                                               joint=self.options.get('joint_model_weights',False))
+                                               joint=self.options.get('joint_model_weights',False),
+                                               spatial_errors=self.options.get('planning_spatial_errors',False),
+                                               balanced_errors=self.options.get('planning_balanced_errors',False))
                 if value and value['estimated_gain_s']>self.options.get('shared_gain_s',10.):
                     candidates.append((value['estimated_gain_s'],ch,value))
             if not candidates:break
@@ -320,7 +322,9 @@ class Q4Controller:
         exclusions=self.optical_exclusions.get(ch,[])
         models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],
                           self.options.get('partial_optical_positions',25),exclusions,
-                          joint=self.options.get('joint_model_weights',False))
+                          joint=self.options.get('joint_model_weights',False),
+                          spatial_errors=self.options.get('planning_spatial_errors',False),
+                          balanced_errors=self.options.get('planning_balanced_errors',False))
         plan=choose_partial(self.polygons[ch],self.client.ledger.position,selected,models,
                             exclusions,self.options,anchor,int(ch!=self.client.ledger.channel))
         if plan is None:return False
@@ -332,8 +336,29 @@ class Q4Controller:
         self.clear(plan['point'],ch,'partial_optical')
         return True
 
+    def probe_selected_task_in_place(self,ch):
+        """One optional RF for the task already chosen by the global route.
+
+        This differs from scanning every known channel at every stop: only
+        information immediately relevant to the selected task is considered.
+        An actual no-signal response still has the ordinary conservative update.
+        """
+        if not self.options.get('selected_inplace_probe') or ch not in self.polygons or ch in self.cleared:return False
+        point=tuple(self.client.ledger.position)
+        if (ch,point) in self.measured:return False
+        value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch],
+                                       exclusions=self.optical_exclusions.get(ch,[]),
+                                       joint=self.options.get('joint_model_weights',False),
+                                       spatial_errors=self.options.get('planning_spatial_errors',False),
+                                       balanced_errors=self.options.get('planning_balanced_errors',False))
+        if value is None or value['estimated_gain_s']<=self.options.get('shared_gain_s',10.):return False
+        self.record('q4_selected_inplace_probe_rank',channel=ch,point=point,**value)
+        self.measure(point,ch,'selected_inplace_probe')
+        return True
+
     def localize(self,ch):
         if self.guaranteed_clear(ch):return
+        if self.probe_selected_task_in_place(ch) and self.guaranteed_clear(ch):return
         r=self.info(ch)[1]
         if 20<r<=self.options['optical_trial']:
             center=self.info(ch)[0];old=self.optical_tried.get(ch)
@@ -377,7 +402,9 @@ class Q4Controller:
                 self.record('q4_finite_lookahead_after_optical_miss',channel=ch,**selected)
         if self.options.get('compact_optical') and (selected or reused):
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
-                              self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False))
+                              self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
+                              spatial_errors=self.options.get('planning_spatial_errors',False),
+                              balanced_errors=self.options.get('planning_balanced_errors',False))
             rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
         if reused:return self.execute_reused_probe(ch,reused,before)
@@ -403,7 +430,9 @@ class Q4Controller:
                 other=self.other_tasks(ch)
                 anchor=min(other,key=lambda p:math.dist(p,self.info(ch)[0])) if other else None
                 models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
-                                  self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False))
+                                  self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
+                                  spatial_errors=self.options.get('planning_spatial_errors',False),
+                                  balanced_errors=self.options.get('planning_balanced_errors',False))
                 if models:
                     radio_cost,branches=single_probe_cost(self.polygons[ch],self.client.ledger.position,
                                                           endpoints[1],models,anchor,kind,probe)

@@ -5,6 +5,16 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
 
+def require_independent_exit(directory):
+    journal=directory/'requests.jsonl';proof=directory/'independent_exit.json'
+    if not proof.is_file():raise ValueError('Second independent exit audit is missing')
+    result=json.loads(proof.read_text(encoding='utf-8'))
+    if not result.get('valid') or result.get('truth_read') is not False or result.get('controller_geometry_imported') is not False:
+        raise ValueError('Second exit audit failed or was not independent')
+    if result.get('journal_sha256')!=hashlib.sha256(journal.read_bytes()).hexdigest():
+        raise ValueError('Second exit audit belongs to a different journal')
+
+
 def promote(name,phase,baseline,candidate,config):
     folder=ROOT/'reports'/phase
     comparison=json.loads((folder/f'comparison_{baseline}_{candidate}.json').read_text())
@@ -17,6 +27,7 @@ def promote(name,phase,baseline,candidate,config):
     for r in rows:
         if not r.get('metrics',{}).get('all_success'):raise ValueError('Failure or missing result in validation')
         directory=Path(r['directory']);m=json.loads((directory/'manifest.json').read_text())
+        require_independent_exit(directory)
         if m['source_hashes']!=freeze['source_hashes']:raise ValueError('Executed code differs from the prevalidation freeze')
         if r['task']['variant']==candidate and m['policy_options']!=freeze['configuration']:raise ValueError('Candidate configuration differs')
         replay=json.loads((directory/'feedback_replay.json').read_text())
