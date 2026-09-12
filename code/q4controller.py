@@ -2,7 +2,8 @@
 import math
 from geometry import outer_disk,clip_bearing,minimum_circle
 from local_geometry import nearest_operating_point
-from routing import open_route,through_operating_point
+from routing import open_route,route_length,through_operating_point
+from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
 from q3client import ProtocolError
@@ -30,6 +31,25 @@ class Q4Controller:
         return sorted(set(range(1,21))-set(self.polygons)-self.cleared-self.empty)
 
     def info(self,ch):return minimum_circle(self.polygons[ch])
+
+    def orient_initial_skeleton(self):
+        if not self.options.get('adapt_rotation') or not self.remaining:return
+        p=self.client.ledger.position
+        targets=[self.info(ch)[0] for ch in sorted(set(self.polygons)-self.cleared)]
+        period=360/self.options['inner_count'];step=self.options.get('rotation_step',5.)
+        angles=[k*step for k in range(math.ceil(period/step)) if k*step<period]
+        angles+= [math.degrees(math.atan2(q[1],q[0]))%period for q in targets]
+        points=self.remaining+targets
+        baseline=route_length(p,points,open_route(p,points));best=(baseline,0.,self.remaining)
+        for angle in sorted(set(angles)):
+            a=math.radians(angle);c,s=math.cos(a),math.sin(a)
+            proposal=[(x*c-y*s,x*s+y*c) for x,y in self.remaining]
+            combined=proposal+targets;length=route_length(p,combined,open_route(p,combined))
+            if length<best[0]-1e-6 and all(self.coverage.prove(self.negatives[ch]+proposal)['complete'] for ch in self.unknown()):
+                best=(length,angle,proposal)
+        self.remaining=list(best[2])
+        self.record('q4_observed_tasks_ring_rotation',angle=best[1],predicted_move_saved_s=(baseline-best[0])/5,
+                    future_not_in_exit_certificate=True)
 
     def measure(self,point,ch,role):
         point=tuple(point)
@@ -72,6 +92,48 @@ class Q4Controller:
 
     def other_tasks(self,ch):
         return list(self.remaining)+[self.info(j)[0] for j in sorted(set(self.polygons)-self.cleared-{ch})]
+
+    def replace_from_actual_stop(self):
+        """Transfer required unknown-channel scans to the actual current stop.
+
+        Geometry with future stations only ranks a plan. A station group is
+        removed only after the actual responses preserve remaining feasibility.
+        """
+        if not self.options.get('replace_search') or not self.remaining:return
+        self.refresh();unknown=self.unknown()
+        if not unknown or not self.remaining:return
+        p=tuple(self.client.ledger.position)
+        pending=[self.info(ch)[0] for ch in sorted(set(self.polygons)-self.cleared)]
+        points=self.remaining+pending
+        baseline=route_length(p,points,open_route(p,points))/5+6*len(unknown)*len(self.remaining)
+        near=sorted(range(len(self.remaining)),key=lambda i:math.dist(p,self.remaining[i]))[:self.options.get('replacement_candidates',4)]
+        best=None
+        for count in range(1,self.options.get('replacement_group',1)+1):
+            for indices in combinations(near,count):
+                others=[q for i,q in enumerate(self.remaining) if i not in indices]
+                needed=[];valid=True
+                for ch in unknown:
+                    if not self.coverage.prove(self.negatives[ch]+others)['complete']:
+                        needed.append(ch)
+                        if not self.coverage.prove(self.negatives[ch]+others+[p])['complete']:
+                            valid=False;break
+                if not valid:continue
+                proposed=others+pending
+                cost=route_length(p,proposed,open_route(p,proposed))/5+6*(len(unknown)*len(others)+len(needed))
+                if cost<baseline-1e-6 and (best is None or cost<best[0]):best=(cost,indices,others,needed)
+        if best is None:return
+        _,indices,others,needed=best
+        removed=[self.remaining[i] for i in indices]
+        for ch in sorted(needed,key=lambda ch:(ch!=self.client.ledger.channel,ch)):
+            if len(set(self.polygons)|self.cleared)==16:break
+            if ch in self.unknown() and (ch,p) not in self.measured:self.measure(p,ch,'replacement_search')
+        self.refresh()
+        if not self.remaining:return
+        if all(self.coverage.prove(self.negatives[ch]+others)['complete'] for ch in self.unknown()):
+            self.remaining=others
+            self.record('q4_actual_stop_replaced_station_group',point=p,removed=removed,channels=needed,
+                        predicted_saved_s=baseline-best[0],actual_negative_counts={ch:len(self.negatives[ch]) for ch in self.unknown()},
+                        future_stations_only_in_plan=True)
 
     def guaranteed_clear(self,ch):
         if ch in self.cleared:return True
@@ -147,6 +209,7 @@ class Q4Controller:
 
     def run(self):
         self.client.action('/enter');self.scan((0.,0.))
+        self.orient_initial_skeleton()
         for decision in range(500):
             self.refresh()
             pending=sorted(set(self.polygons)-self.cleared)
@@ -167,4 +230,5 @@ class Q4Controller:
             if kind=='scan':self.scan(self.remaining.pop(index))
             else:
                 self.since_search+=1;self.phase='localization';self.localize(index)
+                self.replace_from_actual_stop()
         raise ProtocolError('Q4 finite planning guard reached')

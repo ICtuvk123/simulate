@@ -71,6 +71,16 @@ class GeometryTests(unittest.TestCase):
 
 
 class ProtocolTests(unittest.TestCase):
+    def test_single_backside_negative_does_not_clip_known_region(self):
+        from q4controller import Q4Controller
+        config=json.loads((Path(__file__).resolve().parents[1]/'configs/H0.json').read_text())
+        c=client_for(Session(sources=[Source(1,500,0,1000,180)]))
+        controller=Q4Controller(c,config);c.action('/enter')
+        self.assertEqual(controller.measure((0,0),1,'unit'),'direction')
+        before=list(controller.polygons[1])
+        self.assertEqual(controller.measure((600,0),1,'unit'),'no_signal')
+        self.assertEqual(controller.polygons[1],before)
+        self.assertTrue(contains(controller.polygons[1],(500,0),1e-4))
     def test_directional_boundary_and_back(self):
         c=client_for(Session(sources=[Source(1,0,0,1000,0)]));c.action('/enter')
         self.assertEqual(c.action('/measure',(0,100),1)['measure_result'],'direction')
