@@ -6,6 +6,7 @@ from test_shared_stops import Journal
 from q4engine import Session,Source
 from q4controller import Q4Controller
 from q3client import Client,canonical
+from lookahead import single_probe_cost,remaining_cost
 
 
 class CompactOpticalTests(unittest.TestCase):
@@ -20,6 +21,13 @@ class CompactOpticalTests(unittest.TestCase):
         self.assertEqual(cost,20);self.assertEqual(fails,1)
     def test_area_too_large_does_not_claim_a_small_cover(self):
         self.assertEqual(list(rectangle_covers([(-200,-200),(200,-200),(200,200),(-200,200)],4)),[])
+    def test_second_radio_no_signal_keeps_region_without_double_negative_witness(self):
+        poly=[(0,-4),(70,-4),(70,4),(0,4)];saved=list(poly)
+        model=dict(g=(60,0),r=1000,heading=(1,0),weight=1.,error=0.)
+        cost,branches=single_probe_cost(poly,(-10,0),(0,0),[model],first_result='direction')
+        self.assertEqual(branches['no_signal'],1.)
+        self.assertAlmostEqual(cost,7+remaining_cost(poly,(0,0)))
+        self.assertEqual(poly,saved)
     def test_actual_second_optical_success_after_first_failure_preserves_channel(self):
         session=Session(sources=[Source(2,67,0,1500)])
         def transport(path,body,timeout):

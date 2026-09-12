@@ -171,19 +171,3 @@ def shared_information_value(poly,q,positives,negatives,count=7):
         after+=model['weight']*cost
     return dict(estimated_gain_s=baseline-after-6.,model_count=len(models),branches=branches,
                 no_signal_branch_included=True,assumptions_only_for_ranking=True)
-
-
-def single_probe_cost(poly,current,q,models,anchor=None,first_result=None,probe=None):
-    """Cost of the remaining second RF, including a possible valid double-no cut."""
-    total=0.;branches={'no_signal':0.,'direction':0.,'near':0.}
-    for model in models:
-        region=list(poly);cost=math.dist(current,q)/5+5
-        kind,beta=predicted_feedback(model,q);branches[kind]+=model['weight']
-        if kind=='near':cost+=5+(math.dist(q,anchor)/5 if anchor is not None else 0.)
-        else:
-            if kind=='direction':region=predicted_region(region,q,beta)
-            elif first_result=='no_signal' and probe is not None:
-                region=apply_paired_negative(region,dict(probe,results=['no_signal','no_signal']))
-            cost+=remaining_cost(region,q,anchor) if region else 10000.
-        total+=model['weight']*cost
-    return total,branches

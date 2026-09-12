@@ -7,8 +7,6 @@ ROOT=Path(__file__).resolve().parents[1]
 def verify(freeze,code_directory,config):
     f=json.loads(Path(freeze).read_text(encoding='utf-8'));code=Path(code_directory)
     failures=[]
-    for name in sorted({p.name for p in code.glob('*.py')}-set(f['source_hashes'])):
-        failures.append('unexpected_source:'+name)
     for name,expected in f['source_hashes'].items():
         p=code/name
         if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest()!=expected:failures.append(name)

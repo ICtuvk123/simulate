@@ -7,7 +7,7 @@ from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
 from q3client import ProtocolError
-from lookahead import choose_pair,shared_information_value,hypotheses,single_probe_cost
+from lookahead import choose_pair,shared_information_value,hypotheses
 from compact_optical import choose_cover,verify_cover
 
 
@@ -238,16 +238,6 @@ class Q4Controller:
                 return
         raise ProtocolError('Q4 finite optical strip exhausted without success')
 
-    def try_compact_optical(self,ch,models,anchor,radio_cost,context):
-        cover=choose_cover(self.polygons[ch],self.client.ledger.position,models,anchor,
-                           self.options.get('compact_optical_points',4))
-        if not cover or cover['estimated_remaining_s']>=radio_cost:return False
-        if not verify_cover(cover['witness'],cover['points']):raise ProtocolError('Invalid compact optical cover')
-        self.record('q4_compact_optical_cover',channel=ch,radio_alternative_s=radio_cost,context=context,**cover)
-        for point in cover['points']:
-            if self.clear(point,ch,'compact_optical'):return True
-        raise ProtocolError('Certified compact optical cover exhausted without success')
-
     def localize(self,ch):
         if self.guaranteed_clear(ch):return
         r=self.info(ch)[1]
@@ -272,8 +262,14 @@ class Q4Controller:
                 self.record('q4_finite_lookahead_rank',channel=ch,**selected)
         if self.options.get('compact_optical') and selected:
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
+            cover=choose_cover(before,self.client.ledger.position,models,anchor,self.options.get('compact_optical_points',4))
             rf_cost=selected['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
-            if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
+            if cover and cover['estimated_remaining_s']<rf_cost:
+                if not verify_cover(cover['witness'],cover['points']):raise ProtocolError('Invalid compact optical cover')
+                self.record('q4_compact_optical_cover',channel=ch,radio_alternative_s=rf_cost,**cover)
+                for point in cover['points']:
+                    if self.clear(point,ch,'compact_optical'):return
+                raise ProtocolError('Certified compact optical cover exhausted without success')
         if not probe['geometry_valid']:
             self.record('q4_pair_geometry_rejected',channel=ch,probe=probe)
             return self.fallback(ch)
@@ -286,14 +282,6 @@ class Q4Controller:
         for q in endpoints:
             kind=self.measure(q,ch,'paired_probe');results.append(kind);observed.append(q)
             if ch in self.cleared or self.guaranteed_clear(ch):return
-            if len(results)==1 and self.options.get('compact_after_first'):
-                other=self.other_tasks(ch)
-                anchor=min(other,key=lambda p:math.dist(p,self.info(ch)[0])) if other else None
-                models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
-                if models:
-                    radio_cost,branches=single_probe_cost(self.polygons[ch],self.client.ledger.position,
-                                                          endpoints[1],models,anchor,kind,probe)
-                    if self.try_compact_optical(ch,models,anchor,radio_cost,'after_first_'+kind):return
             if self.options.get('lookahead_optical',0)>20 and kind=='direction':
                 center,radius=self.info(ch)
                 if 20<radius<=self.options['lookahead_optical']:

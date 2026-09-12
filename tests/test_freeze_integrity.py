@@ -19,6 +19,11 @@ class FreezeIntegrityTests(unittest.TestCase):
             freeze=dict(version='unit',commit='unit',source_hashes={},configuration={'x':1},config_sha256=hashlib.sha256(b'{"x":1}\n').hexdigest())
             (root/'freeze.json').write_text(json.dumps(freeze))
             self.assertIn('configuration_bytes',verify(root/'freeze.json',root,root/'config.json')['failures'])
+    def test_extra_source_file_cannot_silently_extend_a_frozen_snapshot(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);(root/'config.json').write_text('{}');(root/'extra.py').write_text('x=1')
+            (root/'freeze.json').write_text(json.dumps(dict(version='unit',commit='unit',source_hashes={},configuration={})))
+            self.assertIn('unexpected_source:extra.py',verify(root/'freeze.json',root,root/'config.json')['failures'])
 
 
 if __name__=='__main__':unittest.main()

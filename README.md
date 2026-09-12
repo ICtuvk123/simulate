@@ -22,6 +22,7 @@ python q4.py --sources 14 --seed 1 --replay-check
 python code/verify_freeze.py
 python -m unittest discover -s tests -v
 python code/verify_exit.py runs/本次目录/requests.jsonl
+python code/independent_exit.py runs/本次目录/requests.jsonl
 python code/audit.py runs/本次目录/requests.jsonl
 ```
 
@@ -37,9 +38,16 @@ python code/audit.py runs/本次目录/requests.jsonl
 
 - `reports/RESULTS_REPORT.md`：当前结果、比较、边界与证据索引。
 - `reports/ANALYSIS_MODELING_REPORT.md`：规则迁移与几何模型。
+- `reports/ACTIVE_ALGORITHM.md`：与默认冻结配置一致的详细算法；`Q4_ALGORITHM.md` 保留 E_COMBO 主体推导。
 - `GOAL.md`、`EXPERIMENTS.csv`、`INCUMBENT.json`、`FAILURES.md`、`NEXT.md`：持续研发记录。
 - `frozen/`：经过验证的历史版本及当前版本。
 - `figures/`：矢量图表和数据来源清单。
 - `OFFICIAL_PRACTICE.md`：独立的人工演练操作说明。
 
 本轮仅运行自建本地模拟器。`q4.py` 和实验脚本不会连接官方软件。官方演练入口是单独的 `official_practice.py`，需要操作人员先在官方界面选择“问题4演练测试”，再显式手动运行；它在本轮未执行官方连接。没有正式测试流程。
+
+## 分享包与原始证据
+
+runtime.zip 可以单独解压运行，包含冻结版本、实验源码、回归测试、说明、结果CSV和过程回放。若还需要原始实验记录，将 evidence.zip 解压到相同位置，合并同名 jammer_search_q4 目录。证据包中的场景真值只来自本地引擎的结束后评估。
+
+为控制压缩包大小，重复源码按哈希只保存一次。运行 `python code/restore_evidence.py --verify-only` 核验原始日志和源码对象；运行 `python code/restore_evidence.py` 可恢复每局 `runs/编号/source/` 的完整源码快照。不会覆盖内容不同的已有源码。
