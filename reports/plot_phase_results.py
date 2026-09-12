@@ -20,7 +20,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 ROLES = {'development':'开发集', 'validation':'验证集', 'holdout':'最终保留测试集',
          'final':'最终保留测试集', 'final_holdout':'最终保留测试集',
-         'stress':'压力测试', 'smoke':'开发冒烟', 'integration':'开发集成测试'}
+         'stress':'压力测试', 'pressure':'压力测试', 'smoke':'开发冒烟', 'integration':'开发集成测试'}
 DEFAULT_LABELS = {'compact':'D', 'stable':'L', 'single':'M', 'single_stable':'M+L',
                   'S22':'S22', 'scan_commit':'S22+O'}
 COMPONENTS = [('mean_move_time','移动','#4c7898'),('mean_RF_detection_time','无线检测','#58a5a2'),

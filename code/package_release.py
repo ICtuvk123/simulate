@@ -21,6 +21,8 @@ def safe_files(folder):
 
 
 def build(tag,output,with_evidence=True):
+    from evidence_scope import build as build_scope
+    build_scope()
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
     prefix='jammer_search_q4';runtime=output/f'Q4_{tag}_runtime.zip';evidence=output/f'Q4_{tag}_evidence.zip'
     files=[]

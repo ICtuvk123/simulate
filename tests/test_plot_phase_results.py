@@ -2,6 +2,8 @@ import csv,importlib.util,json,statistics,tempfile,unittest
 from pathlib import Path
 
 FILE=Path(__file__).resolve().parents[1]/'reports/plot_phase_results.py'
+if importlib.util.find_spec('reportlab') is None:
+    raise unittest.SkipTest('Optional figure tests require ReportLab; core simulator uses the standard library')
 spec=importlib.util.spec_from_file_location('plot_phase_results',FILE)
 mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 

@@ -11,7 +11,7 @@ def git(directory,*args):
 def setup(count=4):
     if not (ROOT/'.git').exists():
         git(ROOT,'init','-b','codex/q4-reproduction')
-        files=[n for n in ('code','configs','tests','q4.py','official_practice.py','.gitattributes','.gitignore') if (ROOT/n).exists()]
+        files=[n for n in ('code','configs','frozen','tests','q4.py','official_practice.py','.gitattributes','.gitignore') if (ROOT/n).exists()]
         git(ROOT,'add','--',*files)
         git(ROOT,'-c','user.name=Q4 local reproduction','-c','user.email=q4-local@localhost','commit','-m','Import exported Q4 source for isolated reproduction')
     if git(ROOT,'status','--porcelain','--','code','configs'):

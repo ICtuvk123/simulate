@@ -1,10 +1,10 @@
 # 第四问本地模拟与算法包
 
-当前冻结：**R2_S22-validated-20260912**，执行源码 `93b05993a058e5fe86cba054627ec2ac59ee87a0`。
+当前冻结：**R2_S22_ML-validated-20260912**，执行源码 `09eaa82dd8fca503ba79b72b544b124d221483f5`。
 
-新验证集 100/100 场完整清除。平均每源 **457.12 秒**，平均总时间 **5863.05 秒**，P95 **6450.44 秒**，最坏 **6775.84 秒**。平均策略现实耗时 **6.24 秒**，批量并行环境下测量。
+新验证集 100/100 场完整清除。平均每源 **439.29 秒**，平均总时间 **5672.74 秒**，P95 **6353.33 秒**，最坏 **6487.78 秒**。平均策略现实耗时 **12.17 秒**，批量并行环境下测量。
 
-这里是自建本地场景成绩，分布是假设；完整配对、失败与分项时间见 `reports/R2_S22_val100/`。本轮没有运行官方演练或正式测试。第三问 G 和原目录 D_COMPACT 保持独立。
+这里是自建本地场景成绩，分布是假设；完整配对、失败与分项时间见 `reports/R2_S22_ML_val100/`。本轮没有运行官方演练或正式测试。第三问 G 和原目录 D_COMPACT 保持独立。
 
 ## 运行与回放
 
@@ -32,10 +32,10 @@ python runs/编号/source/audit.py runs/编号/requests.jsonl
 ## 方案与结果
 
 - `reports/ACTIVE_ALGORITHM.md`：与当前实际冻结开关一致的算法说明。
-- `reports/R2_S22_val100/paired_results.csv`：逐场完整指标；同目录比较文件包含配对区间。
+- `reports/R2_S22_ML_val100/paired_results.csv`：逐场完整指标；同目录比较文件包含配对区间。
 - `examples/r2/`：真实路线对照，保留典型、最不利和最大改善案例。
 - `GOAL.md`、`EXPERIMENTS.csv`、`SEEDS.csv`、`FAILURES.md`、`NEXT.md`：预算、假设、种子用途和未晋级候选。
-- `frozen/R2_S22/configs/R2_S_outer13.json`、`configs/R2_S22_FREEZE.json`：冻结配置与全部源码哈希。
+- `frozen/R2_S22_ML/configs/R2_S22_ML.json`、`configs/R2_S22_ML_FREEZE.json`：冻结配置与全部源码哈希。
 - `OFFICIAL_PRACTICE.md`：人工操作官方演练的独立说明；本地入口不会连接官方软件。
 
 历史 D_COMPACT 曾在另行授权下完成一次官方问题4演练：13源全部清除、6813.20秒、每源524.09秒。该记录不能作为本轮版本的官方成绩。正式测试累计0次。

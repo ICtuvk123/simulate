@@ -1,0 +1,15 @@
+Command: python -m unittest discover -s tests -p test_bounded_direction_commit.py -v
+7 tests passed in 2.050 s.
+
+Command: python -m unittest discover -s tests -q
+----------------------------------------------------------------------
+Ran 154 tests in 15.192s
+
+OK
+
+New cases: default off preserves one action; two directions do not recurse;
+first no-signal cannot start a commitment; extra no-signal does not crop the
+position region or start a third attempt; near clears before extra RF;
+round/search guards stop additional commitment; repeated extra point is blocked.
+
+Tests use the local in-memory engine only. No official test was run.
