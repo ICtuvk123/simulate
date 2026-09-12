@@ -15,6 +15,7 @@ from reused_negative import choose_reused_probe,apply_reused_negative
 from partial_optical import choose_partial,EXCLUSION_RADIUS
 from certificate_search import CertificateSearch
 from adaptive_single import choose_adaptive_single
+from scan_commit_scheduler import choose_scan_before_commit
 
 
 class Q4Controller:
@@ -513,8 +514,18 @@ class Q4Controller:
                 exits=[point if kind=='scan' or nearest_operating_point(self.polygons[index],p) is not None
                        else area_centroid(self.polygons[index])
                        for (kind,index),point in zip(tasks,points)]
-                first=open_task_route(p,points,exits)[0]
-            else:first=self.plan_route(p,points)[0]
+                order=open_task_route(p,points,exits)
+            else:order=self.plan_route(p,points)
+            first=order[0]
+            if self.options.get('scan_before_commit'):
+                def information(ch,point):
+                    return shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch],
+                                exclusions=self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
+                                spatial_errors=self.options.get('planning_spatial_errors',False),
+                                balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
+                selected=choose_scan_before_commit(p,tasks,points,order,self.polygons,self.measured,information,self.options)
+                if selected:
+                    first=selected['task_index'];self.record('q4_scan_before_commit',**selected)
             kind,index=tasks[first]
             self.record('q4_route_decision',decision=decision,kind=kind,index=index,
                         sources=len(pending),search_stops=len(self.remaining),forced_search=bool(force_search))
