@@ -1,0 +1,106 @@
+{
+  "phase": "screen2",
+  "workers": 8,
+  "cases": [
+    {
+      "seed": 12001
+    },
+    {
+      "seed": 12002
+    },
+    {
+      "seed": 12003
+    },
+    {
+      "seed": 12004
+    },
+    {
+      "seed": 12005
+    },
+    {
+      "seed": 12006
+    },
+    {
+      "seed": 12007
+    },
+    {
+      "seed": 12008
+    },
+    {
+      "seed": 12009
+    },
+    {
+      "seed": 12010
+    },
+    {
+      "seed": 12011
+    },
+    {
+      "seed": 12012
+    },
+    {
+      "seed": 12013
+    },
+    {
+      "seed": 12014
+    },
+    {
+      "seed": 12015
+    },
+    {
+      "seed": 12016
+    }
+  ],
+  "variants": [
+    {
+      "name": "G"
+    },
+    {
+      "name": "direct",
+      "extra": {
+        "direct_candidates": true
+      }
+    },
+    {
+      "name": "mean_error",
+      "extra": {
+        "direct_candidates": false,
+        "error_risk": 0
+      }
+    },
+    {
+      "name": "direct_mean",
+      "extra": {
+        "direct_candidates": true,
+        "error_risk": 0
+      }
+    },
+    {
+      "name": "direct_balanced",
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "direct_optical",
+      "extra": {
+        "optical_cost": true
+      }
+    },
+    {
+      "name": "direct_area",
+      "extra": {
+        "source_quadrature": true
+      }
+    },
+    {
+      "name": "direct_opt80",
+      "options": {
+        "optical_trial": 80
+      },
+      "extra": {
+        "optical_cost": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "phase": "stress24",
+  "workers": 8,
+  "cases": [
+    {
+      "seed": 14001,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14002,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14003,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14004,
+      "scenario": "uniform",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 14005,
+      "scenario": "uniform",
+      "reception": "maximum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14006,
+      "scenario": "uniform",
+      "reception": "maximum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14007,
+      "scenario": "uniform",
+      "reception": "maximum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14008,
+      "scenario": "uniform",
+      "reception": "maximum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 14009,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14010,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14011,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14012,
+      "scenario": "boundary",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 14013,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14014,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14015,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14016,
+      "scenario": "boundary",
+      "reception": "maximum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 14017,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14018,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14019,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14020,
+      "scenario": "clustered",
+      "reception": "minimum",
+      "error_mode": "minus_one",
+      "count": 16
+    },
+    {
+      "seed": 14021,
+      "scenario": "clustered",
+      "reception": "maximum",
+      "error_mode": "fixed_hash",
+      "count": 10
+    },
+    {
+      "seed": 14022,
+      "scenario": "clustered",
+      "reception": "maximum",
+      "error_mode": "smooth",
+      "count": 16
+    },
+    {
+      "seed": 14023,
+      "scenario": "clustered",
+      "reception": "maximum",
+      "error_mode": "plus_one",
+      "count": 10
+    },
+    {
+      "seed": 14024,
+      "scenario": "clustered",
+      "reception": "maximum",
+      "error_mode": "minus_one",
+      "count": 16
+    }
+  ],
+  "variants": [
+    {
+      "name": "G"
+    },
+    {
+      "name": "Gplus",
+      "options": {
+        "commit_radius": 0,
+        "near_prediction": 10,
+        "bearing_factor": 0.15
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    }
+  ]
+}

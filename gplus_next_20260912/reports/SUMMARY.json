@@ -1,0 +1,81 @@
+{
+  "version": "q3-GplusNext-20260912-OpticalRoute",
+  "selected_candidate": "OpticalRoute",
+  "promoted_locally": false,
+  "total_local_runs": 588,
+  "main_experiment_runs": 585,
+  "additional_entrypoint_runs": 3,
+  "comparison": {
+    "variant": "OpticalRoute",
+    "n": 100,
+    "baseline_s_per_source": 235.1164858081842,
+    "candidate_s_per_source": 234.89656264289297,
+    "saved_s_per_source": 0.21992316529120842,
+    "saved_percent": 0.09353796035835148,
+    "saved_s_per_source_ci95": [
+      -0.14550926604899161,
+      0.6354848855055772
+    ],
+    "saved_s_per_scene": 3.19628343999997,
+    "wins": 58,
+    "ties": 2,
+    "losses": 40,
+    "worst_regression_s_per_source": 7.979901642857158,
+    "all_pass": true
+  },
+  "stress_comparison": {
+    "variant": "OpticalRoute",
+    "n": 24,
+    "baseline_s_per_source": 236.58127457135416,
+    "candidate_s_per_source": 236.15925120729167,
+    "saved_s_per_source": 0.42202336406250396,
+    "saved_percent": 0.17838409435706185,
+    "saved_s_per_source_ci95": [
+      -0.07338499531249869,
+      0.8923157416666694
+    ],
+    "saved_s_per_scene": 5.45402249999997,
+    "wins": 16,
+    "ties": 1,
+    "losses": 7,
+    "worst_regression_s_per_source": 2.9897204375000115,
+    "all_pass": true
+  },
+  "local_summaries": {
+    "Gplus": {
+      "variant": "Gplus",
+      "n": 100,
+      "all_pass": true,
+      "mean_total_time": 2998.16242278,
+      "mean_move_time": 2288.5224224718195,
+      "mean_RF_detection_time": 541.2,
+      "mean_channel_switch_time": 102.22,
+      "mean_optical_time": 40.2,
+      "mean_clear_time": 26.02,
+      "mean_optical_failed_count": 0.39,
+      "mean_average_localization_clear_time_s_per_source": 235.1164858081842,
+      "mean_measured_program_wall_time_s": 6.734003544000589,
+      "worst": 3661.247772
+    },
+    "OpticalRoute": {
+      "variant": "OpticalRoute",
+      "n": 100,
+      "all_pass": true,
+      "mean_total_time": 2994.96613934,
+      "mean_move_time": 2282.186139267329,
+      "mean_RF_detection_time": 542.1,
+      "mean_channel_switch_time": 102.63,
+      "mean_optical_time": 42.03,
+      "mean_clear_time": 26.02,
+      "mean_optical_failed_count": 1,
+      "mean_average_localization_clear_time_s_per_source": 234.89656264289297,
+      "mean_measured_program_wall_time_s": 7.330617620001431,
+      "worst": 3675.204057
+    }
+  },
+  "feedback_replayed_runs": 248,
+  "feedback_replayed_actions": 30967,
+  "original_Gplus_unchanged": true,
+  "official_tests_run": false,
+  "figure_data": "reports/validation_paired.csv"
+}

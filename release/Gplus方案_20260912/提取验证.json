@@ -1,0 +1,54 @@
+{
+  "version": "q3-Gplus-20260912-v1",
+  "checked_at_utc": "2026-09-12T10:53:31.091152+00:00",
+  "extracted_source_files_verified": 19,
+  "strategy_source_unchanged": true,
+  "relocated_directory_tested": true,
+  "official_connection_made": false,
+  "checks": [
+    {
+      "arguments": [
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "--local",
+        "--seed",
+        "13001"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "--local",
+        "--seed",
+        "13001",
+        "--baseline"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "runs": [
+    {
+      "strategy": "G+",
+      "seed": 13001,
+      "clear_count": 11,
+      "source_count": 11,
+      "total_time_s": 2916.97885,
+      "seconds_per_source": 265.17989545454543,
+      "success": true
+    },
+    {
+      "strategy": "G",
+      "seed": 13001,
+      "clear_count": 11,
+      "source_count": 11,
+      "total_time_s": 2926.354063,
+      "seconds_per_source": 266.0321875454546,
+      "success": true
+    }
+  ],
+  "matches_original_entrypoint_to_microsecond": true
+}

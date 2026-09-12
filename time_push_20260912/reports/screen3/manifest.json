@@ -1,0 +1,112 @@
+{
+  "phase": "screen3",
+  "workers": 8,
+  "cases": [
+    {
+      "seed": 12001
+    },
+    {
+      "seed": 12002
+    },
+    {
+      "seed": 12003
+    },
+    {
+      "seed": 12004
+    },
+    {
+      "seed": 12005
+    },
+    {
+      "seed": 12006
+    },
+    {
+      "seed": 12007
+    },
+    {
+      "seed": 12008
+    },
+    {
+      "seed": 12009
+    },
+    {
+      "seed": 12010
+    },
+    {
+      "seed": 12011
+    },
+    {
+      "seed": 12012
+    },
+    {
+      "seed": 12013
+    },
+    {
+      "seed": 12014
+    },
+    {
+      "seed": 12015
+    },
+    {
+      "seed": 12016
+    }
+  ],
+  "variants": [
+    {
+      "name": "G"
+    },
+    {
+      "name": "direct_balanced",
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "explore0.1",
+      "extra": {
+        "error_risk": 0.5,
+        "explore_gain": 0.1
+      }
+    },
+    {
+      "name": "explore0.25",
+      "extra": {
+        "error_risk": 0.5,
+        "explore_gain": 0.25
+      }
+    },
+    {
+      "name": "explore0.4",
+      "extra": {
+        "error_risk": 0.5,
+        "explore_gain": 0.4
+      }
+    },
+    {
+      "name": "intermediate",
+      "extra": {
+        "error_risk": 0.5,
+        "intermediate_shared": true
+      }
+    },
+    {
+      "name": "tight_shared",
+      "options": {
+        "near_prediction": 10,
+        "bearing_factor": 0.15
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "no_commit",
+      "options": {
+        "commit_radius": 0
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    }
+  ]
+}

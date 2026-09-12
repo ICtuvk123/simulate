@@ -1,0 +1,80 @@
+{
+  "version": "q3-Gplus-20260912-v1",
+  "recommendation": "Gplus",
+  "total_local_runs": 874,
+  "independent_pairs": 100,
+  "stress_pairs": 24,
+  "entrypoint_reproduction_runs": 2,
+  "comparison": {
+    "variant": "Gplus",
+    "n": 100,
+    "baseline_s_per_source": 240.21426142565156,
+    "candidate_s_per_source": 238.6472123599919,
+    "saved_s_per_source": 1.5670490656596734,
+    "saved_percent": 0.6523547171426743,
+    "saved_s_per_source_ci95": [
+      0.607042798948385,
+      2.529004580265443
+    ],
+    "saved_s_per_scene": 18.666056160000004,
+    "wins": 65,
+    "ties": 0,
+    "losses": 35,
+    "worst_regression_s_per_source": 20.43786,
+    "all_pass": true
+  },
+  "stress_comparison": {
+    "variant": "Gplus",
+    "n": 24,
+    "baseline_s_per_source": 238.33515738072916,
+    "candidate_s_per_source": 237.85345710989583,
+    "saved_s_per_source": 0.481700270833338,
+    "saved_percent": 0.20211045492706917,
+    "saved_s_per_source_ci95": [
+      -0.7935340348958254,
+      1.9415937911458396
+    ],
+    "saved_s_per_scene": 8.12571170833336,
+    "wins": 13,
+    "ties": 1,
+    "losses": 10,
+    "worst_regression_s_per_source": 4.470020875000017,
+    "all_pass": true
+  },
+  "audit_all_pass": true,
+  "source_region_checks": 10204,
+  "feedback_replayed_runs": 248,
+  "feedback_replayed_actions": 31083,
+  "baseline_G_files_unchanged": true,
+  "engine_unchanged": true,
+  "summaries": {
+    "Gplus": {
+      "variant": "Gplus",
+      "n": 100,
+      "all_pass": true,
+      "mean_total_time": 3026.2700787,
+      "mean_move_time": 2312.9200789062447,
+      "mean_RF_detection_time": 544.8,
+      "mean_channel_switch_time": 102.83,
+      "mean_optical_time": 39.9,
+      "mean_clear_time": 25.82,
+      "mean_average_localization_clear_time_s_per_source": 238.6472123599919,
+      "mean_measured_program_wall_time_s": 5.564763882999978,
+      "worst": 3621.082305
+    },
+    "G": {
+      "variant": "G",
+      "n": 100,
+      "all_pass": true,
+      "mean_total_time": 3044.93613486,
+      "mean_move_time": 2330.3361349793913,
+      "mean_RF_detection_time": 546.45,
+      "mean_channel_switch_time": 102.43,
+      "mean_optical_time": 39.9,
+      "mean_clear_time": 25.82,
+      "mean_average_localization_clear_time_s_per_source": 240.21426142565156,
+      "mean_measured_program_wall_time_s": 4.734079888999986,
+      "worst": 3660.34091
+    }
+  }
+}

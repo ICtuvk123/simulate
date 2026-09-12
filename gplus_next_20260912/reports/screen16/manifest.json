@@ -1,0 +1,124 @@
+{
+  "phase": "screen16",
+  "workers": 6,
+  "variants": [
+    {
+      "name": "Gplus",
+      "kind": "Gplus"
+    },
+    {
+      "name": "Optical",
+      "kind": "Optical"
+    },
+    {
+      "name": "OpticalRisk",
+      "kind": "Optical",
+      "extra": {
+        "optical_sequence_risk": 0.5
+      }
+    },
+    {
+      "name": "FutureAnchor",
+      "kind": "Future",
+      "extra": {
+        "future_mode": "anchor",
+        "future_budget_s": 10
+      }
+    },
+    {
+      "name": "FutureRoute",
+      "kind": "Future",
+      "extra": {
+        "future_mode": "route",
+        "future_budget_s": 10
+      }
+    },
+    {
+      "name": "RouteOrder",
+      "kind": "Route"
+    }
+  ],
+  "cases": [
+    {
+      "seed": 21001
+    },
+    {
+      "seed": 21002
+    },
+    {
+      "seed": 21003
+    },
+    {
+      "seed": 21004
+    },
+    {
+      "seed": 21005
+    },
+    {
+      "seed": 21006
+    },
+    {
+      "seed": 21007
+    },
+    {
+      "seed": 21008
+    },
+    {
+      "seed": 21009
+    },
+    {
+      "seed": 21010
+    },
+    {
+      "seed": 21011
+    },
+    {
+      "seed": 21012
+    },
+    {
+      "seed": 21013
+    },
+    {
+      "seed": 21014
+    },
+    {
+      "seed": 21015
+    },
+    {
+      "seed": 21016
+    }
+  ],
+  "source_sha256": {
+    "audit_feedback_only.py": "5969063fc25fb9a574a2de0283d70377dcd1e06f462e7131e79303022fb0b03c",
+    "audit_time_target.py": "3c83e920e2d4c9207b88173b22df5513a6394dd800da6f07861c59c6fe93dbed",
+    "benchmark.py": "fcc746d5b5526beb8a9a6613df93e87c1d643fdb5180e769573d0178f85c4679",
+    "controller.py": "ed9eac87816ec04b0794c35c6faffc8e424ba14597a0f8cc399c71819d65ba8f",
+    "coverage.py": "2a0d4fe7668911f8674c2508c7a04c5dde0e47c3eb9778931cc613115c43291b",
+    "dynamic.py": "8f6ad30bf4e2f6af72906a0a39999eb1002fee92d8375ae4f06478945a4c2546",
+    "e_policy_presets.py": "cb5d1f01b37015d0adc93cad598d04abaad1f227308221d0b96179960e59885e",
+    "engine.py": "3ec7bc3b860c5ca5069d703fdefeb0c2238c97ef5b3ee0d14c2d440b9da76d65",
+    "f_policy_presets.py": "f0be3cf291e3eaebd31abe8af53ba974f6200865c1baddffa6aeb31ea1ff6c25",
+    "finalize_optimization.py": "0c5ff4ce7982f286c7c47aaf6111d532481b705342faca2daa66404cbbdbb122",
+    "future_policy.py": "adf0ee8cadf9adb1404f78ece17db609d81bc0ec60cd1988db1e4b7d09dbf3ac",
+    "g_policy_presets.py": "58254ad557a1becdf8636322b244c3e21b627f17010e1db2e7e8335f9495637f",
+    "geometry.py": "78fada8559e72ce72deb7413f2e581ca2a103dc67c3331346ffbe2a2da702ce5",
+    "local_geometry.py": "a159e20147acd2f4451efdaf96b197129365faacfee30704f884616830b393c3",
+    "optical_geometry.py": "e9505fa85ed79e75e8feef8807594641407a8f2bb33461df79cea6e1847776e7",
+    "optical_policy.py": "697e01352cdd6fefbf915ea6d92453b7e7930b7a533c09c194f9eea72cde033d",
+    "optimize_experiments.py": "68642980ce13d8071944952ff293b23e60d5d75dac3fa3c9ff0ced9cbc702055",
+    "optimized.py": "1dfc225067a577011a3498541e5bf7e66922205d46ab43e617c53095b4f47454",
+    "package_results.py": "25fdf9e7450ab40e7e2317da78d89770595e48e279bb19017fd0983c7e4bd196",
+    "policy_factory.py": "33f122518bfa9264cb5a16e40be4e8c69b18692226f4721a400a7a80fe96e18f",
+    "policy_presets.py": "5c1c5f3fc0f7e4a1b5a2f9a92b74a1ee7c11a1f71bc1210d347f0e03f885fe0c",
+    "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+    "reception_geometry.py": "17abfcd286cd0cf62170201dfc1091ef0b43a81d0b5be27c02dccb2aaf1fed53",
+    "replanning.py": "40c7b1a8100371d36020fde4d6b8cfe35bdf0fed19297a2bec33c0faeb7b4774",
+    "route_policy.py": "ce8e7afd7435e7836190248bc70f61c20874db7f9238e4964aec5784c2372f26",
+    "route_search.py": "97751a1433d31e89beeb56397154b17037be580b61b21ccf3a9395ad15629eed",
+    "runner.py": "9bc3be95c3eb9a954ad8dc8edebe2d0fadaefe4967726967b61be64cab9f84ad",
+    "server.py": "023c918b80f6ce70ceac3a3da03f2f98de43d4c0f8a1d3c2f26ffa579e4b69a7",
+    "structural.py": "b3f5347875173f287fe89ca4de01ede50272ea0b4cbcf925635a5f36cc753665",
+    "structural_geometry.py": "cbc021b8ab630e60868085a5d140040381959bf72c0a2aa23fbfab325d76f091",
+    "time_policy.py": "7ab4d32fa1a0dec0cbc55993adfb267c4c10aefe15f8f9e9d16485fb85c8d0f3"
+  }
+}

@@ -1,0 +1,19 @@
+# G+ 官方问题 3 演练结果
+
+- 案例：`48NA-EEKE-AKNH-F3JJ`。
+- 策略：冻结 `q3-Gplus-20260912-v1`，与本地独立验证版本一致。
+- 官方演练已正常退出；共 **11 个全向源，11/11 全部清除**。
+- 总行动时间：**2936.872026 秒**。
+- 平均定位清除时间：**266.988366 秒/源**。
+- 程序执行耗时：约 **5.35 秒**，不计入题面行动时间。
+- RF 检测 113 次，切频 106 次，光学定位 11 次且全部成功；移动 11054.36 米。
+- 计时账本、实际负反馈覆盖完成证明通过；无拒绝、光学失败或网络重试。
+- 126 条动作通过仅使用官方接口反馈的离线重放，决策一致；重放期间禁止磁盘、网络和进程访问。
+
+本次只运行了一场问题 3 演练，没有运行正式测试。源总数只在退出后从官方页面读入核验，没有提供给策略。
+
+官方原始日志：[practice-p3-4436860291639403659-48NA-EEKE-AKNH-F3JJ.jlog](D:/computer_learning/jammer_search_q3/training_logs/20260912T092438714303Z-official-practice-Gplus/practice-p3-4436860291639403659-48NA-EEKE-AKNH-F3JJ.jlog)，43637 字节。原文件名与加密内容保留；SHA256：`b7bacdd36f3dbc02ee61e6b7767eafcdb87755931710fde177e6de80a173c8a0`。日志来自官方页面显示的已保存文件，未解密。导出文件夹窗口在操作中被最小化，已直接将该官方保存文件逐字节复制到本目录，校验完全一致。
+
+详细动作见 [requests.jsonl](D:/computer_learning/jammer_search_q3/training_logs/20260912T092438714303Z-official-practice-Gplus/requests.jsonl)，核验统计见 [verified_metrics.json](D:/computer_learning/jammer_search_q3/training_logs/20260912T092438714303Z-official-practice-Gplus/verified_metrics.json)，结束界面证据见 [official_ui_result.json](D:/computer_learning/jammer_search_q3/training_logs/20260912T092438714303Z-official-practice-Gplus/official_ui_result.json)。
+
+本案例为新的随机场景，不能直接把 266.99 秒/源与其他官方案例或本地多场均值作算法快慢比较。

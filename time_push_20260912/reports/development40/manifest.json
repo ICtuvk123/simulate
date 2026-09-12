@@ -1,0 +1,176 @@
+{
+  "phase": "development40",
+  "workers": 8,
+  "cases": [
+    {
+      "seed": 12101
+    },
+    {
+      "seed": 12102
+    },
+    {
+      "seed": 12103
+    },
+    {
+      "seed": 12104
+    },
+    {
+      "seed": 12105
+    },
+    {
+      "seed": 12106
+    },
+    {
+      "seed": 12107
+    },
+    {
+      "seed": 12108
+    },
+    {
+      "seed": 12109
+    },
+    {
+      "seed": 12110
+    },
+    {
+      "seed": 12111
+    },
+    {
+      "seed": 12112
+    },
+    {
+      "seed": 12113
+    },
+    {
+      "seed": 12114
+    },
+    {
+      "seed": 12115
+    },
+    {
+      "seed": 12116
+    },
+    {
+      "seed": 12117
+    },
+    {
+      "seed": 12118
+    },
+    {
+      "seed": 12119
+    },
+    {
+      "seed": 12120
+    },
+    {
+      "seed": 12121
+    },
+    {
+      "seed": 12122
+    },
+    {
+      "seed": 12123
+    },
+    {
+      "seed": 12124
+    },
+    {
+      "seed": 12125
+    },
+    {
+      "seed": 12126
+    },
+    {
+      "seed": 12127
+    },
+    {
+      "seed": 12128
+    },
+    {
+      "seed": 12129
+    },
+    {
+      "seed": 12130
+    },
+    {
+      "seed": 12131
+    },
+    {
+      "seed": 12132
+    },
+    {
+      "seed": 12133
+    },
+    {
+      "seed": 12134
+    },
+    {
+      "seed": 12135
+    },
+    {
+      "seed": 12136
+    },
+    {
+      "seed": 12137
+    },
+    {
+      "seed": 12138
+    },
+    {
+      "seed": 12139
+    },
+    {
+      "seed": 12140
+    }
+  ],
+  "variants": [
+    {
+      "name": "G"
+    },
+    {
+      "name": "direct_balanced",
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "no_commit",
+      "options": {
+        "commit_radius": 0
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "tight_shared",
+      "options": {
+        "near_prediction": 10,
+        "bearing_factor": 0.15
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "combined",
+      "options": {
+        "commit_radius": 0,
+        "near_prediction": 10,
+        "bearing_factor": 0.15
+      },
+      "extra": {
+        "error_risk": 0.5
+      }
+    },
+    {
+      "name": "mean_no_commit",
+      "options": {
+        "commit_radius": 0
+      },
+      "extra": {
+        "error_risk": 0
+      }
+    }
+  ]
+}
