@@ -156,19 +156,6 @@ def nearest_safe_point(poly, position, clearing_radius=20.0):
     return candidate
 
 
-def regular_fallback(radius=1300.0, count=6):
-    """Center plus equally spaced ring, with analytic worst-case certificate."""
-    angle = math.pi / count
-    worst = max(math.sqrt(r * r + radius * radius - 2 * r * radius * math.cos(angle))
-                for r in (1000.0, 1800.0))
-    if worst >= 1000.0 - 1e-5:
-        raise ValueError("Ring fails the minimum-reception-radius coverage certificate")
-    points = [(0.0, 0.0)] + [(radius * math.cos(2 * k * math.pi / count),
-                              radius * math.sin(2 * k * math.pi / count))
-                             for k in range(count)]
-    return points, {"kind": "analytic_center_ring", "ring_radius": radius,
-                    "ring_count": count, "max_annulus_distance": worst,
-                    "reception_radius": 1000, "target_radius": 1800}
 
 
 def open_held_karp(start, points, edge_distances=None, start_distances=None):

@@ -269,5 +269,7 @@ class Q4Controller:
             if kind=='scan':self.scan(self.remaining.pop(index))
             else:
                 self.since_search+=1;self.phase='localization';self.localize(index)
+                if self.options.get('shared_after_localize'):
+                    self.share_at_actual_station(tuple(self.client.ledger.position))
                 self.replace_from_actual_stop()
         raise ProtocolError('Q4 finite planning guard reached')

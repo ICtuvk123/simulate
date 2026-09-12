@@ -1,0 +1,168 @@
+{
+  "tasks": [
+    {
+      "seed": 430002,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430004,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430006,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430008,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430010,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "directional",
+        "orientation": "inward",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430012,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 430014,
+      "variant": "E_combo",
+      "config": "configs/E_combo.json",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1800.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 0.0
+          },
+          {
+            "channel": 2,
+            "x": 0.0,
+            "y": 1800.0,
+            "radius": 1500.0,
+            "direction_deg": 90.0
+          },
+          {
+            "channel": 3,
+            "x": 0.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    }
+  ],
+  "output": "D:\\computer_learning\\jammer_search_q4\\reports\\E_COMBO_pressure14\\worker3.jsonl",
+  "run_root": "D:\\computer_learning\\jammer_search_q4\\runs"
+}
