@@ -7,10 +7,11 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def build():
     incumbent=json.loads((ROOT/'INCUMBENT.json').read_text());freeze=json.loads((ROOT/incumbent['freeze']).read_text())
-    phase=incumbent['evidence'][-1].split('/')[-1];folder=ROOT/'reports'/phase
-    comparison=freeze.get('comparison',{});candidate=comparison.get('candidate','H0')
+    phase=incumbent.get('final_evidence',incumbent['evidence'][-1]).split('/')[-1];folder=ROOT/'reports'/phase
+    comparison=freeze.get('comparison',{});candidate=incumbent.get('final_variant',comparison.get('candidate','H0'))
     summary=json.loads((folder/'summary.json').read_text());current=summary[candidate]
-    lines=['# 第四问计算结果与证据索引','',f"更新时间：{datetime.now(timezone.utc).isoformat()}。持续开发任务尚未结束，以 INCUMBENT.json 指向的冻结版本为准。",'',
+    stage='本轮已完成最终验收与冻结' if incumbent.get('status')=='final_frozen' else '持续开发任务尚未结束'
+    lines=['# 第四问计算结果与证据索引','',f"更新时间：{datetime.now(timezone.utc).isoformat()}。{stage}，以 INCUMBENT.json 指向的冻结版本为准。",'',
            '## 当前已验证版本','',f"版本：`{incumbent['version']}`；执行源码 commit：`{freeze['commit']}`。默认入口从 `{incumbent.get('code_directory','code')}` 加载，不使用正在编辑的实验候选。",'',
            '| 场景集 | 完整成功 | 平均每源 / s | 平均总时间 / s | P95 总时间 / s | 最坏总时间 / s | 平均现实耗时 / s |',
            '|---|---:|---:|---:|---:|---:|---:|',

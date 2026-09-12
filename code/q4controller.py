@@ -9,6 +9,7 @@ from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
 from q3client import ProtocolError
 from lookahead import choose_pair,shared_information_value,hypotheses,single_probe_cost
 from compact_optical import choose_cover,verify_cover
+from task_routing import area_centroid,open_task_route
 
 
 class Q4Controller:
@@ -48,7 +49,6 @@ class Q4Controller:
                                  [q for j,q in self.measured if j==ch],self.options,anchor)
             if selected:return selected['endpoints'][0]
         if self.options.get('route_centroid'):
-            from task_routing import area_centroid
             return area_centroid(self.polygons[ch])
         return self.info(ch)[0]
 
@@ -354,7 +354,6 @@ class Q4Controller:
                 points += [self.route_source_point(ch,p) for ch in pending]
             if not tasks:raise ProtocolError('Q4 no legal progress task')
             if self.options.get('task_route'):
-                from task_routing import area_centroid, open_task_route
                 exits=[point if kind=='scan' or nearest_operating_point(self.polygons[index],p) is not None
                        else area_centroid(self.polygons[index])
                        for (kind,index),point in zip(tasks,points)]
