@@ -11,7 +11,7 @@ def create_replay(directory):
     frames=[];seen=set();role='';regions={};last=(0.,0.);distance=0.;rf=optical=switch=success=0;channel=1
     for row in records:
         if row.get('reason')=='q4_action_role':role=row['role']
-        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip'):
+        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip','q4_negative_history_clip','q4_reused_negative_clip'):
             ch=row.get('channel',row.get('witness',{}).get('channel'));regions[ch]=row['polygon']
             if frames:frames[-1]['regions']=dict(regions)
         if row.get('event')!='response' or row['http_status']!=200:continue

@@ -8,6 +8,7 @@ import math
 from geometry import clip, clip_bearing, minimum_circle, cross, sub
 from local_geometry import nearest_operating_point
 from directional_geometry import paired_probe, apply_paired_negative, ALPHA, MARGIN
+from joint_models import build_joint_models
 
 
 def quadrature(poly, count=9):
@@ -34,7 +35,12 @@ def receives(g,r,heading,q):
     return heading is None or sum((q[k]-g[k])*heading[k] for k in (0,1))>=-1e-8
 
 
-def hypotheses(poly, positives, negatives, count=9, exclusions=()):
+def hypotheses(poly, positives, negatives, count=9, exclusions=(),joint=False):
+    if joint:
+        weighted=build_joint_models(quadrature(poly,count),positives,negatives,exclusions)
+        if weighted:return weighted
+        # The experimental continuous prior may assign zero mass to a legal
+        # boundary case. Fall back to the old finite ranking, never delete P.
     models=[]
     for g in quadrature(poly,count):
         if any(math.dist(g,item['point'])<item['radius'] for item in exclusions):continue
@@ -133,7 +139,8 @@ def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=
 
 
 def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,exclusions=()):
-    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),exclusions)
+    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),exclusions,
+                      joint=options.get('joint_model_weights',False))
     if not models:return None
     candidates=[]
     for s,beta in (positives[:1] if not options.get('lookahead_history') else positives[-3:]):
@@ -161,13 +168,13 @@ def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,ex
                 assumptions_only_for_ranking=True)
 
 
-def shared_information_value(poly,q,positives,negatives,count=7,exclusions=()):
+def shared_information_value(poly,q,positives,negatives,count=7,exclusions=(),joint=False):
     """Expected local remainder reduction at an ALREADY reached station.
 
     No reception guarantee is inferred from distance. A failed reception keeps
     the complete polygon in the prediction, and pays the radio/switch cost.
     """
-    models=hypotheses(poly,positives,negatives,count,exclusions)
+    models=hypotheses(poly,positives,negatives,count,exclusions,joint=joint)
     if not models:return None
     baseline=remaining_cost(poly,q);after=0.;branches={'direction':0.,'near':0.,'no_signal':0.}
     distance_bounded=all(math.dist(q,p)<=1500-1e-5 for p in poly)

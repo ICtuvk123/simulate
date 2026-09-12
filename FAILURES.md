@@ -57,3 +57,8 @@ B 根据初始已知目标旋转完整骨架，30/30 完成，但平均每源恶
 # 第二轮新增记录
 
 - R2_A_dev30：窄截线候选30/30完整，纯反馈重放与独立退出核验全部通过。平均每源464.502→463.720秒，仅改善0.168%，未达到1%门槛；P95下降0.384%，保留候选供消融，未替换D_COMPACT。原始60局均保留。增加可选动作并不自动产生显著完整场景收益。
+# Round 2 development rejection log (2026-09-12)
+
+- R2_D_dev30: continuous negative-history contraction cleared all 30 paired scenes, but mean per-source improvement was 0.6057%, below the pre-registered 1% gate; P95 total changed +0.0621%. Keep disabled in incumbent. Degenerate-polygon witness acceptance found during code review was fixed before promotion; all 60 original runs were independently re-audited and feedback-replayed with the hardened implementation. No new scenes are claimed by this re-audit.
+- R2_AR_dev30: narrow probes plus reused negative station improved mean per-source time by 0.1022% on the same 30 development scenes, with a paired bootstrap interval spanning zero. All 60 runs complete with valid replay/exit. Do not promote.
+- R2_B_dev30: before / after-first / both bounded partial-optical variants changed mean per-source time by -0.0124% / +0.0612% / -0.0086% improvement. All 120 runs complete and independently exit-verified; none passes the 1% gate. Added attempts sometimes replace RF yet add a longer optical detour. These are repeated development cases, not independent validation.

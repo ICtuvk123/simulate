@@ -90,7 +90,8 @@ def choose_reused_probe(poly,current,positives,negatives,measured,options,anchor
                 proxy=math.dist(current,q)/5+abs(t-(low+high)/2)/5
                 candidates.append((proxy,probe))
     if not candidates:return None
-    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9))
+    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),
+                      joint=options.get('joint_model_weights',False))
     if not models:return None
     count=len(candidates);evaluated=[]
     candidates.sort(key=lambda item:(item[0],item[1]['new_station']))

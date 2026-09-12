@@ -196,7 +196,8 @@ class Q4Controller:
             for ch in sorted(set(self.polygons)-self.cleared):
                 if (ch,tuple(point)) in self.measured or self.info(ch)[1]<=20:continue
                 value=shared_information_value(self.polygons[ch],point,self.positives[ch],self.negatives[ch],
-                                               exclusions=self.optical_exclusions.get(ch,[]))
+                                               exclusions=self.optical_exclusions.get(ch,[]),
+                                               joint=self.options.get('joint_model_weights',False))
                 if value and value['estimated_gain_s']>self.options.get('shared_gain_s',10.):
                     candidates.append((value['estimated_gain_s'],ch,value))
             if not candidates:break
@@ -318,7 +319,8 @@ class Q4Controller:
         if not self.partial_allowed(ch):return False
         exclusions=self.optical_exclusions.get(ch,[])
         models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],
-                          self.options.get('partial_optical_positions',25),exclusions)
+                          self.options.get('partial_optical_positions',25),exclusions,
+                          joint=self.options.get('joint_model_weights',False))
         plan=choose_partial(self.polygons[ch],self.client.ledger.position,selected,models,
                             exclusions,self.options,anchor,int(ch!=self.client.ledger.channel))
         if plan is None:return False
@@ -375,7 +377,7 @@ class Q4Controller:
                 self.record('q4_finite_lookahead_after_optical_miss',channel=ch,**selected)
         if self.options.get('compact_optical') and (selected or reused):
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
-                              self.optical_exclusions.get(ch,[]))
+                              self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False))
             rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
         if reused:return self.execute_reused_probe(ch,reused,before)
@@ -401,7 +403,7 @@ class Q4Controller:
                 other=self.other_tasks(ch)
                 anchor=min(other,key=lambda p:math.dist(p,self.info(ch)[0])) if other else None
                 models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
-                                  self.optical_exclusions.get(ch,[]))
+                                  self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False))
                 if models:
                     radio_cost,branches=single_probe_cost(self.polygons[ch],self.client.ledger.position,
                                                           endpoints[1],models,anchor,kind,probe)
