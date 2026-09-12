@@ -24,7 +24,7 @@ def create_replay(directory):
             optical+=1
             if response['clear_result']=='success':success+=1;regions.pop(ch,None)
         frames.append(dict(path=path,point=point,ch=ch,result=response.get('measure_result',response.get('clear_result',response.get('exit_reason','entered'))),
-                           bearing=response.get('svd_deg'),time=response['virtual_time_s'],role=role,regions=dict(regions),distance=distance,
+                           bearing=response.get('svd_deg'),time=response['virtual_time_s'],role=role if path in ('/measure','/clear') else '',regions=dict(regions),distance=distance,
                            rf=rf,switch=switch,optical=optical,success=success))
         last=point
     data=dict(frames=frames,sources=evaluation['sources'],summary={k:metrics[k] for k in ['version','all_success','total_time','mean_time_per_source','policy_wall_time_s','fallback_count']})

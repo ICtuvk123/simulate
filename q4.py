@@ -2,11 +2,10 @@
 import argparse,json,multiprocessing,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-sys.path.insert(0,str(ROOT/'code'))
+if str(ROOT/'code') not in sys.path:sys.path.append(str(ROOT/'code'))
 
 
 def main():
-    from run_case import run_case
     from replay_html import create_replay
     p=argparse.ArgumentParser(description='Q4 local simulator and feedback-only controller')
     p.add_argument('--seed',type=int,default=1,help='Local engine seed, never given to the controller')
@@ -16,8 +15,14 @@ def main():
     p.add_argument('--config',help='Default: frozen incumbent configuration')
     p.add_argument('--replay-check',action='store_true',help='Reproduce actions using only recorded responses')
     a=p.parse_args()
-    config=a.config or json.loads((ROOT/'INCUMBENT.json').read_text(encoding='utf-8'))['configuration']
-    directory,m=run_case(a.seed,config,dict(count=a.sources,source_mix=a.source_mix,scenario=a.scenario),replay_check=a.replay_check)
+    incumbent=json.loads((ROOT/'INCUMBENT.json').read_text(encoding='utf-8'))
+    config=Path(a.config or incumbent['configuration'])
+    if not config.is_absolute():config=ROOT/config
+    code_directory=ROOT/(incumbent.get('code_directory','code') if not a.config else 'code')
+    sys.path.insert(0,str(code_directory))
+    from run_case import run_case
+    directory,m=run_case(a.seed,config,dict(count=a.sources,source_mix=a.source_mix,scenario=a.scenario),
+                         output_root=ROOT/'runs',replay_check=a.replay_check)
     replay=create_replay(directory)
     print(json.dumps(dict(complete=m['all_success'],cleared=m['clear_count'],total_virtual_s=m['total_time'],
                          mean_per_source_s=m['mean_time_per_source'],real_runtime_s=m['policy_wall_time_s'],
