@@ -10,6 +10,7 @@ def prepare():
     plan=json.loads((ROOT/'configs/R2_EXPERIMENT_PLAN.json').read_text())
     plan['smoke_seed_ranges']['integration_extension_LF']=[1400,1400]
     plan['smoke_seed_ranges']['global_scheduler']=[1411,1420]
+    plan['smoke_seed_ranges']['single_risk_and_commitment']=[1421,1430]
     plan['hypotheses']['L']='Representation-invariant equal-area quadrature changes only candidate scoring.'
     plan['hypotheses']['M']='A single informative RF action with full original-pair recovery cost can avoid unnecessary paired RF travel.'
     (ROOT/'configs/R2_EXPERIMENT_PLAN.json').write_text(json.dumps(plan,indent=2)+'\n',encoding='utf-8')

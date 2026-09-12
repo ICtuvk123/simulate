@@ -1,0 +1,214 @@
+{
+  "first_action_index": 20,
+  "compact": {
+    "key": [
+      "/measure",
+      16,
+      {
+        "x": 129.593948992259,
+        "y": -515.0346426175433
+      }
+    ],
+    "record_index": 75,
+    "rank": {
+      "assumptions_only_for_ranking": true,
+      "branches": {
+        "direction": 1.8611111111111152,
+        "near": 0.0,
+        "no_signal": 0.05555555555555555,
+        "optical_failure": 0.0,
+        "optical_success": 0.0
+      },
+      "candidate_count": 9,
+      "channel": 16,
+      "endpoints": [
+        [
+          129.593948992259,
+          -515.0346426175433
+        ],
+        [
+          -29.680110007414157,
+          -530.258772470137
+        ]
+      ],
+      "estimated_remaining_s": 349.04254069127234,
+      "event": "policy",
+      "model_count": 81,
+      "probe": {
+        "b": 80.0,
+        "bearing": 275.46,
+        "d": [
+          0.09515081157871089,
+          -0.9954628687479572
+        ],
+        "geometry_valid": true,
+        "l": -5.673140236491406e-07,
+        "minus": [
+          -29.680110007414157,
+          -530.258772470137
+        ],
+        "n": [
+          0.9954628687479572,
+          0.09515081157871089
+        ],
+        "plus": [
+          129.593948992259,
+          -515.0346426175433
+        ],
+        "station": [
+          0.0,
+          0.0
+        ],
+        "t": 525.0288322669421,
+        "u": 1500.0823789591323
+      },
+      "reason": "q4_finite_lookahead_rank"
+    },
+    "feedback": {
+      "accepted": true,
+      "measure_result": "direction",
+      "real_timestamp_ms": 1789219599237,
+      "svd_deg": 270.41,
+      "virtual_time_s": 231.217753
+    }
+  },
+  "rollout": {
+    "key": [
+      "/measure",
+      16,
+      {
+        "x": 89.77543424234071,
+        "y": -518.8406750806918
+      }
+    ],
+    "record_index": 75,
+    "rank": {
+      "assumptions_only_for_ranking": true,
+      "bounded_rollout": {
+        "complete": true,
+        "continuations": 12,
+        "enabled": true,
+        "maximum_additional_pairs": 1,
+        "maximum_continuations": 18,
+        "optical_failure_branch_included": true,
+        "original_candidate_index": 1,
+        "original_retained": true,
+        "root_models": 6,
+        "scores": [
+          {
+            "branches": {
+              "direction": 2.166666666666667,
+              "near": 0.0,
+              "no_signal": 0.16666666666666666,
+              "optical_failure": 0.0,
+              "optical_success": 0.8333333333333333
+            },
+            "candidate_index": 1,
+            "continuation_kinds": {
+              "certified_optical": 1,
+              "pair": 3
+            },
+            "continuations": 4,
+            "old_score": 349.04254069127234,
+            "score": 339.63403954300685
+          },
+          {
+            "branches": {
+              "direction": 2.5,
+              "near": 0.0,
+              "no_signal": 0.16666666666666666,
+              "optical_failure": 0.0,
+              "optical_success": 0.9999999999999999
+            },
+            "candidate_index": 0,
+            "continuation_kinds": {
+              "certified_optical": 2,
+              "pair": 3
+            },
+            "continuations": 5,
+            "old_score": 351.7093747327362,
+            "score": 328.85492035457276
+          },
+          {
+            "branches": {
+              "direction": 2.0,
+              "near": 0.0,
+              "no_signal": 0.5,
+              "optical_failure": 0.0,
+              "optical_success": 0.8333333333333333
+            },
+            "candidate_index": 2,
+            "continuation_kinds": {
+              "certified_optical": 1,
+              "pair": 2
+            },
+            "continuations": 3,
+            "old_score": 354.32365071499476,
+            "score": 364.3986093188992
+          }
+        ],
+        "selected_candidate_index": 0,
+        "selector_receives_world": false
+      },
+      "branches": {
+        "direction": 2.5,
+        "near": 0.0,
+        "no_signal": 0.16666666666666666,
+        "optical_failure": 0.0,
+        "optical_success": 0.9999999999999999
+      },
+      "candidate_count": 9,
+      "channel": 16,
+      "endpoints": [
+        [
+          89.77543424234071,
+          -518.8406750806918
+        ],
+        [
+          10.138404742504129,
+          -526.4527400069886
+        ]
+      ],
+      "estimated_remaining_s": 328.85492035457276,
+      "event": "policy",
+      "model_count": 81,
+      "pre_rollout_estimated_remaining_s": 351.7093747327362,
+      "probe": {
+        "b": 40.0,
+        "bearing": 275.46,
+        "d": [
+          0.09515081157871089,
+          -0.9954628687479572
+        ],
+        "geometry_valid": true,
+        "l": -5.673140236491406e-07,
+        "minus": [
+          10.138404742504129,
+          -526.4527400069886
+        ],
+        "n": [
+          0.9954628687479572,
+          0.09515081157871089
+        ],
+        "plus": [
+          89.77543424234071,
+          -518.8406750806918
+        ],
+        "station": [
+          0.0,
+          0.0
+        ],
+        "t": 525.0288322669421,
+        "u": 1500.0823789591323
+      },
+      "reason": "q4_finite_lookahead_rank"
+    },
+    "feedback": {
+      "accepted": true,
+      "measure_result": "direction",
+      "real_timestamp_ms": 1789219609212,
+      "svd_deg": 272.77,
+      "virtual_time_s": 230.310071
+    }
+  }
+}

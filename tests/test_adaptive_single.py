@@ -57,6 +57,18 @@ class AdaptiveSingleTests(unittest.TestCase):
         self.assertAlmostEqual(cost['estimated_remaining_s'],100/5+5+1+3+2)
         self.assertEqual(cost['recovery_mass'],0.)
 
+    def test_cached_failure_rollout_matches_uncached_full_cost(self):
+        points=candidate_points(self.poly,self.current,[],self.pair['endpoints'])
+        for threshold in (0.,60.):
+            bases=[pair_cost(self.poly,self.current,self.probe,self.pair['endpoints'],
+                             [dict(m,weight=1.)],optical_threshold=threshold)[0] for m in self.models]
+            for q,_ in points:
+                before=one_action_cost(self.poly,self.current,q,self.models,self.pair,optical_threshold=threshold)
+                cached=one_action_cost(self.poly,self.current,q,self.models,self.pair,optical_threshold=threshold,
+                                       negative_recovery_base=bases)
+                self.assertAlmostEqual(before['estimated_remaining_s'],cached['estimated_remaining_s'],places=9)
+                self.assertEqual(before['branches'],cached['branches'])
+
     def test_informative_single_can_win_without_modifying_pair(self):
         # A real geometric near branch beats the full pair; an unavailable
         # fallback pair must still reject the proposal.

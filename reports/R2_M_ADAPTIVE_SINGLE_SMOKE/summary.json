@@ -1,0 +1,166 @@
+{
+  "M": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 5634.224445,
+    "mean_per_source": 461.71556249160716,
+    "p95": 7399.799151249998,
+    "worst": 8002.75036,
+    "mean_wall": 16.10653115000023,
+    "worst_wall": 23.11929930000042,
+    "mean_move_time": 4021.6244460149032,
+    "mean_RF_detection_time": 1295.5,
+    "mean_channel_switch_time": 239.7,
+    "mean_optical_time": 51,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 226.7,
+    "mean_optical_failed_count": 3.8,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 333813.3,
+    "mean_role_cost": {
+      "search": {
+        "actions": 226.8,
+        "total_time": 3898.270748851748,
+        "move_time": 2548.0707488517482,
+        "rf_time": 1134.0,
+        "switch_time": 216.2,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 15.1,
+        "total_time": 90.6,
+        "move_time": 0.0,
+        "rf_time": 75.5,
+        "switch_time": 15.1,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "adaptive_single_probe": {
+        "actions": 8.4,
+        "total_time": 298.82312860197317,
+        "move_time": 251.32312860197317,
+        "rf_time": 42.0,
+        "switch_time": 5.5,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 6.2,
+        "total_time": 335.4619695827064,
+        "move_time": 304.4619695827064,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 18.6,
+        "clear_time": 12.4
+      },
+      "compact_optical": {
+        "actions": 10.8,
+        "total_time": 556.5052010043476,
+        "move_time": 510.1052010043476,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 32.4,
+        "clear_time": 14.0
+      },
+      "paired_probe": {
+        "actions": 8.8,
+        "total_time": 454.56339797412795,
+        "move_time": 407.6633979741279,
+        "rf_time": 44.0,
+        "switch_time": 2.9,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      }
+    }
+  },
+  "compact": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 6072.8842011,
+    "mean_per_source": 491.24584139446426,
+    "p95": 7526.818646549999,
+    "worst": 7944.011793,
+    "mean_wall": 6.883367979999457,
+    "worst_wall": 10.750971299989033,
+    "mean_move_time": 4382.884200441853,
+    "mean_RF_detection_time": 1362.5,
+    "mean_channel_switch_time": 249.8,
+    "mean_optical_time": 51.3,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 238.9,
+    "mean_optical_failed_count": 3.9,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 330395.6,
+    "mean_role_cost": {
+      "search": {
+        "actions": 238.2,
+        "total_time": 4167.6474113995555,
+        "move_time": 2749.447411399555,
+        "rf_time": 1191.0,
+        "switch_time": 227.2,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 14.7,
+        "total_time": 88.2,
+        "move_time": 0.0,
+        "rf_time": 73.5,
+        "switch_time": 14.7,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "compact_optical": {
+        "actions": 10.4,
+        "total_time": 543.2366094443709,
+        "move_time": 499.036609444371,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 31.2,
+        "clear_time": 13.0
+      },
+      "paired_probe": {
+        "actions": 19.6,
+        "total_time": 943.2472775204754,
+        "move_time": 837.3472775204755,
+        "rf_time": 98.0,
+        "switch_time": 7.9,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 6.7,
+        "total_time": 330.5529020774512,
+        "move_time": 297.0529020774512,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 20.1,
+        "clear_time": 13.4
+      }
+    }
+  },
+  "comparison": {
+    "all_complete": true,
+    "all_independent_exit_valid": true,
+    "all_feedback_replay_valid": true,
+    "same_world_and_fixed_error_engine": true,
+    "not_promotion_evidence": true,
+    "contraction_events": {
+      "compact": {
+        "q4_paired_negative_clip": 29
+      },
+      "M": {
+        "q4_paired_negative_clip": 18
+      }
+    },
+    "M": {
+      "mean_per_source_improvement_over_compact": 0.06011303590689265,
+      "p95_change": -0.016875588647033757
+    }
+  }
+}

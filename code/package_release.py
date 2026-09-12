@@ -39,7 +39,10 @@ def build(tag,output,with_evidence=True):
             name=p.relative_to(ROOT).as_posix();data=p.read_bytes();index[name]=sha(data)
             z.writestr(prefix+'/'+name,data)
         manifest=dict(created_utc=datetime.now(timezone.utc).isoformat(),files=index,
-                      incumbent=json.loads((ROOT/'INCUMBENT.json').read_text()),official_practice_tests_executed=1,formal_tests_executed=0)
+                      incumbent=json.loads((ROOT/'INCUMBENT.json').read_text()),
+                      historical_official_practice_tests_executed=1,
+                      current_round_official_practice_tests_executed=0,
+                      current_round_formal_tests_executed=0,total_formal_tests_executed=0)
         z.writestr(prefix+'/PACKAGE_MANIFEST.json',json.dumps(manifest,indent=2))
     archives=[runtime];evidence_manifest=None
     if with_evidence:
