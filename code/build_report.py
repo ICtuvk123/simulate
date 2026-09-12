@@ -46,7 +46,7 @@ def build():
             '```text','python q4.py --sources 14 --seed 1 --replay-check','python code/verify_freeze.py','python -m unittest discover -s tests -v','python code/verify_exit.py runs/本次目录/requests.jsonl','```','',
             '批量复现前运行 python code/setup_workers.py 准备独立Git worktree，然后使用EXPERIMENTS.csv记录的阶段命令（为新运行换一个phase名）。单局入口只需Python标准库；图表生成另外使用reportlab。','',
             '## 结果边界','',
-            '数学推导、连续数值几何证书、本地完整任务时间、官方演练及正式成绩相互区分。本轮未运行官方演练或正式测试；官方适配器仅通过模拟连接单测，操作说明见OFFICIAL_PRACTICE.md。最终保留集的结果只有实际完成后才写入报告。当前有限模型与终值近似用于动作排序，不证明全局时间最优。']
+            '数学推导、连续数值几何证书、本地完整任务时间、官方演练及正式成绩相互区分。D_COMPACT 另经用户授权完成一次官方问题4演练，13源全部清除，6813.20秒，每源524.09秒；正式测试0次。详见reports/OFFICIAL_PRACTICE_RESULT.md及OFFICIAL_PRACTICE.md。最终保留集的结果只有实际完成后才写入报告。当前有限模型与终值近似用于动作排序，不证明全局时间最优。']
     (ROOT/'reports/RESULTS_REPORT.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     if overview:
         with (ROOT/'reports/EXPERIMENT_OVERVIEW.csv').open('w',newline='',encoding='utf-8-sig') as f:

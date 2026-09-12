@@ -41,12 +41,15 @@ class Q4Controller:
     def route_source_point(self,ch,p):
         safe=nearest_operating_point(self.polygons[ch],p)
         if safe is not None:return safe
-        if self.options.get('route_probe'):
+        if self.options.get('route_probe') or self.options.get('task_route'):
             other=self.other_tasks(ch)
             anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
             selected=choose_pair(self.polygons[ch],p,self.positives[ch],self.negatives[ch],
                                  [q for j,q in self.measured if j==ch],self.options,anchor)
             if selected:return selected['endpoints'][0]
+        if self.options.get('route_centroid'):
+            from task_routing import area_centroid
+            return area_centroid(self.polygons[ch])
         return self.info(ch)[0]
 
     def scan_for_forecast_complement(self):
@@ -350,7 +353,14 @@ class Q4Controller:
                 tasks += [('source',ch) for ch in pending]
                 points += [self.route_source_point(ch,p) for ch in pending]
             if not tasks:raise ProtocolError('Q4 no legal progress task')
-            first=self.plan_route(p,points)[0];kind,index=tasks[first]
+            if self.options.get('task_route'):
+                from task_routing import area_centroid, open_task_route
+                exits=[point if kind=='scan' or nearest_operating_point(self.polygons[index],p) is not None
+                       else area_centroid(self.polygons[index])
+                       for (kind,index),point in zip(tasks,points)]
+                first=open_task_route(p,points,exits)[0]
+            else:first=self.plan_route(p,points)[0]
+            kind,index=tasks[first]
             self.record('q4_route_decision',decision=decision,kind=kind,index=index,
                         sources=len(pending),search_stops=len(self.remaining),forced_search=bool(force_search))
             if kind=='scan':self.scan(self.remaining.pop(index))
