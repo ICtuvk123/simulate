@@ -35,6 +35,7 @@ def main():
                  seeds=seeds,incumbent=incumbent,variants=variants,
                  gate=json.loads((ROOT/'configs/R2_EXPERIMENT_PLAN.json').read_text())['gate'],
                  selection_made_without_final_results=True,
+                 runner_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                  prior_final_420001_420200_not_used_for_this_selection=True,
                  source_freeze_sha256={v:hashlib.sha256((ROOT/s['freeze']).read_bytes()).hexdigest() for v,s in variants.items()})
     target=ROOT/'configs/R2_FINAL_SELECTION_FREEZE.json'
@@ -43,17 +44,22 @@ def main():
     summary=execute(phase,variants,seeds,'final')
     comparisons=[compare(phase,'H0','best'),compare(phase,'compact','best')]
     independent=check(phase)
+    rows=[json.loads(line) for line in (ROOT/'reports'/phase/'runs.jsonl').read_text().splitlines()]
+    replays=[json.loads((ROOT/'runs'/row['run_id']/'feedback_replay.json').read_text()) for row in rows]
+    feedback=dict(runs=len(replays),all_valid=all(r.get('valid') for r in replays),
+                  actions=sum(r.get('actions',0) for r in replays))
     for baseline in ('H0','compact'):
         record(phase,baseline,'best','Previously selected immutable policy generalizes to untouched final scenes',
                'No algorithm or configuration changes; exact frozen snapshots with identical scene engine',
                'final_evidence_only_no_post_holdout_tuning')
     result=dict(incumbent=incumbent,summary=summary,comparisons=comparisons,
                 independent_all_valid=independent['all_valid'],
+                feedback_replay=feedback,
                 elapsed_with_postprocessing_s=time.monotonic()-start,
                 algorithms_not_changed_after_final_results=True)
     (ROOT/'reports'/phase/'acceptance.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result,indent=2),flush=True)
-    return 0 if independent['all_valid'] and all(s['all_success'] for s in summary.values()) else 1
+    return 0 if independent['all_valid'] and feedback['all_valid'] and all(s['all_success'] for s in summary.values()) else 1
 
 
 if __name__=='__main__':raise SystemExit(main())

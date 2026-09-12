@@ -1,0 +1,2976 @@
+{
+  "phase": "R2_S22_ML_pressure22",
+  "utc": "2026-09-12T15:06:00.583954+00:00",
+  "role": "pressure",
+  "seeds": [
+    530001,
+    530002,
+    530003,
+    530004,
+    530005,
+    530006,
+    530007,
+    530008,
+    530009,
+    530010,
+    530011,
+    530012,
+    530013,
+    530014,
+    530015,
+    530016,
+    530017,
+    530018,
+    530019,
+    530020,
+    530021,
+    530022
+  ],
+  "variants": {
+    "s22": "frozen/R2_S22/configs/R2_S_outer13.json",
+    "s22_ml": "frozen/R2_S22_ML/configs/R2_S22_ML.json"
+  },
+  "snapshots": {
+    "s22": {
+      "snapshot": "frozen/R2_S22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "freeze": "configs/R2_S22_FREEZE.json"
+    },
+    "s22_ml": {
+      "snapshot": "frozen/R2_S22_ML",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "freeze": "configs/R2_S22_ML_FREEZE.json"
+    }
+  },
+  "tasks": [
+    {
+      "seed": 530001,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530001,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530002,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530002,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "outward",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530003,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530003,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530004,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530004,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530005,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530005,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530006,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530006,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "orientation": "angle_boundary",
+        "source_mix": "mixed",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530007,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "omni",
+        "count": 10,
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530007,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "omni",
+        "count": 10,
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530008,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530008,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530009,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "outward",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530009,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "outward",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530010,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "directional",
+        "orientation": "inward",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530010,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "uniform",
+        "source_mix": "directional",
+        "orientation": "inward",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530011,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "angle_boundary",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530011,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "angle_boundary",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "fixed_hash"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530012,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530012,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 10,
+        "reception": "maximum",
+        "error_mode": "smooth"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530013,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 4.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 600.0,
+            "y": -0.1,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": -525.3288904374105,
+            "y": 1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530013,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 4.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 600.0,
+            "y": -0.1,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": -525.3288904374105,
+            "y": 1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530014,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1800.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 0.0
+          },
+          {
+            "channel": 2,
+            "x": 0.0,
+            "y": 1800.0,
+            "radius": 1500.0,
+            "direction_deg": 90.0
+          },
+          {
+            "channel": 3,
+            "x": 0.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530014,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1800.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 0.0
+          },
+          {
+            "channel": 2,
+            "x": 0.0,
+            "y": 1800.0,
+            "radius": 1500.0,
+            "direction_deg": 90.0
+          },
+          {
+            "channel": 3,
+            "x": 0.0,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 4,
+            "x": -1375.3288904374106,
+            "y": 999.2349288972046,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -1700.0,
+            "y": 2.0818995585505005e-13,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 6,
+            "x": -1375.3288904374106,
+            "y": -999.2349288972041,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -525.3288904374109,
+            "y": -1616.796077701761,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 8,
+            "x": 525.3288904374103,
+            "y": -1616.796077701761,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1375.3288904374106,
+            "y": -999.2349288972047,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 10,
+            "x": 1700.0,
+            "y": -4.163799117101001e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ],
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530015,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "plus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1569.2564486451688,
+            "y": 312.1445152258052,
+            "radius": 1000.0,
+            "direction_deg": 101.2499999
+          },
+          {
+            "channel": 2,
+            "x": 1330.3513796840723,
+            "y": 888.9123728313634,
+            "radius": 1500.0,
+            "direction_deg": 123.7500001
+          },
+          {
+            "channel": 3,
+            "x": 888.9123728313637,
+            "y": 1330.3513796840723,
+            "radius": 1000.0,
+            "direction_deg": 146.2499999
+          },
+          {
+            "channel": 4,
+            "x": 312.1445152258053,
+            "y": 1569.2564486451688,
+            "radius": 1500.0,
+            "direction_deg": 168.7500001
+          },
+          {
+            "channel": 5,
+            "x": -312.1445152258051,
+            "y": 1569.2564486451688,
+            "radius": 1000.0,
+            "direction_deg": 191.2499999
+          },
+          {
+            "channel": 6,
+            "x": -888.9123728313637,
+            "y": 1330.3513796840723,
+            "radius": 1500.0,
+            "direction_deg": 213.7500001
+          },
+          {
+            "channel": 7,
+            "x": -1330.3513796840725,
+            "y": 888.9123728313634,
+            "radius": 1000.0,
+            "direction_deg": 236.2499999
+          },
+          {
+            "channel": 8,
+            "x": -1569.2564486451688,
+            "y": 312.14451522580504,
+            "radius": 1500.0,
+            "direction_deg": 258.7500001
+          },
+          {
+            "channel": 9,
+            "x": -1569.2564486451688,
+            "y": -312.1445152258054,
+            "radius": 1000.0,
+            "direction_deg": 281.2499999
+          },
+          {
+            "channel": 10,
+            "x": -1330.3513796840723,
+            "y": -888.9123728313637,
+            "radius": 1500.0,
+            "direction_deg": 303.7500001
+          },
+          {
+            "channel": 11,
+            "x": -888.9123728313634,
+            "y": -1330.3513796840723,
+            "radius": 1000.0,
+            "direction_deg": 326.2499999
+          },
+          {
+            "channel": 12,
+            "x": -312.1445152258059,
+            "y": -1569.2564486451686,
+            "radius": 1500.0,
+            "direction_deg": 348.7500001
+          },
+          {
+            "channel": 13,
+            "x": 312.14451522580526,
+            "y": -1569.2564486451688,
+            "radius": 1000.0,
+            "direction_deg": 11.249999899999978
+          },
+          {
+            "channel": 14,
+            "x": 888.912372831363,
+            "y": -1330.3513796840728,
+            "radius": 1500.0,
+            "direction_deg": 33.75000010000002
+          },
+          {
+            "channel": 15,
+            "x": 1330.3513796840723,
+            "y": -888.9123728313634,
+            "radius": 1000.0,
+            "direction_deg": 56.24999989999998
+          },
+          {
+            "channel": 16,
+            "x": 1569.2564486451686,
+            "y": -312.14451522580595,
+            "radius": 1500.0,
+            "direction_deg": 78.75000010000002
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530015,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "plus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1569.2564486451688,
+            "y": 312.1445152258052,
+            "radius": 1000.0,
+            "direction_deg": 101.2499999
+          },
+          {
+            "channel": 2,
+            "x": 1330.3513796840723,
+            "y": 888.9123728313634,
+            "radius": 1500.0,
+            "direction_deg": 123.7500001
+          },
+          {
+            "channel": 3,
+            "x": 888.9123728313637,
+            "y": 1330.3513796840723,
+            "radius": 1000.0,
+            "direction_deg": 146.2499999
+          },
+          {
+            "channel": 4,
+            "x": 312.1445152258053,
+            "y": 1569.2564486451688,
+            "radius": 1500.0,
+            "direction_deg": 168.7500001
+          },
+          {
+            "channel": 5,
+            "x": -312.1445152258051,
+            "y": 1569.2564486451688,
+            "radius": 1000.0,
+            "direction_deg": 191.2499999
+          },
+          {
+            "channel": 6,
+            "x": -888.9123728313637,
+            "y": 1330.3513796840723,
+            "radius": 1500.0,
+            "direction_deg": 213.7500001
+          },
+          {
+            "channel": 7,
+            "x": -1330.3513796840725,
+            "y": 888.9123728313634,
+            "radius": 1000.0,
+            "direction_deg": 236.2499999
+          },
+          {
+            "channel": 8,
+            "x": -1569.2564486451688,
+            "y": 312.14451522580504,
+            "radius": 1500.0,
+            "direction_deg": 258.7500001
+          },
+          {
+            "channel": 9,
+            "x": -1569.2564486451688,
+            "y": -312.1445152258054,
+            "radius": 1000.0,
+            "direction_deg": 281.2499999
+          },
+          {
+            "channel": 10,
+            "x": -1330.3513796840723,
+            "y": -888.9123728313637,
+            "radius": 1500.0,
+            "direction_deg": 303.7500001
+          },
+          {
+            "channel": 11,
+            "x": -888.9123728313634,
+            "y": -1330.3513796840723,
+            "radius": 1000.0,
+            "direction_deg": 326.2499999
+          },
+          {
+            "channel": 12,
+            "x": -312.1445152258059,
+            "y": -1569.2564486451686,
+            "radius": 1500.0,
+            "direction_deg": 348.7500001
+          },
+          {
+            "channel": 13,
+            "x": 312.14451522580526,
+            "y": -1569.2564486451688,
+            "radius": 1000.0,
+            "direction_deg": 11.249999899999978
+          },
+          {
+            "channel": 14,
+            "x": 888.912372831363,
+            "y": -1330.3513796840728,
+            "radius": 1500.0,
+            "direction_deg": 33.75000010000002
+          },
+          {
+            "channel": 15,
+            "x": 1330.3513796840723,
+            "y": -888.9123728313634,
+            "radius": 1000.0,
+            "direction_deg": 56.24999989999998
+          },
+          {
+            "channel": 16,
+            "x": 1569.2564486451686,
+            "y": -312.14451522580595,
+            "radius": 1500.0,
+            "direction_deg": 78.75000010000002
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530016,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "minus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1000.000001,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 809.0169935659304,
+            "y": 587.7852517046879,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 309.01699468396447,
+            "y": 951.0565172462101,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 4,
+            "x": -309.01699406593036,
+            "y": 951.0565153440971,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -809.0169951839644,
+            "y": 587.7852528802586,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 6,
+            "x": -999.999999,
+            "y": 1.2246467979227064e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -809.0169951839645,
+            "y": -587.7852528802583,
+            "radius": 1000.0,
+            "direction_deg": 36.0
+          },
+          {
+            "channel": 8,
+            "x": -309.0169940659306,
+            "y": -951.056515344097,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 309.01699468396424,
+            "y": -951.0565172462102,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 10,
+            "x": 809.0169935659303,
+            "y": -587.7852517046881,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530016,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "minus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1000.000001,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 809.0169935659304,
+            "y": 587.7852517046879,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 309.01699468396447,
+            "y": 951.0565172462101,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 4,
+            "x": -309.01699406593036,
+            "y": 951.0565153440971,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -809.0169951839644,
+            "y": 587.7852528802586,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 6,
+            "x": -999.999999,
+            "y": 1.2246467979227064e-13,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -809.0169951839645,
+            "y": -587.7852528802583,
+            "radius": 1000.0,
+            "direction_deg": 36.0
+          },
+          {
+            "channel": 8,
+            "x": -309.0169940659306,
+            "y": -951.056515344097,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 309.01699468396424,
+            "y": -951.0565172462102,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 10,
+            "x": 809.0169935659303,
+            "y": -587.7852517046881,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530017,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "fixed_hash",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1500.0000009999999,
+            "y": 2.6179938797368235e-05,
+            "radius": 1000.0,
+            "direction_deg": 180.000001
+          },
+          {
+            "channel": 2,
+            "x": 1385.8192878244213,
+            "y": 574.0251723520606,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 1060.6601539749158,
+            "y": 1060.6601909989402,
+            "radius": 1000.0,
+            "direction_deg": 225.000001
+          },
+          {
+            "channel": 4,
+            "x": 574.0251239778415,
+            "y": 1385.8193078616791,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -2.6179938809035294e-05,
+            "y": 1500.0000009999999,
+            "radius": 1000.0,
+            "direction_deg": 270.000001
+          },
+          {
+            "channel": 6,
+            "x": -574.0251723520606,
+            "y": 1385.8192878244213,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -1060.6601909989402,
+            "y": 1060.6601539749158,
+            "radius": 1000.0,
+            "direction_deg": 315.000001
+          },
+          {
+            "channel": 8,
+            "x": -1385.8193078616791,
+            "y": 574.0251239778415,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": -1500.0000009999999,
+            "y": -2.617993871718678e-05,
+            "radius": 1000.0,
+            "direction_deg": 9.999999974752427e-07
+          },
+          {
+            "channel": 10,
+            "x": -1385.8192878244215,
+            "y": -574.0251723520606,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 11,
+            "x": -1060.6601539749158,
+            "y": -1060.6601909989402,
+            "radius": 1000.0,
+            "direction_deg": 45.000001
+          },
+          {
+            "channel": 12,
+            "x": -574.0251239778416,
+            "y": -1385.8193078616791,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 13,
+            "x": 2.6179937959204458e-05,
+            "y": -1500.0000009999999,
+            "radius": 1000.0,
+            "direction_deg": 90.000001
+          },
+          {
+            "channel": 14,
+            "x": 574.0251723520605,
+            "y": -1385.8192878244215,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 15,
+            "x": 1060.6601909989404,
+            "y": -1060.6601539749154,
+            "radius": 1000.0,
+            "direction_deg": 135.000001
+          },
+          {
+            "channel": 16,
+            "x": 1385.8193078616791,
+            "y": -574.0251239778418,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530017,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "fixed_hash",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1500.0000009999999,
+            "y": 2.6179938797368235e-05,
+            "radius": 1000.0,
+            "direction_deg": 180.000001
+          },
+          {
+            "channel": 2,
+            "x": 1385.8192878244213,
+            "y": 574.0251723520606,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 1060.6601539749158,
+            "y": 1060.6601909989402,
+            "radius": 1000.0,
+            "direction_deg": 225.000001
+          },
+          {
+            "channel": 4,
+            "x": 574.0251239778415,
+            "y": 1385.8193078616791,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -2.6179938809035294e-05,
+            "y": 1500.0000009999999,
+            "radius": 1000.0,
+            "direction_deg": 270.000001
+          },
+          {
+            "channel": 6,
+            "x": -574.0251723520606,
+            "y": 1385.8192878244213,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -1060.6601909989402,
+            "y": 1060.6601539749158,
+            "radius": 1000.0,
+            "direction_deg": 315.000001
+          },
+          {
+            "channel": 8,
+            "x": -1385.8193078616791,
+            "y": 574.0251239778415,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": -1500.0000009999999,
+            "y": -2.617993871718678e-05,
+            "radius": 1000.0,
+            "direction_deg": 9.999999974752427e-07
+          },
+          {
+            "channel": 10,
+            "x": -1385.8192878244215,
+            "y": -574.0251723520606,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 11,
+            "x": -1060.6601539749158,
+            "y": -1060.6601909989402,
+            "radius": 1000.0,
+            "direction_deg": 45.000001
+          },
+          {
+            "channel": 12,
+            "x": -574.0251239778416,
+            "y": -1385.8193078616791,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 13,
+            "x": 2.6179937959204458e-05,
+            "y": -1500.0000009999999,
+            "radius": 1000.0,
+            "direction_deg": 90.000001
+          },
+          {
+            "channel": 14,
+            "x": 574.0251723520605,
+            "y": -1385.8192878244215,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 15,
+            "x": 1060.6601909989404,
+            "y": -1060.6601539749154,
+            "radius": 1000.0,
+            "direction_deg": 135.000001
+          },
+          {
+            "channel": 16,
+            "x": 1385.8193078616791,
+            "y": -574.0251239778418,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530018,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "plus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 5.000001,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 4.0450841628577425,
+            "y": 2.9389256736771134,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 1.5450852808917317,
+            "y": 4.755283532532284,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 4,
+            "x": -1.5450846628577424,
+            "y": 4.755281630419252,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -4.045085780891731,
+            "y": 2.938926849247619,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 6,
+            "x": -4.999999,
+            "y": 6.123232771089967e-16,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -4.045085780891732,
+            "y": -2.9389268492476175,
+            "radius": 1000.0,
+            "direction_deg": 36.0
+          },
+          {
+            "channel": 8,
+            "x": -1.5450846628577435,
+            "y": -4.755281630419251,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1.5450852808917306,
+            "y": -4.755283532532284,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 10,
+            "x": 4.0450841628577425,
+            "y": -2.9389256736771143,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530018,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "mixed",
+        "error_mode": "plus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 5.000001,
+            "y": 0.0,
+            "radius": 1000.0,
+            "direction_deg": 180.0
+          },
+          {
+            "channel": 2,
+            "x": 4.0450841628577425,
+            "y": 2.9389256736771134,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 3,
+            "x": 1.5450852808917317,
+            "y": 4.755283532532284,
+            "radius": 1000.0,
+            "direction_deg": 252.0
+          },
+          {
+            "channel": 4,
+            "x": -1.5450846628577424,
+            "y": 4.755281630419252,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 5,
+            "x": -4.045085780891731,
+            "y": 2.938926849247619,
+            "radius": 1000.0,
+            "direction_deg": 324.0
+          },
+          {
+            "channel": 6,
+            "x": -4.999999,
+            "y": 6.123232771089967e-16,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 7,
+            "x": -4.045085780891732,
+            "y": -2.9389268492476175,
+            "radius": 1000.0,
+            "direction_deg": 36.0
+          },
+          {
+            "channel": 8,
+            "x": -1.5450846628577435,
+            "y": -4.755281630419251,
+            "radius": 1500.0,
+            "direction_deg": null
+          },
+          {
+            "channel": 9,
+            "x": 1.5450852808917306,
+            "y": -4.755283532532284,
+            "radius": 1000.0,
+            "direction_deg": 108.0
+          },
+          {
+            "channel": 10,
+            "x": 4.0450841628577425,
+            "y": -2.9389256736771143,
+            "radius": 1500.0,
+            "direction_deg": null
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530019,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "minus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1747.6952703959516,
+            "y": 430.7681954782883,
+            "radius": 1000.0,
+            "direction_deg": 13.846153846153847
+          },
+          {
+            "channel": 2,
+            "x": 1449.8120377862515,
+            "y": 1066.7919438625681,
+            "radius": 1500.0,
+            "direction_deg": 36.34615384615385
+          },
+          {
+            "channel": 3,
+            "x": 931.2080650024443,
+            "y": 1540.4062892868242,
+            "radius": 1000.0,
+            "direction_deg": 58.84615384615385
+          },
+          {
+            "channel": 4,
+            "x": 270.83610574414496,
+            "y": 1779.5077409849462,
+            "radius": 1500.0,
+            "direction_deg": 81.34615384615384
+          },
+          {
+            "channel": 5,
+            "x": -430.7681954782882,
+            "y": 1747.6952703959516,
+            "radius": 1000.0,
+            "direction_deg": 103.84615384615384
+          },
+          {
+            "channel": 6,
+            "x": -1066.7919438625677,
+            "y": 1449.8120377862517,
+            "radius": 1500.0,
+            "direction_deg": 126.34615384615384
+          },
+          {
+            "channel": 7,
+            "x": -1540.406289286824,
+            "y": 931.2080650024448,
+            "radius": 1000.0,
+            "direction_deg": 148.84615384615384
+          },
+          {
+            "channel": 8,
+            "x": -1779.507740984946,
+            "y": 270.83610574414547,
+            "radius": 1500.0,
+            "direction_deg": 171.34615384615384
+          },
+          {
+            "channel": 9,
+            "x": -1747.6952703959519,
+            "y": -430.7681954782877,
+            "radius": 1000.0,
+            "direction_deg": 193.84615384615384
+          },
+          {
+            "channel": 10,
+            "x": -1449.8120377862517,
+            "y": -1066.7919438625675,
+            "radius": 1500.0,
+            "direction_deg": 216.34615384615384
+          },
+          {
+            "channel": 11,
+            "x": -931.208065002445,
+            "y": -1540.4062892868237,
+            "radius": 1000.0,
+            "direction_deg": 238.84615384615384
+          },
+          {
+            "channel": 12,
+            "x": -270.8361057441448,
+            "y": -1779.5077409849462,
+            "radius": 1500.0,
+            "direction_deg": 261.34615384615387
+          },
+          {
+            "channel": 13,
+            "x": 430.76819547828916,
+            "y": -1747.6952703959514,
+            "radius": 1000.0,
+            "direction_deg": 283.84615384615387
+          },
+          {
+            "channel": 14,
+            "x": 1066.7919438625681,
+            "y": -1449.8120377862515,
+            "radius": 1500.0,
+            "direction_deg": 306.34615384615387
+          },
+          {
+            "channel": 15,
+            "x": 1540.4062892868246,
+            "y": -931.2080650024435,
+            "radius": 1000.0,
+            "direction_deg": 328.84615384615387
+          },
+          {
+            "channel": 16,
+            "x": 1779.5077409849462,
+            "y": -270.8361057441449,
+            "radius": 1500.0,
+            "direction_deg": 351.34615384615387
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530019,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "minus_one",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1747.6952703959516,
+            "y": 430.7681954782883,
+            "radius": 1000.0,
+            "direction_deg": 13.846153846153847
+          },
+          {
+            "channel": 2,
+            "x": 1449.8120377862515,
+            "y": 1066.7919438625681,
+            "radius": 1500.0,
+            "direction_deg": 36.34615384615385
+          },
+          {
+            "channel": 3,
+            "x": 931.2080650024443,
+            "y": 1540.4062892868242,
+            "radius": 1000.0,
+            "direction_deg": 58.84615384615385
+          },
+          {
+            "channel": 4,
+            "x": 270.83610574414496,
+            "y": 1779.5077409849462,
+            "radius": 1500.0,
+            "direction_deg": 81.34615384615384
+          },
+          {
+            "channel": 5,
+            "x": -430.7681954782882,
+            "y": 1747.6952703959516,
+            "radius": 1000.0,
+            "direction_deg": 103.84615384615384
+          },
+          {
+            "channel": 6,
+            "x": -1066.7919438625677,
+            "y": 1449.8120377862517,
+            "radius": 1500.0,
+            "direction_deg": 126.34615384615384
+          },
+          {
+            "channel": 7,
+            "x": -1540.406289286824,
+            "y": 931.2080650024448,
+            "radius": 1000.0,
+            "direction_deg": 148.84615384615384
+          },
+          {
+            "channel": 8,
+            "x": -1779.507740984946,
+            "y": 270.83610574414547,
+            "radius": 1500.0,
+            "direction_deg": 171.34615384615384
+          },
+          {
+            "channel": 9,
+            "x": -1747.6952703959519,
+            "y": -430.7681954782877,
+            "radius": 1000.0,
+            "direction_deg": 193.84615384615384
+          },
+          {
+            "channel": 10,
+            "x": -1449.8120377862517,
+            "y": -1066.7919438625675,
+            "radius": 1500.0,
+            "direction_deg": 216.34615384615384
+          },
+          {
+            "channel": 11,
+            "x": -931.208065002445,
+            "y": -1540.4062892868237,
+            "radius": 1000.0,
+            "direction_deg": 238.84615384615384
+          },
+          {
+            "channel": 12,
+            "x": -270.8361057441448,
+            "y": -1779.5077409849462,
+            "radius": 1500.0,
+            "direction_deg": 261.34615384615387
+          },
+          {
+            "channel": 13,
+            "x": 430.76819547828916,
+            "y": -1747.6952703959514,
+            "radius": 1000.0,
+            "direction_deg": 283.84615384615387
+          },
+          {
+            "channel": 14,
+            "x": 1066.7919438625681,
+            "y": -1449.8120377862515,
+            "radius": 1500.0,
+            "direction_deg": 306.34615384615387
+          },
+          {
+            "channel": 15,
+            "x": 1540.4062892868246,
+            "y": -931.2080650024435,
+            "radius": 1000.0,
+            "direction_deg": 328.84615384615387
+          },
+          {
+            "channel": 16,
+            "x": 1779.5077409849462,
+            "y": -270.8361057441449,
+            "radius": 1500.0,
+            "direction_deg": 351.34615384615387
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530020,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "smooth",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1799.9999899999998,
+            "y": -3.141592612709596e-05,
+            "radius": 1000.0,
+            "direction_deg": 89.999999
+          },
+          {
+            "channel": 2,
+            "x": 1456.2306002505532,
+            "y": 1058.0134228325808,
+            "radius": 1500.0,
+            "direction_deg": 125.999999
+          },
+          {
+            "channel": 3,
+            "x": 556.2306166630567,
+            "y": 1711.901710112656,
+            "radius": 1000.0,
+            "direction_deg": 161.999999
+          },
+          {
+            "channel": 4,
+            "x": -556.2305569064139,
+            "y": 1711.901729528766,
+            "radius": 1500.0,
+            "direction_deg": 197.999999
+          },
+          {
+            "channel": 5,
+            "x": -1456.2305633189171,
+            "y": 1058.0134736646173,
+            "radius": 1000.0,
+            "direction_deg": 233.999999
+          },
+          {
+            "channel": 6,
+            "x": -1799.9999899999998,
+            "y": 3.1415926347532376e-05,
+            "radius": 1500.0,
+            "direction_deg": 269.999999
+          },
+          {
+            "channel": 7,
+            "x": -1456.2306002505534,
+            "y": -1058.0134228325805,
+            "radius": 1000.0,
+            "direction_deg": 305.999999
+          },
+          {
+            "channel": 8,
+            "x": -556.2306166630569,
+            "y": -1711.901710112656,
+            "radius": 1500.0,
+            "direction_deg": 341.999999
+          },
+          {
+            "channel": 9,
+            "x": 556.2305569064138,
+            "y": -1711.901729528766,
+            "radius": 1000.0,
+            "direction_deg": 17.999999000000003
+          },
+          {
+            "channel": 10,
+            "x": 1456.230563318917,
+            "y": -1058.0134736646175,
+            "radius": 1500.0,
+            "direction_deg": 53.999999
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530020,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "source_mix": "directional",
+        "error_mode": "smooth",
+        "sources": [
+          {
+            "channel": 1,
+            "x": 1799.9999899999998,
+            "y": -3.141592612709596e-05,
+            "radius": 1000.0,
+            "direction_deg": 89.999999
+          },
+          {
+            "channel": 2,
+            "x": 1456.2306002505532,
+            "y": 1058.0134228325808,
+            "radius": 1500.0,
+            "direction_deg": 125.999999
+          },
+          {
+            "channel": 3,
+            "x": 556.2306166630567,
+            "y": 1711.901710112656,
+            "radius": 1000.0,
+            "direction_deg": 161.999999
+          },
+          {
+            "channel": 4,
+            "x": -556.2305569064139,
+            "y": 1711.901729528766,
+            "radius": 1500.0,
+            "direction_deg": 197.999999
+          },
+          {
+            "channel": 5,
+            "x": -1456.2305633189171,
+            "y": 1058.0134736646173,
+            "radius": 1000.0,
+            "direction_deg": 233.999999
+          },
+          {
+            "channel": 6,
+            "x": -1799.9999899999998,
+            "y": 3.1415926347532376e-05,
+            "radius": 1500.0,
+            "direction_deg": 269.999999
+          },
+          {
+            "channel": 7,
+            "x": -1456.2306002505534,
+            "y": -1058.0134228325805,
+            "radius": 1000.0,
+            "direction_deg": 305.999999
+          },
+          {
+            "channel": 8,
+            "x": -556.2306166630569,
+            "y": -1711.901710112656,
+            "radius": 1500.0,
+            "direction_deg": 341.999999
+          },
+          {
+            "channel": 9,
+            "x": 556.2305569064138,
+            "y": -1711.901729528766,
+            "radius": 1000.0,
+            "direction_deg": 17.999999000000003
+          },
+          {
+            "channel": 10,
+            "x": 1456.230563318917,
+            "y": -1058.0134736646175,
+            "radius": 1500.0,
+            "direction_deg": 53.999999
+          }
+        ]
+      },
+      "replay": true
+    },
+    {
+      "seed": 530021,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530021,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "omni",
+        "count": 16,
+        "reception": "maximum",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530022,
+      "variant": "s22",
+      "config": "frozen/R2_S22/configs/R2_S_outer13.json",
+      "snapshot": "frozen/R2_S22",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 530022,
+      "variant": "s22_ml",
+      "config": "frozen/R2_S22_ML/configs/R2_S22_ML.json",
+      "snapshot": "frozen/R2_S22_ML",
+      "scene": {
+        "scenario": "clustered",
+        "source_mix": "directional",
+        "count": 16,
+        "reception": "minimum",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    }
+  ],
+  "worker_provenance": {
+    "s22": [
+      {
+        "worker": 0,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w0",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w0\\frozen\\R2_S22",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e640511f565d13162b60b614a6d5010557bd4f9e0d01a6a5d81fdd1ccc621ae7",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "d90aed44c3be575ad4b40398437c4105c70d865891d3a580674c6ba19beead7a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "d93773c27cb8cf52e0c41d31b6f03cd10c0967184c978d718d39a88740d305be",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "83d8c2e3dcb1a16ef37245b26e6feab693c5bfbb366e1c3c7ede781923140c0e",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "04a8d448d3d440b708bc88f322940e4f0d17bcb58f78f591779f59168f824676",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "cd6f5dd267965d39f5533da991dcf5c8dd124f446a5b3a66efa62c75d4dd41be"
+        },
+        "configuration": {
+          "version": "R2-S-outer13-R1860",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "7913d4ebe41765c079ea6095517c7ef01d8e0f83b82808133389fb0184068d80"
+      },
+      {
+        "worker": 1,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w1",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w1\\frozen\\R2_S22",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e640511f565d13162b60b614a6d5010557bd4f9e0d01a6a5d81fdd1ccc621ae7",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "d90aed44c3be575ad4b40398437c4105c70d865891d3a580674c6ba19beead7a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "d93773c27cb8cf52e0c41d31b6f03cd10c0967184c978d718d39a88740d305be",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "83d8c2e3dcb1a16ef37245b26e6feab693c5bfbb366e1c3c7ede781923140c0e",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "04a8d448d3d440b708bc88f322940e4f0d17bcb58f78f591779f59168f824676",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "cd6f5dd267965d39f5533da991dcf5c8dd124f446a5b3a66efa62c75d4dd41be"
+        },
+        "configuration": {
+          "version": "R2-S-outer13-R1860",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "7913d4ebe41765c079ea6095517c7ef01d8e0f83b82808133389fb0184068d80"
+      },
+      {
+        "worker": 2,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w2",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w2\\frozen\\R2_S22",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e640511f565d13162b60b614a6d5010557bd4f9e0d01a6a5d81fdd1ccc621ae7",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "d90aed44c3be575ad4b40398437c4105c70d865891d3a580674c6ba19beead7a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "d93773c27cb8cf52e0c41d31b6f03cd10c0967184c978d718d39a88740d305be",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "83d8c2e3dcb1a16ef37245b26e6feab693c5bfbb366e1c3c7ede781923140c0e",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "04a8d448d3d440b708bc88f322940e4f0d17bcb58f78f591779f59168f824676",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "cd6f5dd267965d39f5533da991dcf5c8dd124f446a5b3a66efa62c75d4dd41be"
+        },
+        "configuration": {
+          "version": "R2-S-outer13-R1860",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "7913d4ebe41765c079ea6095517c7ef01d8e0f83b82808133389fb0184068d80"
+      },
+      {
+        "worker": 3,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w3",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w3\\frozen\\R2_S22",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e640511f565d13162b60b614a6d5010557bd4f9e0d01a6a5d81fdd1ccc621ae7",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "76618de1dff816e2cdbc71f28fd6e79384ccf420155719e6d52be94920d88e25",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "cea1ee662d63952922518c1108c456cf7d89dd632a011a1d2312c790b634a43a",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "d90aed44c3be575ad4b40398437c4105c70d865891d3a580674c6ba19beead7a",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "d93773c27cb8cf52e0c41d31b6f03cd10c0967184c978d718d39a88740d305be",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "28927f5a01e927df17f828dad1e61b631a46ca01f5c26bc6f606940376149e6d",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "83d8c2e3dcb1a16ef37245b26e6feab693c5bfbb366e1c3c7ede781923140c0e",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "04a8d448d3d440b708bc88f322940e4f0d17bcb58f78f591779f59168f824676",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "cd6f5dd267965d39f5533da991dcf5c8dd124f446a5b3a66efa62c75d4dd41be"
+        },
+        "configuration": {
+          "version": "R2-S-outer13-R1860",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4
+        },
+        "config_sha256": "7913d4ebe41765c079ea6095517c7ef01d8e0f83b82808133389fb0184068d80"
+      }
+    ],
+    "s22_ml": [
+      {
+        "worker": 0,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w0",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w0\\frozen\\R2_S22_ML",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "adaptive_single.py": "f0c6882e9ac9507312c5a6044b94e3621a522be6b5a801d3bf056ef7c4cb4dab",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "candidate_geometry.py": "623bdd301ad96c5564f4f79fd70844a03d2c5bbc91b7305a5c809fe127377684",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e332e44c1c14ba4941e8ec23f1fdecc595c4d561df93946e02c4d3b1f1b6568d",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "7e371ad2e25b1457bbd7aa30e3b0c20ad29387492131a0d66c832e3039463512",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "import_worker_evidence.py": "eabe6f3aa022a0ef25bdd0bc0b6cbffee610eb1487fcd5c84d763a0d321a12cb",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "b2d410b60ec037ad79c8cb4166160fd3778195536c65ec793770eb07d98bf4cb",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_r2_pressure.py": "afae7e199e4ceb4ba4a9cc5585e5e1824d6d5dfdc04b3cdab68a3a874ccd11df",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "e610289fe56805b26c433616e0151cb48dda58ce0a59bffa07612aee42917893",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "postprocess_lm_screen.py": "215114e86cc5c02c3e3a48ce2f539b24685351d560e6992211ac8bf5bec5d7d4",
+          "postprocess_sml_screen.py": "5146d334124b799701d19e08e0c77966229dcfa8142b7d1e55dc26061394f433",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "prepare_lm_screen.py": "448508dcd53d433db3d351831c2d603e49e4825222a12b119bda601ddfff64c7",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "eef51a7661951cf1a0860287682f344ef05e93abefdc69e32abbe480ba16f664",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "2f28fe0ff627c7ef7cf96562fc4428ae73a11da891589e2e64af80f3c4eb5f88",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "region_quadrature.py": "7bbb6720901761564661792fb094f18ffd0470dd15beba7bd9bc13548defa5d5",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "c99555ed741d70ba8c76278e4a3f4519c6724526ba5a62fa33a72309005945e9",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "run_harness_regression.py": "9f74d26111a1c334f2b1ff829cd01b2d26e2e99f3d4d74e1a4ffca137d561bad",
+          "run_lm_screen.py": "8ba7b62e15bf9e1a7e5bf3e2b68603314b1d5c7046ca49d165a0a1eaad83e2dc",
+          "run_ml_validation.py": "3f7417faf0c1469936a9036b05f9f2f187bcc71d8581a5f0c55674c22d7670fc",
+          "run_sml_screen.py": "b369622bc17c63cd9b36f7f9e4f7eb521ff1b213b57a9638c2acf877feddc68d",
+          "scan_commit_scheduler.py": "cad142f46659ac7d806748a8d84d80fe7535c541b25ebc5309604e68e8254b70",
+          "scheduling_diagnose.py": "1f01c011e54981a2a39788834336374ffd635c0ac82f2c560f63c9ca8b670d71",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "7d5bebfd8ac04d8c5ebf42f4ea72a1fa7ec1dc9460d954822b4afe02eb1171b0",
+          "write_release_readme.py": "5d733689eb3f5246b0ead5367052c6595dddc1a2a61677bf99f036b1f97c59b8"
+        },
+        "configuration": {
+          "version": "R2-s22_ml",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4,
+          "adaptive_single": true,
+          "adaptive_single_gain_s": 1.0,
+          "stable_quadrature": true
+        },
+        "config_sha256": "968fd8c3d43e1ec914faa10f2b17badf65af2cd7edbe82c748112d7226d7f716"
+      },
+      {
+        "worker": 1,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w1",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w1\\frozen\\R2_S22_ML",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "adaptive_single.py": "f0c6882e9ac9507312c5a6044b94e3621a522be6b5a801d3bf056ef7c4cb4dab",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "candidate_geometry.py": "623bdd301ad96c5564f4f79fd70844a03d2c5bbc91b7305a5c809fe127377684",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e332e44c1c14ba4941e8ec23f1fdecc595c4d561df93946e02c4d3b1f1b6568d",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "7e371ad2e25b1457bbd7aa30e3b0c20ad29387492131a0d66c832e3039463512",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "import_worker_evidence.py": "eabe6f3aa022a0ef25bdd0bc0b6cbffee610eb1487fcd5c84d763a0d321a12cb",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "b2d410b60ec037ad79c8cb4166160fd3778195536c65ec793770eb07d98bf4cb",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_r2_pressure.py": "afae7e199e4ceb4ba4a9cc5585e5e1824d6d5dfdc04b3cdab68a3a874ccd11df",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "e610289fe56805b26c433616e0151cb48dda58ce0a59bffa07612aee42917893",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "postprocess_lm_screen.py": "215114e86cc5c02c3e3a48ce2f539b24685351d560e6992211ac8bf5bec5d7d4",
+          "postprocess_sml_screen.py": "5146d334124b799701d19e08e0c77966229dcfa8142b7d1e55dc26061394f433",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "prepare_lm_screen.py": "448508dcd53d433db3d351831c2d603e49e4825222a12b119bda601ddfff64c7",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "eef51a7661951cf1a0860287682f344ef05e93abefdc69e32abbe480ba16f664",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "2f28fe0ff627c7ef7cf96562fc4428ae73a11da891589e2e64af80f3c4eb5f88",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "region_quadrature.py": "7bbb6720901761564661792fb094f18ffd0470dd15beba7bd9bc13548defa5d5",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "c99555ed741d70ba8c76278e4a3f4519c6724526ba5a62fa33a72309005945e9",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "run_harness_regression.py": "9f74d26111a1c334f2b1ff829cd01b2d26e2e99f3d4d74e1a4ffca137d561bad",
+          "run_lm_screen.py": "8ba7b62e15bf9e1a7e5bf3e2b68603314b1d5c7046ca49d165a0a1eaad83e2dc",
+          "run_ml_validation.py": "3f7417faf0c1469936a9036b05f9f2f187bcc71d8581a5f0c55674c22d7670fc",
+          "run_sml_screen.py": "b369622bc17c63cd9b36f7f9e4f7eb521ff1b213b57a9638c2acf877feddc68d",
+          "scan_commit_scheduler.py": "cad142f46659ac7d806748a8d84d80fe7535c541b25ebc5309604e68e8254b70",
+          "scheduling_diagnose.py": "1f01c011e54981a2a39788834336374ffd635c0ac82f2c560f63c9ca8b670d71",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "7d5bebfd8ac04d8c5ebf42f4ea72a1fa7ec1dc9460d954822b4afe02eb1171b0",
+          "write_release_readme.py": "5d733689eb3f5246b0ead5367052c6595dddc1a2a61677bf99f036b1f97c59b8"
+        },
+        "configuration": {
+          "version": "R2-s22_ml",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4,
+          "adaptive_single": true,
+          "adaptive_single_gain_s": 1.0,
+          "stable_quadrature": true
+        },
+        "config_sha256": "968fd8c3d43e1ec914faa10f2b17badf65af2cd7edbe82c748112d7226d7f716"
+      },
+      {
+        "worker": 2,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w2",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w2\\frozen\\R2_S22_ML",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "adaptive_single.py": "f0c6882e9ac9507312c5a6044b94e3621a522be6b5a801d3bf056ef7c4cb4dab",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "candidate_geometry.py": "623bdd301ad96c5564f4f79fd70844a03d2c5bbc91b7305a5c809fe127377684",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e332e44c1c14ba4941e8ec23f1fdecc595c4d561df93946e02c4d3b1f1b6568d",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "7e371ad2e25b1457bbd7aa30e3b0c20ad29387492131a0d66c832e3039463512",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "import_worker_evidence.py": "eabe6f3aa022a0ef25bdd0bc0b6cbffee610eb1487fcd5c84d763a0d321a12cb",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "b2d410b60ec037ad79c8cb4166160fd3778195536c65ec793770eb07d98bf4cb",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_r2_pressure.py": "afae7e199e4ceb4ba4a9cc5585e5e1824d6d5dfdc04b3cdab68a3a874ccd11df",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "e610289fe56805b26c433616e0151cb48dda58ce0a59bffa07612aee42917893",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "postprocess_lm_screen.py": "215114e86cc5c02c3e3a48ce2f539b24685351d560e6992211ac8bf5bec5d7d4",
+          "postprocess_sml_screen.py": "5146d334124b799701d19e08e0c77966229dcfa8142b7d1e55dc26061394f433",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "prepare_lm_screen.py": "448508dcd53d433db3d351831c2d603e49e4825222a12b119bda601ddfff64c7",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "eef51a7661951cf1a0860287682f344ef05e93abefdc69e32abbe480ba16f664",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "2f28fe0ff627c7ef7cf96562fc4428ae73a11da891589e2e64af80f3c4eb5f88",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "region_quadrature.py": "7bbb6720901761564661792fb094f18ffd0470dd15beba7bd9bc13548defa5d5",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "c99555ed741d70ba8c76278e4a3f4519c6724526ba5a62fa33a72309005945e9",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "run_harness_regression.py": "9f74d26111a1c334f2b1ff829cd01b2d26e2e99f3d4d74e1a4ffca137d561bad",
+          "run_lm_screen.py": "8ba7b62e15bf9e1a7e5bf3e2b68603314b1d5c7046ca49d165a0a1eaad83e2dc",
+          "run_ml_validation.py": "3f7417faf0c1469936a9036b05f9f2f187bcc71d8581a5f0c55674c22d7670fc",
+          "run_sml_screen.py": "b369622bc17c63cd9b36f7f9e4f7eb521ff1b213b57a9638c2acf877feddc68d",
+          "scan_commit_scheduler.py": "cad142f46659ac7d806748a8d84d80fe7535c541b25ebc5309604e68e8254b70",
+          "scheduling_diagnose.py": "1f01c011e54981a2a39788834336374ffd635c0ac82f2c560f63c9ca8b670d71",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "7d5bebfd8ac04d8c5ebf42f4ea72a1fa7ec1dc9460d954822b4afe02eb1171b0",
+          "write_release_readme.py": "5d733689eb3f5246b0ead5367052c6595dddc1a2a61677bf99f036b1f97c59b8"
+        },
+        "configuration": {
+          "version": "R2-s22_ml",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4,
+          "adaptive_single": true,
+          "adaptive_single_gain_s": 1.0,
+          "stable_quadrature": true
+        },
+        "config_sha256": "968fd8c3d43e1ec914faa10f2b17badf65af2cd7edbe82c748112d7226d7f716"
+      },
+      {
+        "worker": 3,
+        "directory": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w3",
+        "snapshot": "D:\\computer_learning\\jammer_search_q4_r2_workers\\w3\\frozen\\R2_S22_ML",
+        "source_hashes": {
+          "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+          "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+          "adaptive_single.py": "f0c6882e9ac9507312c5a6044b94e3621a522be6b5a801d3bf056ef7c4cb4dab",
+          "audit.py": "f827a78bbc14508dfa881fd129e170db4f9a74159cb26e408454495c1066cbe3",
+          "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+          "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+          "candidate_geometry.py": "623bdd301ad96c5564f4f79fd70844a03d2c5bbc91b7305a5c809fe127377684",
+          "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+          "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+          "compare_behavior.py": "e332e44c1c14ba4941e8ec23f1fdecc595c4d561df93946e02c4d3b1f1b6568d",
+          "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+          "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+          "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+          "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+          "experiment.py": "7e371ad2e25b1457bbd7aa30e3b0c20ad29387492131a0d66c832e3039463512",
+          "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+          "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+          "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+          "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+          "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+          "import_worker_evidence.py": "eabe6f3aa022a0ef25bdd0bc0b6cbffee610eb1487fcd5c84d763a0d321a12cb",
+          "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+          "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+          "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+          "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+          "lookahead.py": "b2d410b60ec037ad79c8cb4166160fd3778195536c65ec793770eb07d98bf4cb",
+          "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+          "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+          "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+          "make_r2_pressure.py": "afae7e199e4ceb4ba4a9cc5585e5e1824d6d5dfdc04b3cdab68a3a874ccd11df",
+          "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+          "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+          "package_release.py": "e610289fe56805b26c433616e0151cb48dda58ce0a59bffa07612aee42917893",
+          "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+          "postprocess_lm_screen.py": "215114e86cc5c02c3e3a48ce2f539b24685351d560e6992211ac8bf5bec5d7d4",
+          "postprocess_sml_screen.py": "5146d334124b799701d19e08e0c77966229dcfa8142b7d1e55dc26061394f433",
+          "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+          "prepare_lm_screen.py": "448508dcd53d433db3d351831c2d603e49e4825222a12b119bda601ddfff64c7",
+          "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+          "promote_candidate.py": "eef51a7661951cf1a0860287682f344ef05e93abefdc69e32abbe480ba16f664",
+          "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+          "q4controller.py": "2f28fe0ff627c7ef7cf96562fc4428ae73a11da891589e2e64af80f3c4eb5f88",
+          "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+          "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+          "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+          "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+          "region_quadrature.py": "7bbb6720901761564661792fb094f18ffd0470dd15beba7bd9bc13548defa5d5",
+          "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+          "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+          "reused_negative.py": "c99555ed741d70ba8c76278e4a3f4519c6724526ba5a62fa33a72309005945e9",
+          "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+          "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+          "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+          "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+          "run_harness_regression.py": "9f74d26111a1c334f2b1ff829cd01b2d26e2e99f3d4d74e1a4ffca137d561bad",
+          "run_lm_screen.py": "8ba7b62e15bf9e1a7e5bf3e2b68603314b1d5c7046ca49d165a0a1eaad83e2dc",
+          "run_ml_validation.py": "3f7417faf0c1469936a9036b05f9f2f187bcc71d8581a5f0c55674c22d7670fc",
+          "run_sml_screen.py": "b369622bc17c63cd9b36f7f9e4f7eb521ff1b213b57a9638c2acf877feddc68d",
+          "scan_commit_scheduler.py": "cad142f46659ac7d806748a8d84d80fe7535c541b25ebc5309604e68e8254b70",
+          "scheduling_diagnose.py": "1f01c011e54981a2a39788834336374ffd635c0ac82f2c560f63c9ca8b670d71",
+          "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+          "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+          "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+          "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+          "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+          "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+          "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+          "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+          "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+          "write_active_algorithm.py": "7d5bebfd8ac04d8c5ebf42f4ea72a1fa7ec1dc9460d954822b4afe02eb1171b0",
+          "write_release_readme.py": "5d733689eb3f5246b0ead5367052c6595dddc1a2a61677bf99f036b1f97c59b8"
+        },
+        "configuration": {
+          "version": "R2-s22_ml",
+          "inner_count": 8,
+          "outer_count": 13,
+          "inner_radius": 995.0,
+          "outer_radius": 1860.0,
+          "inner_phase": 0.0,
+          "outer_phase": 0.0,
+          "probe_b": 80.0,
+          "probe_fraction": 0.5,
+          "max_local_rounds": 10,
+          "max_tasks_before_search": 8,
+          "through_clear": true,
+          "shared_bearing": true,
+          "optical_trial": 0.0,
+          "replace_search": false,
+          "forecast_search": false,
+          "commit_radius": 0.0,
+          "probe_order": "nearest",
+          "route_mode": "joint",
+          "lookahead": true,
+          "lookahead_positions": 9,
+          "lookahead_fractions": [
+            0.35,
+            0.5,
+            0.65
+          ],
+          "lookahead_spacings": [
+            40.0,
+            80.0,
+            120.0
+          ],
+          "shared_limit_per_stop": 3,
+          "shared_gain_s": 10.0,
+          "compact_optical": true,
+          "compact_optical_points": 4,
+          "adaptive_single": true,
+          "adaptive_single_gain_s": 1.0,
+          "stable_quadrature": true
+        },
+        "config_sha256": "968fd8c3d43e1ec914faa10f2b17badf65af2cd7edbe82c748112d7226d7f716"
+      }
+    ]
+  },
+  "actual_frozen_execution": true,
+  "worker_task_indices": [
+    [
+      0,
+      7,
+      8,
+      15,
+      16,
+      23,
+      24,
+      31,
+      32,
+      39,
+      40
+    ],
+    [
+      1,
+      2,
+      9,
+      10,
+      17,
+      18,
+      25,
+      26,
+      33,
+      34,
+      41,
+      42
+    ],
+    [
+      3,
+      4,
+      11,
+      12,
+      19,
+      20,
+      27,
+      28,
+      35,
+      36,
+      43
+    ],
+    [
+      5,
+      6,
+      13,
+      14,
+      21,
+      22,
+      29,
+      30,
+      37,
+      38
+    ]
+  ],
+  "isolation_wrapper": "frozen_policy_worker.policy_main",
+  "engine_argument_wrapper": "frozen_policy_worker.engine_main",
+  "harness_hashes": {
+    "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+    "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+    "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+    "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e"
+  }
+}
