@@ -14,6 +14,7 @@ from negative_cells import contract as contract_negative_history
 from reused_negative import choose_reused_probe,apply_reused_negative
 from partial_optical import choose_partial,EXCLUSION_RADIUS
 from certificate_search import CertificateSearch
+from adaptive_single import choose_adaptive_single
 
 
 class Q4Controller:
@@ -400,13 +401,28 @@ class Q4Controller:
             if reranked:
                 selected=reranked;probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
                 self.record('q4_finite_lookahead_after_optical_miss',channel=ch,**selected)
-        if self.options.get('compact_optical') and (selected or reused):
+        adaptive=None
+        if self.options.get('adaptive_single',False) and selected:
+            adaptive=choose_adaptive_single(before,self.client.ledger.position,self.positives[ch],self.negatives[ch],
+                                             [q for j,q in self.measured if j==ch],self.options,selected,anchor,
+                                             int(ch!=self.client.ledger.channel),self.optical_exclusions.get(ch,[]))
+            if adaptive and reused and adaptive['estimated_remaining_s']>=reused['estimated_remaining_s']+int(ch!=self.client.ledger.channel):
+                adaptive=None
+            if adaptive:self.record('q4_adaptive_single_rank',channel=ch,**adaptive)
+        if self.options.get('compact_optical') and (selected or reused or adaptive):
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
                               self.optical_exclusions.get(ch,[]),joint=self.options.get('joint_model_weights',False),
                               spatial_errors=self.options.get('planning_spatial_errors',False),
                               balanced_errors=self.options.get('planning_balanced_errors',False),stable=self.options.get('stable_quadrature',False))
             rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
+            if adaptive:rf_cost=adaptive['estimated_remaining_s']
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
+        if adaptive:
+            kind=self.measure(adaptive['point'],ch,'adaptive_single_probe')
+            if ch not in self.cleared:self.guaranteed_clear(ch)
+            self.record('q4_replan_after_adaptive_single',channel=ch,result=kind,
+                        cleared=ch in self.cleared,single_negative_is_not_pair_certificate=True)
+            return
         if reused:return self.execute_reused_probe(ch,reused,before)
         if not probe['geometry_valid']:
             self.record('q4_pair_geometry_rejected',channel=ch,probe=probe)
