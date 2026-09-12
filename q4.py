@@ -16,6 +16,10 @@ def main():
     p.add_argument('--replay-check',action='store_true',help='Reproduce actions using only recorded responses')
     a=p.parse_args()
     incumbent=json.loads((ROOT/'INCUMBENT.json').read_text(encoding='utf-8'))
+    if not a.config:
+        from verify_freeze import verify
+        audit=verify(ROOT/incumbent['freeze'],ROOT/incumbent['code_directory'],ROOT/incumbent['configuration'])
+        if not audit['valid']:raise RuntimeError('Frozen version failed integrity verification: '+str(audit['failures']))
     config=Path(a.config or incumbent['configuration'])
     if not config.is_absolute():config=ROOT/config
     code_directory=ROOT/(incumbent.get('code_directory','code') if not a.config else 'code')

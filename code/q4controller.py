@@ -223,6 +223,10 @@ class Q4Controller:
                     if old is None or math.dist(old,center)>10:
                         self.optical_tried[ch]=center
                         if self.clear(center,ch,'lookahead_optical'):return
+            if kind=='direction' and len(results)==1 and self.options.get('replan_after_direction'):
+                self.record('q4_replan_after_first_direction',channel=ch,
+                            unvisited_endpoint=endpoints[1],remaining_radius=self.info(ch)[1])
+                return
         if results==['no_signal','no_signal']:
             witness={**probe,'results':results,'observed_order':observed,
                      'before_polygon':before,'channel':ch,'positive_station':station}

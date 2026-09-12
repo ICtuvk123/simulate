@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-WORKERS=ROOT.parent/'jammer_search_q4_workers'
+WORKERS=ROOT.parent/(ROOT.name+'_workers')
 
 
 def worker_provenance(variants,workers=4):

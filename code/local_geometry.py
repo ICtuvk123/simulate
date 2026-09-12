@@ -1,4 +1,4 @@
-"""Q2 operating regions and limited one-step time rollouts, no environment I/O."""
+"""Guaranteed optical operating region for conservative Q4 polygons."""
 import math
 
 from geometry import minimum_circle

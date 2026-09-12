@@ -13,6 +13,9 @@ def main():
     p.add_argument('--url',default='http://127.0.0.1:2026')
     a=p.parse_args()
     incumbent=json.loads((ROOT/'INCUMBENT.json').read_text(encoding='utf-8'))
+    from verify_freeze import verify as verify_integrity
+    integrity=verify_integrity(ROOT/incumbent['freeze'],ROOT/incumbent['code_directory'],ROOT/incumbent['configuration'])
+    if not integrity['valid']:raise RuntimeError('Frozen version integrity check failed before any connection')
     sys.path.insert(0,str(ROOT/incumbent.get('code_directory','code')))
     from q3client import Client,JsonlJournal
     from q4controller import Q4Controller
