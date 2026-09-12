@@ -316,9 +316,14 @@ class Q4Controller:
                 raise ProtocolError('Q4 skeleton exhausted with unproved directional coverage')
             p=self.client.ledger.position
             force_search=self.remaining and self.since_search>=self.options['max_tasks_before_search']
-            tasks=[('scan',i) for i in range(len(self.remaining))]
-            points=list(self.remaining)
-            if not force_search:
+            indices=list(range(len(self.remaining)))
+            if self.options.get('search_stage')=='inner_first':
+                inner=[i for i in indices if math.hypot(*self.remaining[i])<1500]
+                if inner:indices=inner
+            tasks=[('scan',i) for i in indices]
+            points=[self.remaining[i] for i in indices]
+            allow_sources=not (self.options.get('search_stage')=='search_first' and self.remaining)
+            if not force_search and allow_sources:
                 tasks += [('source',ch) for ch in pending]
                 points += [self.route_source_point(ch,p) for ch in pending]
             if not tasks:raise ProtocolError('Q4 no legal progress task')
