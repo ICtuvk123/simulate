@@ -11,6 +11,7 @@ from lookahead import choose_pair,shared_information_value,hypotheses,single_pro
 from compact_optical import choose_cover,verify_cover
 from task_routing import area_centroid,open_task_route
 from negative_cells import contract as contract_negative_history
+from reused_negative import choose_reused_probe,apply_reused_negative
 
 
 class Q4Controller:
@@ -259,6 +260,27 @@ class Q4Controller:
             if self.clear(point,ch,'compact_optical'):return True
         raise ProtocolError('Certified compact optical cover exhausted without success')
 
+    def execute_reused_probe(self,ch,selected,before):
+        """Pay for one new RF; an earlier same-channel negative supplies its mate."""
+        if ch in self.cleared:raise ProtocolError('Cannot reuse history after successful clearing')
+        probe=selected['probe'];h=probe['historical_negative']
+        if not any(math.dist(h,p)<1e-8 for p in self.negatives[ch]):
+            raise ProtocolError('Historical endpoint lacks an actual same-channel negative')
+        if not any(math.dist(probe['station'],s)<1e-8 and probe['bearing']==beta
+                   for s,beta in self.positives[ch]):
+            raise ProtocolError('Reused pair lacks an actual positive reception premise')
+        kind=self.measure(selected['point'],ch,'reused_negative_probe')
+        if ch in self.cleared:return
+        if kind=='no_signal':
+            witness=dict(probe,channel=ch,before_polygon=before,results=['no_signal','no_signal'],
+                         historical_result='no_signal',new_result=kind)
+            updated=apply_reused_negative(self.polygons[ch],witness)
+            if not updated:raise ProtocolError('Asymmetric negative pair produced empty region')
+            self.polygons[ch]=updated
+            self.record('q4_reused_negative_clip',witness=witness,polygon=updated,
+                        virtual_time_s=self.client.ledger.virtual_time)
+        self.guaranteed_clear(ch)
+
     def localize(self,ch):
         if self.guaranteed_clear(ch):return
         r=self.info(ch)[1]
@@ -282,10 +304,20 @@ class Q4Controller:
             if selected:
                 probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
                 self.record('q4_finite_lookahead_rank',channel=ch,**selected)
-        if self.options.get('compact_optical') and selected:
+        reused=None
+        if self.options.get('reuse_negative',False):
+            other=self.other_tasks(ch)
+            anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
+            reused=choose_reused_probe(before,self.client.ledger.position,self.positives[ch],self.negatives[ch],
+                                       [q for j,q in self.measured if j==ch],self.options,anchor)
+            if reused and selected and reused['estimated_remaining_s']>=selected['estimated_remaining_s']:
+                reused=None
+            if reused:self.record('q4_reused_negative_rank',channel=ch,**reused)
+        if self.options.get('compact_optical') and (selected or reused):
             models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
-            rf_cost=selected['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
+            rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
+        if reused:return self.execute_reused_probe(ch,reused,before)
         if not probe['geometry_valid']:
             self.record('q4_pair_geometry_rejected',channel=ch,probe=probe)
             return self.fallback(ch)

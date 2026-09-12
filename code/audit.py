@@ -49,21 +49,57 @@ def audit_pair_witness(w,positive,negative):
     except (KeyError,ValueError,TypeError,OverflowError):return False
 
 
+def audit_reused_witness(w,positive,negative,cleared):
+    """Independent asymmetric witness, including chronological negative reuse."""
+    try:
+        ch=w['channel'];s=w['station'];h=w['historical_negative'];q=w['new_station']
+        if ch in cleared:return False
+        a=math.radians(w['bearing']);d=(math.cos(a),math.sin(a));n=(-d[1],d[0]);b=w['b']
+        if not all(math.isfinite(v) for v in [*s,*h,*q,a,b]):return False
+        t=(h[0]-s[0])*d[0]+(h[1]-s[1])*d[1]
+        c=(h[0]-s[0])*n[0]+(h[1]-s[1])*n[1];opposite=-math.copysign(b,c)
+        expected=(s[0]+t*d[0]+opposite*n[0],s[1]+t*d[1]+opposite*n[1])
+        valid=(w.get('kind')=='positive_station_asymmetric_pair' and t>0 and b>0
+               and abs(c)>=t*math.tan(ALPHA)+MARGIN and b>=t*math.tan(ALPHA)+MARGIN
+               and c*c+2*t*abs(c)*math.tan(ALPHA)<=t*t-MARGIN
+               and b*b+2*t*b*math.tan(ALPHA)<=t*t-MARGIN
+               and abs(w['t']-t)<1e-8 and abs(w['historical_height']-c)<1e-8
+               and abs(w['new_height']-opposite)<1e-8 and math.dist(expected,q)<1e-8
+               and math.dist(h,q)>MARGIN and math.dist(w['d'],d)<1e-9 and math.dist(w['n'],n)<1e-9
+               and bool(w['before_polygon']) and w.get('results')==['no_signal','no_signal'])
+        for v in w['before_polygon']:
+            x=(v[0]-s[0])*d[0]+(v[1]-s[1])*d[1]
+            y=(v[0]-s[0])*n[0]+(v[1]-s[1])*n[1]
+            valid=valid and x>=-1e-6 and abs(y)<=math.tan(ALPHA)*x+1e-6
+        history=negative.get(ch,[])
+        old_indices=[i for i,p in enumerate(history) if math.dist(p,h)<1e-8]
+        new_indices=[i for i,p in enumerate(history) if math.dist(p,q)<1e-8]
+        return (valid and any(math.dist(p,s)<1e-9 and beta==w['bearing'] for p,beta in positive.get(ch,[]))
+                and bool(old_indices) and bool(new_indices) and min(old_indices)<max(new_indices))
+    except (KeyError,ValueError,TypeError,OverflowError):return False
+
+
 def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
-    positive={};negative={};prior_regions={};region_checks=0;witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
+    positive={};negative={};cleared=set();prior_regions={};region_checks=0;witnesses=0;reused_witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
     for row in records:
         if row['event']=='response' and row['http_status']==200:
             response=json.loads(row['response_body'])
+            if response.get('accepted') and row['path']=='/clear' and response.get('clear_result')=='success':
+                cleared.add(row['payload']['channel'])
             if response.get('accepted') and row['path']=='/measure':
                 ch=row['payload']['channel'];p=row['payload']['position'];q=(p['x'],p['y'])
-                if response['measure_result']=='direction':positive.setdefault(ch,[]).append((q,response['svd_deg']))
-                elif response['measure_result']=='no_signal':negative.setdefault(ch,[]).append(q)
+                if ch not in cleared:
+                    if response['measure_result']=='direction':positive.setdefault(ch,[]).append((q,response['svd_deg']))
+                    elif response['measure_result']=='no_signal':negative.setdefault(ch,[]).append(q)
         if row.get('reason')=='q4_paired_negative_clip':
             w=row['witness'];valid=audit_pair_witness(w,positive,negative)
             if not valid:errors.append('invalid_pair_witness')
             witnesses+=1
+        if row.get('reason')=='q4_reused_negative_clip':
+            if not audit_reused_witness(row['witness'],positive,negative,cleared):errors.append('invalid_reused_pair_witness')
+            reused_witnesses+=1
         if row.get('reason')=='q4_compact_optical_cover':
             w=row['witness'];d=w['d'];n=w['n'];x0,y0,x1,y1=w['bounds'];nx=w['nx'];ny=w['ny']
             contained=all(x0<=sum(p[k]*d[k] for k in (0,1))<=x1 and
@@ -86,14 +122,15 @@ def postcheck(journal_path,evaluation):
             if not verify_contraction(row['witness'],row['polygon'],positive.get(ch,[]),negative.get(ch,[])):
                 errors.append('invalid_continuous_negative_contraction')
             negative_contractions+=1
-        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip','q4_negative_history_clip'):
+        if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip','q4_negative_history_clip','q4_reused_negative_clip'):
             ch=row.get('channel',row.get('witness',{}).get('channel'))
             if ch not in truth or not contains(row['polygon'],truth[ch],tolerance=1e-3):
                 errors.append('truth_excluded_channel_'+str(ch))
             region_checks+=1
             prior_regions[ch]=row['polygon']
     return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,
-                compact_optical_covers=optical_covers,negative_contractions=negative_contractions)
+                reused_pair_witnesses=reused_witnesses,compact_optical_covers=optical_covers,
+                negative_contractions=negative_contractions)
 
 
 class MemoryJournal:
