@@ -1,10 +1,25 @@
 """Registered paired local experiments in independent read-only code worktrees."""
-import argparse,csv,json,math,os,statistics,subprocess,sys,time
+import argparse,csv,hashlib,json,math,os,statistics,subprocess,sys,time
 from datetime import datetime,timezone
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 WORKERS=ROOT.parent/'jammer_search_q4_workers'
+
+
+def worker_provenance(variants,workers=4):
+    entries=[]
+    for i in range(workers):
+        directory=WORKERS/f'w{i}'
+        hashes={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((directory/'code').glob('*.py'))}
+        commit=subprocess.check_output(['git','-c','safe.directory='+directory.as_posix(),'-C',str(directory),'rev-parse','HEAD'],text=True).strip()
+        configs={name:dict(sha256=hashlib.sha256((directory/'configs'/filename).read_bytes()).hexdigest(),
+                           options=json.loads((directory/'configs'/filename).read_text())) for name,filename in variants.items()}
+        entries.append(dict(worker=i,directory=str(directory),commit=commit,source_hashes=hashes,configurations=configs))
+    for row in entries[1:]:
+        if any(row[k]!=entries[0][k] for k in ('commit','source_hashes','configurations')):
+            raise RuntimeError('Worker code/config bytes differ before experiment; resynchronize worktrees')
+    return entries
 
 
 def percentile(x,q):
@@ -38,11 +53,12 @@ def summarize(rows):
 
 
 def run_phase(phase,variants,seeds,role='development',scenes=None,replay=False,workers=4):
+    provenance=worker_provenance(variants,workers)
     directory=ROOT/'reports'/phase;directory.mkdir(exist_ok=False)
     tasks=[dict(seed=seed,variant=variant,config='configs/'+filename,scene=(scenes or {}).get(str(seed),{}),replay=replay)
            for seed in seeds for variant,filename in variants.items()]
     registration=dict(phase=phase,utc=datetime.now(timezone.utc).isoformat(),role=role,
-                      variants=variants,seeds=seeds,tasks=tasks,workers=workers)
+                      variants=variants,seeds=seeds,tasks=tasks,workers=workers,worker_provenance=provenance)
     (directory/'registration.json').write_text(json.dumps(registration,indent=2),encoding='utf-8')
     with (ROOT/'SEEDS.csv').open('a',newline='',encoding='utf-8') as f:
         writer=csv.writer(f)
