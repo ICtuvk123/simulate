@@ -8,7 +8,7 @@ import argparse,csv,hashlib,json,subprocess,sys,time
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from datetime import datetime,timezone
 from pathlib import Path
-from experiment import ROOT,WORKERS,summarize
+from experiment import ROOT,WORKERS,summarize,allocate_tasks
 from verify_freeze import verify
 
 
@@ -37,6 +37,7 @@ def execute(phase,variants,seeds,role,scenes=None):
     registration=dict(phase=phase,utc=datetime.now(timezone.utc).isoformat(),role=role,seeds=seeds,
                       variants={v:s['config'] for v,s in variants.items()},snapshots=variants,
                       tasks=tasks,worker_provenance=provenance,actual_frozen_execution=True,
+                      worker_task_indices=[[i for i,_ in group] for group in allocate_tasks(tasks,4)],
                       isolation_wrapper='frozen_policy_worker.policy_main',
                       engine_argument_wrapper='frozen_policy_worker.engine_main',
                       harness_hashes={n:hashlib.sha256((ROOT/'code'/n).read_bytes()).hexdigest()
@@ -48,7 +49,7 @@ def execute(phase,variants,seeds,role,scenes=None):
     start=time.monotonic()
     def batch(i):
         worker=WORKERS/f'w{i}';returned=[]
-        for index,t in list(enumerate(tasks))[i::4]:
+        for index,t in allocate_tasks(tasks,4)[i]:
             output=folder/f'case_{index}.json'
             command=[sys.executable,str(ROOT/'code/snapshot_case.py'),'--snapshot',str(worker/t['snapshot']),
                      '--config',str(worker/t['config']),'--seed',str(t['seed']),'--scene',json.dumps(t['scene']),

@@ -7,6 +7,17 @@ ROOT=Path(__file__).resolve().parents[1]
 WORKERS=ROOT.parent/(ROOT.name+'_workers')
 
 
+def allocate_tasks(tasks,workers):
+    """Spread each variant across workers while retaining registered task order."""
+    if workers<1:raise ValueError('At least one worker is required')
+    seeds={seed:i for i,seed in enumerate(dict.fromkeys(t['seed'] for t in tasks))}
+    variants={name:i for i,name in enumerate(dict.fromkeys(t['variant'] for t in tasks))}
+    groups=[[] for _ in range(workers)]
+    for index,task in enumerate(tasks):
+        groups[(seeds[task['seed']]+variants[task['variant']])%workers].append((index,task))
+    return groups
+
+
 def worker_provenance(variants,workers=4):
     entries=[]
     for i in range(workers):
@@ -58,7 +69,8 @@ def run_phase(phase,variants,seeds,role='development',scenes=None,replay=False,w
     tasks=[dict(seed=seed,variant=variant,config='configs/'+filename,scene=(scenes or {}).get(str(seed),{}),replay=replay)
            for seed in seeds for variant,filename in variants.items()]
     registration=dict(phase=phase,utc=datetime.now(timezone.utc).isoformat(),role=role,
-                      variants=variants,seeds=seeds,tasks=tasks,workers=workers,worker_provenance=provenance)
+                      variants=variants,seeds=seeds,tasks=tasks,workers=workers,worker_provenance=provenance,
+                      worker_task_indices=[[i for i,_ in group] for group in allocate_tasks(tasks,workers)])
     (directory/'registration.json').write_text(json.dumps(registration,indent=2),encoding='utf-8')
     with (ROOT/'SEEDS.csv').open('a',newline='',encoding='utf-8') as f:
         writer=csv.writer(f)
@@ -66,7 +78,7 @@ def run_phase(phase,variants,seeds,role='development',scenes=None,replay=False,w
     processes=[]
     for i in range(workers):
         worktree=WORKERS/f'w{i}';log=(directory/f'worker{i}.log').open('w',encoding='utf-8')
-        job=dict(tasks=tasks[i::workers],output=str(directory/f'worker{i}.jsonl'),run_root=str(ROOT/'runs'))
+        job=dict(tasks=[task for _,task in allocate_tasks(tasks,workers)[i]],output=str(directory/f'worker{i}.jsonl'),run_root=str(ROOT/'runs'))
         job_path=directory/f'job{i}.json';job_path.write_text(json.dumps(job,indent=2),encoding='utf-8')
         proc=subprocess.Popen([sys.executable,str(worktree/'code/batch_worker.py'),'--job',str(job_path)],cwd=worktree,stdout=log,stderr=subprocess.STDOUT,
                               creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))

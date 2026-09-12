@@ -33,7 +33,11 @@ def write():
             f"| 有限两RF前瞻 | {bool(options.get('lookahead'))} |",
             f"| 真实搜索站共享测向 | {bool(options.get('shared_bearing'))} |",
             f"| 少量光学点连续覆盖 | {bool(options.get('compact_optical'))} |",
-            f"| 首端反馈后再比较光学覆盖 | {bool(options.get('compact_after_first'))} |",'',
+            f"| 首端反馈后再比较光学覆盖 | {bool(options.get('compact_after_first'))} |",
+            f"| 单RF后按反馈重规划 | {bool(options.get('adaptive_single'))} |",
+            f"| 稳定区域取样 | {bool(options.get('stable_quadrature'))} |",
+            f"| 先搜索再承诺定位 | {bool(options.get('scan_before_commit'))} |",
+            f"| 单RF候选几何规范化 | {bool(options.get('canonical_single_candidates'))} |",'',
             '以下完整保留主体规则、几何证明、评分模型与调度方法。末尾补充表中实际开启的光学覆盖模块；未开启的实验候选不属于默认算法。','']
     appendix=[]
     if options.get('adaptive_single'):
@@ -44,6 +48,13 @@ def write():
     if options.get('stable_quadrature'):
         appendix+=['','## 当前启用：与多边形顶点表示无关的区域取样','',
                    '评分专用副本先规范化凸包，沿较长包围盒轴计算分段线性截面宽度，精确积分梯形面积，再在等面积分位上选点，并用固定的交替截面分位选第二坐标。相同几何区域插入共线点、循环移动顶点或反向列举，不会改变评分取样。它只稳定有限假设的位置；保守区域、真实观测和退出证明均不因此改变。','']
+    if options.get('canonical_single_candidates'):
+        appendix+=['','## 当前启用：稳定单点候选的几何表示','',
+                   '只在生成单RF候选位置时，使用排序、去重和去除共线冗余点后的规范凸包副本，避免同一多边形顶点起点不同，导致并列最长直径选到不同方向。有限假设、真实区域裁剪、每个候选的分支评分仍使用原始保守区域。候选规范化与稳定等面积取样是两个独立开关。','']
+    if options.get('scan_before_commit'):
+        appendix+=['','## 当前启用：先完成有信息收益的既定搜索站','',
+                   '若开放路线的第一项是一个尚不能保证清除的源任务，则考虑把该路线中第一座后续搜索站提前。依据当前合法历史，预测在该站的已知源共享测向优先序；只有当前目标有望排入每站共享测向预算内，才继续比较。该站必须是既有搜索任务，未添加新站，也未删除后备站。','',
+                   '计算将该站提到路线首项后整条开放路线的移动时间差；共享测向的预计信息收益已扣5秒RF与1秒切频，并包含no_signal分支。预计净收益为正时才前置。实际到站仍按真实未知频道扫描和共享测向规则执行，新发现源或实际负反馈可能使原预测失效，之后重新调度。所有实际扫描与切频都进入总账；预测优先序、测向、清除与覆盖均不会成为事实证据。','']
     if options.get('route_centroid'):
         header.insert(-2,'全局源任务代理已启用面积重心；有限前瞻中的离开方向估计仍沿用原规则，没有把预测重心加入任何位置或退出证书。')
     if options.get('compact_optical'):
