@@ -13,8 +13,9 @@ def main():
     # audited modern process wrapper and remove evaluator arguments early.
     sys.argv=['q4-frozen-runner']
     import run_case
-    from frozen_policy_worker import policy_main
+    from frozen_policy_worker import policy_main,engine_main
     run_case.policy_main=policy_main
+    run_case.engine_main=engine_main
     directory,m=run_case.run_case(a.seed,a.config,a.scene,output_root=a.run_root,replay_check=True)
     result=dict(run_id=directory.name,directory=str(directory),metrics=m)
     Path(a.output).write_text(json.dumps(result),encoding='utf-8')

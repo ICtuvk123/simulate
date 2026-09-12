@@ -20,7 +20,7 @@ sys.addaudithook(hook)
 def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
-    positive={};negative={};region_checks=0;witnesses=0;errors=[]
+    positive={};negative={};region_checks=0;witnesses=0;optical_covers=0;errors=[]
     for row in records:
         if row['event']=='response' and row['http_status']==200:
             response=json.loads(row['response_body'])
@@ -39,12 +39,26 @@ def postcheck(journal_path,evaluation):
                    and w.get('results')==['no_signal','no_signal'])
             if not valid:errors.append('invalid_pair_witness')
             witnesses+=1
+        if row.get('reason')=='q4_compact_optical_cover':
+            w=row['witness'];d=w['d'];n=w['n'];x0,y0,x1,y1=w['bounds'];nx=w['nx'];ny=w['ny']
+            contained=all(x0<=sum(p[k]*d[k] for k in (0,1))<=x1 and
+                          y0<=sum(p[k]*n[k] for k in (0,1))<=y1 for p in w['before_polygon'])
+            centers=[tuple((x0+(i+.5)*(x1-x0)/nx)*d[k]+(y0+(j+.5)*(y1-y0)/ny)*n[k] for k in (0,1))
+                     for j in range(ny) for i in range(nx)]
+            valid=(contained and nx>0 and ny>0 and len(row['points'])==nx*ny
+                   and abs(math.hypot(*d)-1)<1e-10 and abs(math.hypot(*n)-1)<1e-10
+                   and abs(sum(d[k]*n[k] for k in (0,1)))<1e-10
+                   and math.hypot((x1-x0)/(2*nx),(y1-y0)/(2*ny))<=20-1e-5+1e-10
+                   and all(any(math.dist(a,b)<=1e-8 for b in row['points']) for a in centers)
+                   and contains(w['before_polygon'],truth[row['channel']],tolerance=1e-3))
+            if not valid:errors.append('invalid_compact_optical_cover')
+            optical_covers+=1
         if row.get('reason') in ('q4_positive_region','q4_paired_negative_clip'):
             ch=row.get('channel',row.get('witness',{}).get('channel'))
             if ch not in truth or not contains(row['polygon'],truth[ch],tolerance=1e-3):
                 errors.append('truth_excluded_channel_'+str(ch))
             region_checks+=1
-    return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses)
+    return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,compact_optical_covers=optical_covers)
 
 
 class MemoryJournal:

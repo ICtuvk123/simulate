@@ -1,6 +1,14 @@
 """Common isolation wrapper around an unchanged frozen Q4Controller import."""
 
 
+def engine_main(connection,configuration):
+    from q4engine import simulator_worker,Source
+    configuration=dict(configuration)
+    if configuration.get('sources') is not None:
+        configuration['sources']=[Source(**s) if isinstance(s,dict) else s for s in configuration['sources']]
+    simulator_worker(connection,configuration)
+
+
 def policy_main(connection,options,journal_path,metadata):
     import sys,time,traceback,array
     sys.argv=['q4-feedback-policy']

@@ -38,6 +38,7 @@ def execute(phase,variants,seeds,role,scenes=None):
                       variants={v:s['config'] for v,s in variants.items()},snapshots=variants,
                       tasks=tasks,worker_provenance=provenance,actual_frozen_execution=True,
                       isolation_wrapper='frozen_policy_worker.policy_main',
+                      engine_argument_wrapper='frozen_policy_worker.engine_main',
                       harness_hashes={n:hashlib.sha256((ROOT/'code'/n).read_bytes()).hexdigest()
                                       for n in ['frozen_experiment.py','snapshot_case.py','frozen_policy_worker.py','decision_guard.py']})
     (folder/'registration.json').write_text(json.dumps(registration,indent=2),encoding='utf-8')

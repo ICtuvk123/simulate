@@ -7,7 +7,8 @@ from itertools import combinations
 from directional_geometry import (DirectionalCoverage,skeleton,paired_probe,
                                   apply_paired_negative,optical_strip)
 from q3client import ProtocolError
-from lookahead import choose_pair,shared_information_value
+from lookahead import choose_pair,shared_information_value,hypotheses
+from compact_optical import choose_cover,verify_cover
 
 
 class Q4Controller:
@@ -259,6 +260,16 @@ class Q4Controller:
             if selected:
                 probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
                 self.record('q4_finite_lookahead_rank',channel=ch,**selected)
+        if self.options.get('compact_optical') and selected:
+            models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
+            cover=choose_cover(before,self.client.ledger.position,models,anchor,self.options.get('compact_optical_points',4))
+            rf_cost=selected['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
+            if cover and cover['estimated_remaining_s']<rf_cost:
+                if not verify_cover(cover['witness'],cover['points']):raise ProtocolError('Invalid compact optical cover')
+                self.record('q4_compact_optical_cover',channel=ch,radio_alternative_s=rf_cost,**cover)
+                for point in cover['points']:
+                    if self.clear(point,ch,'compact_optical'):return
+                raise ProtocolError('Certified compact optical cover exhausted without success')
         if not probe['geometry_valid']:
             self.record('q4_pair_geometry_rejected',channel=ch,probe=probe)
             return self.fallback(ch)
