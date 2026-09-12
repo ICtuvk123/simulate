@@ -1,0 +1,159 @@
+{
+  "D24": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 5837.352807,
+    "mean_per_source": 474.7136491121429,
+    "p95": 7024.094076799999,
+    "worst": 7442.259275,
+    "mean_wall": 4.952961719999439,
+    "worst_wall": 6.364491000000271,
+    "mean_move_time": 4158.152807201886,
+    "mean_RF_detection_time": 1348.5,
+    "mean_channel_switch_time": 250.3,
+    "mean_optical_time": 54,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 236.4,
+    "mean_optical_failed_count": 4.8,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 355041.9,
+    "mean_role_cost": {
+      "search": {
+        "actions": 238.6,
+        "total_time": 3934.292656548715,
+        "move_time": 2512.792656548715,
+        "rf_time": 1193.0,
+        "switch_time": 228.5,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 14.7,
+        "total_time": 88.2,
+        "move_time": 0.0,
+        "rf_time": 73.5,
+        "switch_time": 14.7,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 5.9,
+        "total_time": 277.8052219299498,
+        "move_time": 248.30522192994982,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 17.7,
+        "clear_time": 11.8
+      },
+      "compact_optical": {
+        "actions": 12.1,
+        "total_time": 611.8802504197432,
+        "move_time": 560.9802504197432,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 36.3,
+        "clear_time": 14.6
+      },
+      "paired_probe": {
+        "actions": 16.4,
+        "total_time": 925.1746783034789,
+        "move_time": 836.0746783034789,
+        "rf_time": 82.0,
+        "switch_time": 7.1,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      }
+    }
+  },
+  "D24D4": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 5837.352807,
+    "mean_per_source": 474.7136491121429,
+    "p95": 7024.094076799999,
+    "worst": 7442.259275,
+    "mean_wall": 5.123317899995891,
+    "worst_wall": 6.97765879999497,
+    "mean_move_time": 4158.152807201886,
+    "mean_RF_detection_time": 1348.5,
+    "mean_channel_switch_time": 250.3,
+    "mean_optical_time": 54,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 236.4,
+    "mean_optical_failed_count": 4.8,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 355100.5,
+    "mean_role_cost": {
+      "search": {
+        "actions": 238.6,
+        "total_time": 3934.292656548715,
+        "move_time": 2512.792656548715,
+        "rf_time": 1193.0,
+        "switch_time": 228.5,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 14.7,
+        "total_time": 88.2,
+        "move_time": 0.0,
+        "rf_time": 73.5,
+        "switch_time": 14.7,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 5.9,
+        "total_time": 277.8052219299498,
+        "move_time": 248.30522192994982,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 17.7,
+        "clear_time": 11.8
+      },
+      "compact_optical": {
+        "actions": 12.1,
+        "total_time": 611.8802504197432,
+        "move_time": 560.9802504197432,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 36.3,
+        "clear_time": 14.6
+      },
+      "paired_probe": {
+        "actions": 16.4,
+        "total_time": 925.1746783034789,
+        "move_time": 836.0746783034789,
+        "rf_time": 82.0,
+        "switch_time": 7.1,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      }
+    }
+  },
+  "comparison": {
+    "all_complete": true,
+    "all_independent_exit_valid": true,
+    "all_feedback_replay_valid": true,
+    "same_world_and_fixed_error_engine": true,
+    "not_promotion_evidence": true,
+    "contraction_events": {
+      "D24": {
+        "q4_negative_history_clip": 57,
+        "q4_paired_negative_clip": 15
+      },
+      "D24D4": {
+        "q4_negative_history_clip": 57,
+        "q4_paired_negative_clip": 15
+      }
+    },
+    "D24D4": {
+      "mean_per_source_improvement_over_D24": 0.0,
+      "p95_change": 0.0
+    }
+  }
+}

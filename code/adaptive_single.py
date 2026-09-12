@@ -40,12 +40,14 @@ def candidate_points(poly,current,measured,pair_endpoints):
     return accepted
 
 
-def one_action_cost(poly,current,q,models,pair,anchor=None,switch_cost=0,optical_threshold=0.):
+def one_action_cost(poly,current,q,models,pair,anchor=None,switch_cost=0,optical_threshold=0.,negative_recovery_base=None):
     total=0.;branches={'no_signal':0.,'direction':0.,'near':0.}
     recovery_cost={'no_signal':0.,'direction':0.};recovery_mass=0.
     full_range=all(math.dist(q,p)<=1500-1e-5 for p in poly)
     immediate=math.dist(current,q)/5+5+switch_cost
-    for model in models:
+    first=pair['endpoints'][0]
+    entry_delta=(math.dist(q,first)-math.dist(current,first))/5
+    for index,model in enumerate(models):
         mass=model['weight'];kind,beta=predicted_feedback(model,q);branches[kind]+=mass
         if kind=='near':tail=5+(math.dist(q,anchor)/5 if anchor is not None else 0.)
         else:
@@ -59,8 +61,13 @@ def one_action_cost(poly,current,q,models,pair,anchor=None,switch_cost=0,optical
                 # This is a complete original-pair rollout, not the cheap
                 # unresolved-radius terminal approximation at q. The current
                 # single no_signal itself makes no positional cut.
-                singleton=dict(model,weight=1.)
-                tail,_=pair_cost(region,q,pair['probe'],pair['endpoints'],[singleton],anchor,optical_threshold)
+                if kind=='no_signal' and negative_recovery_base is not None:
+                    # The complete original rollout changes only in its first
+                    # movement leg; optical failures remain inside the cache.
+                    tail=negative_recovery_base[index]+entry_delta
+                else:
+                    singleton=dict(model,weight=1.)
+                    tail,_=pair_cost(region,q,pair['probe'],pair['endpoints'],[singleton],anchor,optical_threshold)
                 recovery_cost[kind]+=mass*tail;recovery_mass+=mass
         total+=mass*(immediate+tail)
     return dict(estimated_remaining_s=total,branches=branches,recovery_mass=recovery_mass,
@@ -77,8 +84,11 @@ def choose_adaptive_single(poly,current,positives,negatives,measured,options,pai
     if not models:return None
     candidates=candidate_points(poly,current,measured,pair['endpoints'])
     baseline=pair['estimated_remaining_s']+switch_cost;best=None
+    optical_threshold=options.get('lookahead_optical',0.)
+    negative_recovery_base=[pair_cost(poly,current,pair['probe'],pair['endpoints'],
+                                     [dict(model,weight=1.)],anchor,optical_threshold)[0] for model in models]
     for point,kind in candidates:
-        cost=one_action_cost(poly,current,point,models,pair,anchor,switch_cost,options.get('lookahead_optical',0.))
+        cost=one_action_cost(poly,current,point,models,pair,anchor,switch_cost,optical_threshold,negative_recovery_base)
         if cost['estimated_remaining_s']>=baseline-options.get('adaptive_single_gain_s',1.):continue
         if best is None or cost['estimated_remaining_s']<best['estimated_remaining_s']:
             best=dict(point=point,candidate_kind=kind,**cost)
