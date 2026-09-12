@@ -7,6 +7,7 @@ All failure branches pay for restoring the original, still unvisited pair.
 import math
 from geometry import minimum_circle,diameter,clip_bearing
 from task_routing import area_centroid
+from candidate_geometry import canonical_candidate_polygon
 from lookahead import hypotheses,predicted_feedback,predicted_region,pair_cost,remaining_cost
 
 
@@ -82,7 +83,9 @@ def choose_adaptive_single(poly,current,positives,negatives,measured,options,pai
                       joint=options.get('joint_model_weights',False),spatial_errors=options.get('planning_spatial_errors',False),
                       balanced_errors=options.get('planning_balanced_errors',False),stable=options.get('stable_quadrature',False))
     if not models:return None
-    candidates=candidate_points(poly,current,measured,pair['endpoints'])
+    candidate_poly=(canonical_candidate_polygon(poly)
+                    if options.get('canonical_single_candidates',False) else poly)
+    candidates=candidate_points(candidate_poly,current,measured,pair['endpoints'])
     baseline=pair['estimated_remaining_s']+switch_cost;best=None
     optical_threshold=options.get('lookahead_optical',0.)
     negative_recovery_base=[pair_cost(poly,current,pair['probe'],pair['endpoints'],
