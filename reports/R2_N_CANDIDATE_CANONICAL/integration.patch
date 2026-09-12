@@ -1,0 +1,13 @@
+--- a/code/adaptive_single.py
++++ b/code/adaptive_single.py
+@@ -9,2 +9,3 @@
+ from task_routing import area_centroid
++from candidate_geometry import canonical_candidate_polygon
+ from lookahead import hypotheses,predicted_feedback,predicted_region,pair_cost,remaining_cost
+@@ -84,3 +85,5 @@
+     if not models:return None
+-    candidates=candidate_points(poly,current,measured,pair['endpoints'])
++    candidate_poly=(canonical_candidate_polygon(poly)
++                    if options.get('canonical_single_candidates',False) else poly)
++    candidates=candidate_points(candidate_poly,current,measured,pair['endpoints'])
+     baseline=pair['estimated_remaining_s']+switch_cost;best=None
