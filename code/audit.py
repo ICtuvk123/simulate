@@ -83,6 +83,7 @@ def postcheck(journal_path,evaluation):
     records=[json.loads(s) for s in Path(journal_path).read_text(encoding='utf-8').splitlines()]
     truth={s['channel']:(s['x'],s['y']) for s in evaluation['sources']}
     positive={};negative={};cleared=set();prior_regions={};region_checks=0;witnesses=0;reused_witnesses=0;optical_covers=0;negative_contractions=0;errors=[]
+    failed_clears={};exclusion_ids=set();optical_exclusions=0;partial_trials={}
     for row in records:
         if row['event']=='response' and row['http_status']==200:
             response=json.loads(row['response_body'])
@@ -93,6 +94,30 @@ def postcheck(journal_path,evaluation):
                 if ch not in cleared:
                     if response['measure_result']=='direction':positive.setdefault(ch,[]).append((q,response['svd_deg']))
                     elif response['measure_result']=='no_signal':negative.setdefault(ch,[]).append(q)
+            if response.get('accepted') and row['path']=='/clear' and response.get('clear_result')=='no_target_in_range':
+                p=row['payload']['position']
+                failed_clears[row['payload']['request_id']]=(row['payload']['channel'],(p['x'],p['y']))
+        if row.get('reason')=='q4_actual_optical_exclusion':
+            ch=row['channel'];q=row['point'];radius=row['radius'];rid=row['request_id']
+            actual=failed_clears.get(rid)
+            valid=(actual is not None and actual[0]==ch and math.dist(actual[1],q)<1e-9
+                   and rid not in exclusion_ids and ch in positive and 0<radius<=20-1e-5
+                   and row.get('convex_outer_region_unchanged') is True
+                   and ch in truth and math.dist(truth[ch],q)>=radius)
+            if not valid:errors.append('invalid_optical_exclusion')
+            exclusion_ids.add(rid);optical_exclusions+=1
+        if row.get('reason')=='q4_partial_optical_plan':
+            ch=row['channel'];version=row['positive_version'];key=(ch,version)
+            partial_trials[key]=partial_trials.get(key,0)+1
+            metadata=next(r for r in records if r['event']=='metadata')
+            options=metadata['policy_options']
+            count=sum(n for (j,_),n in partial_trials.items() if j==ch)
+            if (not options.get('partial_optical') or version!=len(positive.get(ch,[]))
+                or partial_trials[key]>options.get('partial_optical_per_version',1)
+                or count>options.get('partial_optical_total',4)
+                or row.get('full_coverage_claimed') is not False
+                or row.get('miss_continuation_included') is not True):
+                errors.append('invalid_partial_optical_guard')
         if row.get('reason')=='q4_paired_negative_clip':
             w=row['witness'];valid=audit_pair_witness(w,positive,negative)
             if not valid:errors.append('invalid_pair_witness')
@@ -130,7 +155,8 @@ def postcheck(journal_path,evaluation):
             prior_regions[ch]=row['polygon']
     return dict(valid=not errors,errors=errors,region_checks=region_checks,paired_witnesses=witnesses,
                 reused_pair_witnesses=reused_witnesses,compact_optical_covers=optical_covers,
-                negative_contractions=negative_contractions)
+                negative_contractions=negative_contractions,optical_exclusions=optical_exclusions,
+                partial_optical_trials=sum(partial_trials.values()))
 
 
 class MemoryJournal:

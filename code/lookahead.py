@@ -34,9 +34,10 @@ def receives(g,r,heading,q):
     return heading is None or sum((q[k]-g[k])*heading[k] for k in (0,1))>=-1e-8
 
 
-def hypotheses(poly, positives, negatives, count=9):
+def hypotheses(poly, positives, negatives, count=9, exclusions=()):
     models=[]
     for g in quadrature(poly,count):
+        if any(math.dist(g,item['point'])<item['radius'] for item in exclusions):continue
         low=max([1000.]+[math.dist(g,s) for s,_ in positives])
         if low>1500+1e-6:continue
         radii=sorted(set((min(1500.,low),min(1500.,(low+1500)/2),1500.)))
@@ -131,8 +132,8 @@ def pair_cost(poly,current,probe,endpoints,models,anchor=None,optical_threshold=
     return expected,branches
 
 
-def choose_pair(poly,current,positives,negatives,measured,options,anchor=None):
-    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9))
+def choose_pair(poly,current,positives,negatives,measured,options,anchor=None,exclusions=()):
+    models=hypotheses(poly,positives,negatives,options.get('lookahead_positions',9),exclusions)
     if not models:return None
     candidates=[]
     for s,beta in (positives[:1] if not options.get('lookahead_history') else positives[-3:]):

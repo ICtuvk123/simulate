@@ -12,6 +12,7 @@ from compact_optical import choose_cover,verify_cover
 from task_routing import area_centroid,open_task_route
 from negative_cells import contract as contract_negative_history
 from reused_negative import choose_reused_probe,apply_reused_negative
+from partial_optical import choose_partial,EXCLUSION_RADIUS
 
 
 class Q4Controller:
@@ -19,6 +20,7 @@ class Q4Controller:
         self.client=client;self.options=dict(options)
         self.polygons={};self.positives={};self.negatives={j:[] for j in range(1,21)}
         self.empty=set();self.rounds={};self.optical_tried={};self.measured=set()
+        self.optical_exclusions={};self.partial_counts={};self.partial_versions={}
         self.coverage=DirectionalCoverage()
         names=['inner_count','outer_count','inner_radius','outer_radius','inner_phase','outer_phase']
         self.sites=skeleton(**{k:options[k] for k in names})
@@ -141,7 +143,18 @@ class Q4Controller:
 
     def clear(self,point,ch,role):
         self.record('q4_action_role',role=role,path='/clear',channel=ch,point=point)
-        return self.client.action('/clear',point,ch)['clear_result']=='success'
+        success=self.client.action('/clear',point,ch)['clear_result']=='success'
+        if not success and self.options.get('partial_optical') and ch in self.polygons and ch not in self.cleared:
+            # action() only returns after HTTP and accepted validation. Keep
+            # holes separately; the reliable convex outer region is unchanged.
+            event=self.client.ledger.events[-1]
+            exclusion=dict(point=tuple(point),radius=EXCLUSION_RADIUS,
+                           request_id=event['request_id'])
+            self.optical_exclusions.setdefault(ch,[]).append(exclusion)
+            self.record('q4_actual_optical_exclusion',channel=ch,role=role,
+                        positive_version=len(self.positives.get(ch,[])),
+                        convex_outer_region_unchanged=True,**exclusion)
+        return success
 
     def refresh(self):
         if len(set(self.polygons)|self.cleared)==16:
@@ -281,6 +294,28 @@ class Q4Controller:
                         virtual_time_s=self.client.ledger.virtual_time)
         self.guaranteed_clear(ch)
 
+    def partial_allowed(self,ch):
+        version=len(self.positives.get(ch,[]))
+        return (self.options.get('partial_optical',False)
+                and self.partial_counts.get(ch,0)<self.options.get('partial_optical_total',4)
+                and self.partial_versions.get((ch,version),0)<self.options.get('partial_optical_per_version',1))
+
+    def try_partial_optical(self,ch,selected,anchor):
+        if not self.partial_allowed(ch):return False
+        exclusions=self.optical_exclusions.get(ch,[])
+        models=hypotheses(self.polygons[ch],self.positives[ch],self.negatives[ch],
+                          self.options.get('partial_optical_positions',25),exclusions)
+        plan=choose_partial(self.polygons[ch],self.client.ledger.position,selected,models,
+                            exclusions,self.options,anchor,int(ch!=self.client.ledger.channel))
+        if plan is None:return False
+        version=len(self.positives[ch]);key=(ch,version)
+        self.partial_counts[ch]=self.partial_counts.get(ch,0)+1
+        self.partial_versions[key]=self.partial_versions.get(key,0)+1
+        self.record('q4_partial_optical_plan',channel=ch,positive_version=version,
+                    trial_number=self.partial_counts[ch],**plan)
+        self.clear(plan['point'],ch,'partial_optical')
+        return True
+
     def localize(self,ch):
         if self.guaranteed_clear(ch):return
         r=self.info(ch)[1]
@@ -300,7 +335,8 @@ class Q4Controller:
             other=self.other_tasks(ch)
             anchor=min(other,key=lambda q:math.dist(q,self.info(ch)[0])) if other else None
             selected=choose_pair(before,self.client.ledger.position,self.positives[ch],self.negatives[ch],
-                                 [q for j,q in self.measured if j==ch],self.options,anchor)
+                                 [q for j,q in self.measured if j==ch],self.options,anchor,
+                                 self.optical_exclusions.get(ch,[]))
             if selected:
                 probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
                 self.record('q4_finite_lookahead_rank',channel=ch,**selected)
@@ -313,8 +349,19 @@ class Q4Controller:
             if reused and selected and reused['estimated_remaining_s']>=selected['estimated_remaining_s']:
                 reused=None
             if reused:self.record('q4_reused_negative_rank',channel=ch,**reused)
+        if selected and not reused and self.try_partial_optical(ch,selected,anchor):
+            if ch in self.cleared:return
+            # An actual miss changes the current point and exclusion history.
+            # Re-rank the original reliable baseline, without a second trial.
+            reranked=choose_pair(before,self.client.ledger.position,self.positives[ch],self.negatives[ch],
+                                 [q for j,q in self.measured if j==ch],self.options,anchor,
+                                 self.optical_exclusions.get(ch,[]))
+            if reranked:
+                selected=reranked;probe=selected['probe'];station=probe['station'];bearing=probe['bearing']
+                self.record('q4_finite_lookahead_after_optical_miss',channel=ch,**selected)
         if self.options.get('compact_optical') and (selected or reused):
-            models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9))
+            models=hypotheses(before,self.positives[ch],self.negatives[ch],self.options.get('lookahead_positions',9),
+                              self.optical_exclusions.get(ch,[]))
             rf_cost=(reused or selected)['estimated_remaining_s']+int(ch!=self.client.ledger.channel)
             if self.try_compact_optical(ch,models,anchor,rf_cost,'before_pair'):return
         if reused:return self.execute_reused_probe(ch,reused,before)
