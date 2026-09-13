@@ -1,5 +1,6 @@
 """Create and verify a small standalone practice package without official calls."""
 import hashlib
+import os
 import json
 import subprocess
 import sys
@@ -59,6 +60,21 @@ def build():
         checks.append(dict(name=name, returncode=result.returncode))
         if result.returncode:
             raise RuntimeError('Extracted check failed: ' + name + '\n' + result.stdout + result.stderr)
+    if os.name == 'nt':
+        # Reproduce the reported failure: no Python commands in PATH. Exercise
+        # the real .cmd from a fresh Chinese/spaced extraction directory.
+        env = os.environ.copy()
+        env['PATH'] = ''
+        system_root = next(value for key, value in env.items() if key.casefold() == 'systemroot')
+        command = [str(Path(system_root) / 'System32/cmd.exe'), '/d', '/c',
+                   'start_q4_practice.cmd', '--check-only']
+        result = subprocess.run(command, cwd=unpacked, env=env, capture_output=True,
+                                text=True, encoding='utf-8', timeout=90,
+                                creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+        (destination / 'windows_no_python_path.txt').write_text(result.stdout + '\n' + result.stderr, encoding='utf-8')
+        checks.append(dict(name='windows_launcher_without_python_in_path', returncode=result.returncode))
+        if result.returncode or 'network_requests' not in result.stdout:
+            raise RuntimeError('Windows launcher check failed: ' + result.stdout + result.stderr)
     report = dict(valid=True, archive=str(archive), bytes=archive.stat().st_size,
                   sha256=sha(archive.read_bytes()), packaged_files=len(data),
                   frozen_version=incumbent['version'], robot_id='202617201735',
