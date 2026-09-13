@@ -1,0 +1,27 @@
+{
+  "round": "Q4 search-cost optimization R3",
+  "started_utc": "2026-09-13T03:47:42Z",
+  "development_deadline_utc": "2026-09-13T07:47:42Z",
+  "new_structure_cutoff_utc": "2026-09-13T06:15:00Z",
+  "selection_freeze_target_utc": "2026-09-13T06:40:00Z",
+  "last_case_start_utc": "2026-09-13T07:18:00Z",
+  "experiment_hard_stop_utc": "2026-09-13T07:30:00Z",
+  "baseline": "frozen/R2_S22_ML",
+  "baseline_algorithm_commit": "09eaa82dd8fca503ba79b72b544b124d221483f5",
+  "official_tests_authorized": false,
+  "development_seed_range": [600001, 600300],
+  "validation_seed_range": [610001, 610600],
+  "final_holdout_seed_range": [620001, 620200],
+  "pressure_seed_range": [630001, 630030],
+  "smoke_seed_ranges": {"A": [600901, 600910], "B": [600921, 600930], "C": [600941, 600950], "integration": [600961, 600970]},
+  "screening_seeds": [600001, 600030],
+  "previous_validation_for_diagnosis_only": [510101, 510200],
+  "previous_final_never_for_selection": [[420001, 420200], [520001, 520200]],
+  "gate": {"minimum_mean_per_source_improvement_percent": 1.0, "maximum_p95_total_increase_percent": 2.0, "failures_allowed": 0, "feedback_replay_required": true, "independent_exit_required": true},
+  "hypotheses": {
+    "A": "Rebuild and continuously certify exactly the new 21-station 999.5/1870 m six-decimal candidate; test complete scenes.",
+    "B": "Reduce search travel by certified deletion and selective unknown-channel scans at actual stops or low-detour route points.",
+    "C": "Use historical positive-hull candidates or action-level scheduling only after diagnosing existing search tail and failed substitution opportunities."
+  },
+  "evaluation": "Same scenes, sources and fixed spatial error fields across paired variants; all registered cases retained. No sampled geometry accepted as certificate."
+}
