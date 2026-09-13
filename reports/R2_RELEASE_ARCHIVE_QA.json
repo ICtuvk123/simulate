@@ -1,0 +1,33 @@
+{
+  "valid": true,
+  "archives": [
+    {
+      "path": "D:\\computer_learning\\jammer_search_q4_r2\\release\\Q4_R2_S22ML_20260913_runtime.zip",
+      "sha256": "3a696f11cb1494be28490ebe78acb34a5e0614ba4bb7e84d83f8892c6e593055",
+      "files": 1121,
+      "raw_runs": 0,
+      "valid": true
+    },
+    {
+      "path": "D:\\computer_learning\\jammer_search_q4_r2\\release\\Q4_R2_S22ML_20260913_evidence.zip",
+      "sha256": "f8294838a09fee4953bf2b971cbd1619a410a9ddf82ec64b4224adb7c5df4ca0",
+      "files": 17843,
+      "raw_runs": 2324,
+      "valid": true
+    }
+  ],
+  "extracted_checks": [
+    {
+      "name": "freeze",
+      "returncode": 0
+    },
+    {
+      "name": "regression",
+      "returncode": 0
+    }
+  ],
+  "new_simulations": 0,
+  "final_holdout_status": "interrupted_not_accepted",
+  "prior_14_source_smoke": "reports/R2_PACKAGE_PREFLIGHT_QA.json",
+  "note": "Final extraction verifies the frozen policy and regression suite. The already completed preflight provides the local 14-source smoke; no new simulation is run after the budget stop."
+}
