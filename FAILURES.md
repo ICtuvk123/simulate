@@ -62,3 +62,14 @@ B 根据初始已知目标旋转完整骨架，30/30 完成，但平均每源恶
 - R2_D_dev30: continuous negative-history contraction cleared all 30 paired scenes, but mean per-source improvement was 0.6057%, below the pre-registered 1% gate; P95 total changed +0.0621%. Keep disabled in incumbent. Degenerate-polygon witness acceptance found during code review was fixed before promotion; all 60 original runs were independently re-audited and feedback-replayed with the hardened implementation. No new scenes are claimed by this re-audit.
 - R2_AR_dev30: narrow probes plus reused negative station improved mean per-source time by 0.1022% on the same 30 development scenes, with a paired bootstrap interval spanning zero. All 60 runs complete with valid replay/exit. Do not promote.
 - R2_B_dev30: before / after-first / both bounded partial-optical variants changed mean per-source time by -0.0124% / +0.0612% / -0.0086% improvement. All 120 runs complete and independently exit-verified; none passes the 1% gate. Added attempts sometimes replace RF yet add a longer optical detour. These are repeated development cases, not independent validation.
+# 第二轮动作优化的拒绝与审计记录
+
+最终保留批次因现实时间跨越截止而中断：H0 102/200、D_COMPACT 100/200、S22ML 102/200有完整记录，其余296个注册位置未完成。未观察到这些已完成运行的漏清，但没有完成整批独立退出核验和最终200场验收，因此不得写作最终成功率100%或删除未完成局后发布“最终平均”。本轮交付依据完整100场独立验证的S22ML。工具待返回期间较长时间间隔的精确原因未确定，所有原始记录保留。
+
+完整消融与失败解释见 `reports/R2_ACTION_ABLATIONS.md`、`reports/R2_ACTION_FAILURES.md`。重复的500001–500030是开发对照，不累计为独立验证。M+L已经过新的100场验证晋级；O、N、21站、MR、MC、MD及其他未过门槛的实验开关不进入默认配置。
+
+最后的D3+稳定采样：十个开发压力烟测全部合法且均未退步，但普通30场只改善0.793688%，低于1%门槛；12快、6平、12慢，最坏总时间从6447.198秒增到6607.570秒。保留原始日志与弦裁剪见证，拒绝继续晋级，不能用烟测结果替代普通完整任务成绩。
+
+发布工具审计发现：某些早期CSV没有run_id列，旧证据范围程序会把其210次运行记成零引用。这些原始文件实际存在，没有丢日志。现改为CSV、runs.jsonl和worker记录的编号并集，加入无CSV编号列、漏文件拒绝、去重三个回归测试；全部通过。此项只修复证据检查，不改变冻结策略。
+
+旧算法说明中共享原地清除的适用频道、光学比较时机和L的数值不变范围已按源码收窄。说明修订与策略性能优化分别记账，没有把文档修改算成提速。

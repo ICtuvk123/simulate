@@ -4,6 +4,8 @@
 
 新验证集 100/100 场完整清除。平均每源 **439.29 秒**，平均总时间 **5672.74 秒**，P95 **6353.33 秒**，最坏 **6487.78 秒**。平均策略现实耗时 **12.17 秒**，批量并行环境下测量。
 
+本轮200场×3方案的最终保留批次发生中断：304次运行已有记录、296次未完成，未通过整批最终验收。以上数字来自完整的新100场验证，不冒充最终200场成绩。中断记录和全部注册位置均保留。
+
 这里是自建本地场景成绩，分布是假设；完整配对、失败与分项时间见 `reports/R2_S22_ML_val100/`。本轮没有运行官方演练或正式测试。第三问 G 和原目录 D_COMPACT 保持独立。
 
 ## 运行与回放
@@ -32,6 +34,7 @@ python runs/编号/source/audit.py runs/编号/requests.jsonl
 ## 方案与结果
 
 - `reports/ACTIVE_ALGORITHM.md`：与当前实际冻结开关一致的算法说明。
+- `reports/R2_RESULTS_REPORT.md`：本轮完整结果、10至16源分层及压力测试；`R2_ACTION_ABLATIONS.md`、`R2_ACTION_FAILURES.md`保留拒绝方案和原因。
 - `reports/R2_S22_ML_val100/paired_results.csv`：逐场完整指标；同目录比较文件包含配对区间。
 - `examples/r2/`：真实路线对照，保留典型、最不利和最大改善案例。
 - `GOAL.md`、`EXPERIMENTS.csv`、`SEEDS.csv`、`FAILURES.md`、`NEXT.md`：预算、假设、种子用途和未晋级候选。

@@ -88,6 +88,14 @@ class ResultsEvidenceTests(unittest.TestCase):
         p=self.audit();self.assertFalse(p['all_verified']);self.assertEqual(len(p['audits']),4)
     def test_historical_report_cannot_be_overwritten(self):
         with self.assertRaisesRegex(ValueError,'Historical'):mod.build(self.root,self.root/'reports/RESULTS_REPORT.md')
+    def test_original_absolute_directory_is_not_an_evidence_source(self):
+        # The raw files are local; an obsolete developer directory must not
+        # redirect the audit away from the explicitly selected evidence root.
+        self.rows[0]['directory']=str(self.root/'obsolete_developer_worktree')
+        self.flush();self.assertTrue(self.audit()['all_verified'])
+    def test_run_id_cannot_escape_selected_evidence_root(self):
+        self.rows[0]['run_id']='../outside';self.flush()
+        with self.assertRaisesRegex(ValueError,'leaves evidence root'):self.audit()
 
 
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,176 @@
+{
+  "S22ML": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 5713.8089138,
+    "mean_per_source": 463.1204766367857,
+    "p95": 7107.841025649999,
+    "worst": 7497.513559,
+    "mean_wall": 11.5867215700011,
+    "worst_wall": 19.663252500002272,
+    "mean_move_time": 4178.708915670402,
+    "mean_RF_detection_time": 1229.5,
+    "mean_channel_switch_time": 228.5,
+    "mean_optical_time": 50.7,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 212.3,
+    "mean_optical_failed_count": 3.7,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 321733.2,
+    "mean_role_cost": {
+      "search": {
+        "actions": 212.9,
+        "total_time": 4027.630381707377,
+        "move_time": 2759.530381707377,
+        "rf_time": 1064.5,
+        "switch_time": 203.6,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 17.4,
+        "total_time": 104.4,
+        "move_time": 0.0,
+        "rf_time": 87.0,
+        "switch_time": 17.4,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "compact_optical": {
+        "actions": 10.8,
+        "total_time": 526.220012578991,
+        "move_time": 479.6200125789911,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 32.4,
+        "clear_time": 14.2
+      },
+      "paired_probe": {
+        "actions": 7.6,
+        "total_time": 411.4397914206693,
+        "move_time": 371.23979142066923,
+        "rf_time": 38.0,
+        "switch_time": 2.2,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 6.1,
+        "total_time": 272.9736515918484,
+        "move_time": 242.4736515918484,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 18.3,
+        "clear_time": 12.2
+      },
+      "adaptive_single_probe": {
+        "actions": 8.0,
+        "total_time": 371.14507837151706,
+        "move_time": 325.84507837151705,
+        "rf_time": 40.0,
+        "switch_time": 5.3,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      }
+    }
+  },
+  "S22MLD3": {
+    "n": 10,
+    "complete": 10,
+    "all_success": true,
+    "missing_metrics": 0,
+    "mean_total": 5617.6529547,
+    "mean_per_source": 454.032169725,
+    "p95": 6677.81811625,
+    "worst": 6830.439997,
+    "mean_wall": 11.74758845000033,
+    "worst_wall": 20.087344999992638,
+    "mean_move_time": 4090.1529560991585,
+    "mean_RF_detection_time": 1221.5,
+    "mean_channel_switch_time": 228.6,
+    "mean_optical_time": 51,
+    "mean_clear_time": 26.4,
+    "mean_no_signal_count": 211,
+    "mean_optical_failed_count": 3.8,
+    "mean_fallback_count": 0,
+    "mean_journal_bytes": 328335.5,
+    "mean_role_cost": {
+      "search": {
+        "actions": 212.9,
+        "total_time": 4035.176468791035,
+        "move_time": 2766.9764687910347,
+        "rf_time": 1064.5,
+        "switch_time": 203.7,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "shared_bearing": {
+        "actions": 17.6,
+        "total_time": 105.6,
+        "move_time": 0.0,
+        "rf_time": 88.0,
+        "switch_time": 17.6,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "compact_optical": {
+        "actions": 11.3,
+        "total_time": 554.4604634698874,
+        "move_time": 505.56046346988734,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 33.9,
+        "clear_time": 15.0
+      },
+      "paired_probe": {
+        "actions": 6.0,
+        "total_time": 306.2112534414964,
+        "move_time": 274.1112534414964,
+        "rf_time": 30.0,
+        "switch_time": 2.1,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      },
+      "guaranteed": {
+        "actions": 5.7,
+        "total_time": 258.5016055214111,
+        "move_time": 230.0016055214111,
+        "rf_time": 0.0,
+        "switch_time": 0.0,
+        "optical_time": 17.1,
+        "clear_time": 11.4
+      },
+      "adaptive_single_probe": {
+        "actions": 7.8,
+        "total_time": 357.7031648753288,
+        "move_time": 313.5031648753289,
+        "rf_time": 39.0,
+        "switch_time": 5.2,
+        "optical_time": 0.0,
+        "clear_time": 0.0
+      }
+    }
+  },
+  "comparison": {
+    "all_complete": true,
+    "all_independent_exit_valid": true,
+    "all_feedback_replay_valid": true,
+    "same_world_and_fixed_error_engine": true,
+    "not_promotion_evidence": true,
+    "contraction_events": {
+      "S22ML": {
+        "q4_paired_negative_clip": 16
+      },
+      "S22MLD3": {
+        "q4_negative_chord_clip": 48,
+        "q4_paired_negative_clip": 10
+      }
+    },
+    "S22MLD3": {
+      "mean_per_source_improvement_over_S22ML": 0.01962406624251567,
+      "p95_change": -0.06049979281306095
+    }
+  }
+}

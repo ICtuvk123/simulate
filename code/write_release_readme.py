@@ -17,6 +17,11 @@ def write(phase,variant):
     summary=json.loads((folder/'summary.json').read_text())[variant]
     role={'development':'开发配对','validation':'新验证集','final':'最终保留测试','holdout':'最终保留测试'}.get(registration['role'],registration['role'])
     evidence=f"{role} {summary['complete']}/{summary['n']} 场完整清除。平均每源 **{summary['mean_per_source']:.2f} 秒**，平均总时间 **{summary['mean_total']:.2f} 秒**，P95 **{summary['p95']:.2f} 秒**，最坏 **{summary['worst']:.2f} 秒**。平均策略现实耗时 **{summary['mean_wall']:.2f} 秒**，批量并行环境下测量。"
+    interrupted=ROOT/'reports/R2_FINAL_holdout200/INTERRUPTED.json'
+    if interrupted.exists():
+        data=json.loads(interrupted.read_text());recorded=sum(x['recorded_runs'] for x in data['counts'].values())
+        missing=sum(x['unfinished'] for x in data['counts'].values())
+        evidence+=f'\n\n本轮200场×3方案的最终保留批次发生中断：{recorded}次运行已有记录、{missing}次未完成，未通过整批最终验收。以上数字来自完整的新100场验证，不冒充最终200场成绩。中断记录和全部注册位置均保留。'
     text=f'''# 第四问本地模拟与算法包
 
 当前冻结：**{current['version']}**，执行源码 `{freeze['commit']}`。
@@ -51,6 +56,7 @@ python runs/编号/source/audit.py runs/编号/requests.jsonl
 ## 方案与结果
 
 - `reports/ACTIVE_ALGORITHM.md`：与当前实际冻结开关一致的算法说明。
+- `reports/R2_RESULTS_REPORT.md`：本轮完整结果、10至16源分层及压力测试；`R2_ACTION_ABLATIONS.md`、`R2_ACTION_FAILURES.md`保留拒绝方案和原因。
 - `reports/{phase}/paired_results.csv`：逐场完整指标；同目录比较文件包含配对区间。
 - `examples/r2/`：真实路线对照，保留典型、最不利和最大改善案例。
 - `GOAL.md`、`EXPERIMENTS.csv`、`SEEDS.csv`、`FAILURES.md`、`NEXT.md`：预算、假设、种子用途和未晋级候选。

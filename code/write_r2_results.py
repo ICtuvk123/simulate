@@ -76,8 +76,11 @@ def audit_phase(root,phase,freeze,inc_options,variant=None):
         count=m.get('engine_source_count');require(type(count) is int and count>0,f'Missing post-run source count {key}')
         close(m['total_time']/count,m['mean_time_per_source'],f'{key}/per source')
         close(sum(m[k] for k in ('move_time','RF_detection_time','channel_switch_time','optical_time','clear_time')),m['total_time'],f'{key}/time accounting')
-        directory=Path(row.get('directory') or Path(m['raw_log_path']).parent)
-        if not directory.exists():directory=root/'runs'/row['run_id']
+        # Imported registrations preserve their original absolute directory as
+        # provenance. Audit the selected evidence root, never a still-existing
+        # developer worktree outside a freshly extracted package.
+        directory=(root/'runs'/row['run_id']).resolve()
+        require(directory.parent==(root/'runs').resolve(),f'{key}: run path leaves evidence root')
         manifest=read(directory/'manifest.json');expected_hashes=versions[v]['hashes']
         require(manifest['run_id']==row['run_id']==m['run_id'],f'{key}: run identity mismatch')
         require(manifest['source_hashes']==expected_hashes,f'{key}: actual source manifest differs from registration')
@@ -208,6 +211,14 @@ def build(root,out,phase_name=None,variant=None,pressure_names=None):
             group={v:s for v,s in group.items() if s['n']}
             lines += [f'**{label}压力子集**','']+(summary_table(group) if group else ['无注册场景。'])+['']
         lines+=['压力场景包含边界向外辐射、发射角边界、1000/1500m半径、0/360度、聚集、10/16源、near、空频道等预设情况，精确组成见该阶段registration。该人工压力比例不称为官方分布，也不混入主验证均值。','']
+    interrupted=root/'reports/R2_FINAL_holdout200/INTERRUPTED.json'
+    if interrupted.exists():
+        data=read(interrupted)
+        lines+=['## 最终保留批次未完成','',
+                '预登记200场×3方案的最终批次没有完成，不能声称通过最终200场。工具待返回期间出现较长现实时间间隔，精确原因未确定；恢复控制时已超过约定截止，已停止该批次。当前版本依赖上述完整100场新验证；不根据已完成部分重新选型，也不只挑成功子集发布最终均值。','',
+                '| 方案 | 注册 | 已有完整运行 | 未完成 |','|---|---:|---:|---:|']
+        for variant,count in data['counts'].items():lines.append(f"| {variant} | {count['registered']} | {count['recorded_complete']} | {count['unfinished']} |")
+        lines+=['','所有记录、未完成位置和截止状态见 `R2_FINAL_holdout200/INTERRUPTED.json`、`paired_results.csv`，该阶段未通过整批最终验收。','']
     lines += ['## 隔离、分布假设与复用边界','',
               '主结果为自建本地场景分布假设，包含本地生成的位置、半径、源类型/朝向及固定空间误差；不是官方分布估计。引擎与策略隔离，有限假设仅用于候选排序，不能删除真实位置或证明空频道。相同位置反馈固定，不按调用次数重新抽取，不将重复测量当作独立噪声。',
               '普通开发500001–500030在LM、SML、IJ及其他消融中反复使用，运行次数不能累计为独立场景数；多次选择后的开发自举区间也不是独立验证。开发、验证、最终保留和压力结果分别报告。原始日志和快照应保留，下一轮不用本轮保留集做参数选择。',

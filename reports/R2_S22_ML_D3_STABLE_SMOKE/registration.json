@@ -1,0 +1,408 @@
+{
+  "utc": "2026-09-12T15:00:26.462488+00:00",
+  "purpose": "stable_quadrature_exact_negative_chord_recheck_smoke_not_validation",
+  "parent_base_commit": "09eaa82",
+  "source_commit": "b954d49f9e301406465e19342653f3b6b0344b81",
+  "source_hashes": {
+    "ablation_report.py": "1117db0320c2fe69ce53d6c2c362c1a96051b060e6b7dbdee4b54dfb3d14e163",
+    "action_diagnostics.py": "4f4fb3ae971d762b0fd33576d95006d5ad6a5cbb314924166dee89813add2bf2",
+    "adaptive_single.py": "f0c6882e9ac9507312c5a6044b94e3621a522be6b5a801d3bf056ef7c4cb4dab",
+    "audit.py": "35f7831851bec0f5990b10da2be64578cbb259ddda1ed2d0381ed2b9b141e3e4",
+    "batch_worker.py": "60ad79168fba3ef223c3c3c6be842d59ec0cf2b1e00a947984c0c7341f4d5ef0",
+    "build_report.py": "4b20bcd5cbe375fd36c1a04c705697ce32a212a8fc2d33c961ec4f293b10558f",
+    "candidate_geometry.py": "623bdd301ad96c5564f4f79fd70844a03d2c5bbc91b7305a5c809fe127377684",
+    "certificate_search.py": "22dae437bb745ee3bfcff0a515b39f389e0fb164c5fa5bc484822a9727985147",
+    "compact_optical.py": "7a6893fb66efa36fd9609d5032d29b4ae0494285ff94896127220b1735ba6979",
+    "compare_behavior.py": "e332e44c1c14ba4941e8ec23f1fdecc595c4d561df93946e02c4d3b1f1b6568d",
+    "compare_phase.py": "42d5961cef26e3079c8035340bee1fd541a36a4b37276af6fd375883c4477725",
+    "coverage.py": "6b29fb4c5fa1a9de131acb49ffe5488e033ef6a2926934c038e69b347ed021ce",
+    "decision_guard.py": "bd0a4c39069e22bb1cb6c1016d444b5eb47e73b3c9cf7d3fd4ff5d9a45786c3e",
+    "directional_geometry.py": "614921815a99ca64ca491fda08fef7d24f16fa52b8ae035f339ea670cdddf2f4",
+    "experiment.py": "7e371ad2e25b1457bbd7aa30e3b0c20ad29387492131a0d66c832e3039463512",
+    "finalize_holdout.py": "685f8eebb3b65fe8bef6f0a73d79f572ad5b776e34254c546ad8600f6d7b651a",
+    "freeze_candidate.py": "7aab03b7acf0154244d0dd6936fcc7deabbcffa6517882e19cca6264c1222185",
+    "frozen_experiment.py": "8de333c90f5c474df1e37e5db94570ef7fdfce254752b70349ccb051d2f748bd",
+    "frozen_policy_worker.py": "9692f0dc0c3bae78ebabfbb7275b42829ee03c0c3fd32f9db7654cf7bf14546a",
+    "geometry.py": "d8bb01ffbcccbb054aa53cf5a6582cdd1e31d4568e2e76a37b1f1e0b182d48ca",
+    "import_worker_evidence.py": "eabe6f3aa022a0ef25bdd0bc0b6cbffee610eb1487fcd5c84d763a0d321a12cb",
+    "independent_exit.py": "b049298171a0a9bdc437b60dedd28c53b3340cdcec84c2522a0f20e83cb60597",
+    "independent_phase.py": "271d035ea0002db91fe78a0a29ab0c162c933f59238419192eda09510d7a2542",
+    "joint_models.py": "15c1bdf86104e7d46b04da106e19d2129c49671ffed32127d577c8db80173127",
+    "local_geometry.py": "b333628c7639ac9640d03c2864f35662f9b710b787f10f3258fa4448fcc9012f",
+    "lookahead.py": "b2d410b60ec037ad79c8cb4166160fd3778195536c65ec793770eb07d98bf4cb",
+    "make_figures.py": "6803df46217e0838c602457cb8b72148bb20689ba81550342656ca86da87be5d",
+    "make_gallery.py": "ef2521bee4d3eb553dbdde54e6b09b00019428ff225c1e97a47e3fe06dc857f4",
+    "make_pressure.py": "e2d4e3916ffaf433eef5d1fe6e719cad74b88c86299bbbd8837ffd79ba44d83c",
+    "make_r2_pressure.py": "afae7e199e4ceb4ba4a9cc5585e5e1824d6d5dfdc04b3cdab68a3a874ccd11df",
+    "make_route_pairs.py": "8f4e2f77ec8fecbfcf48670d32a187197b6a2a6d56ef722c3d118b87efcc058c",
+    "negative_cells.py": "27204334def6af126364e4729104d4aaac31c93de90d2d1c4464cce320d8020c",
+    "negative_chords.py": "e0dd6dabf494dce7d82dcfa20fd53df1b99e8e5dc12cd04147bd136f31989551",
+    "package_release.py": "e610289fe56805b26c433616e0151cb48dda58ce0a59bffa07612aee42917893",
+    "partial_optical.py": "ab733685105cb2a1a59977bbcbeb3285e21b59a5cdd419ca11d00d7e0e82b67c",
+    "postprocess_lm_screen.py": "215114e86cc5c02c3e3a48ce2f539b24685351d560e6992211ac8bf5bec5d7d4",
+    "postprocess_sml_screen.py": "5146d334124b799701d19e08e0c77966229dcfa8142b7d1e55dc26061394f433",
+    "practice_transport.py": "8128d3a0478ba50b871d9337ac6cf5dcd9e96463882caaf2f9af62cc7901f24a",
+    "prepare_lm_screen.py": "448508dcd53d433db3d351831c2d603e49e4825222a12b119bda601ddfff64c7",
+    "pressure_summary.py": "c35ac449303c1f89b853a031b4b2c7cf0fcd378091f584b381a80b9c0f15f8ac",
+    "promote_candidate.py": "eef51a7661951cf1a0860287682f344ef05e93abefdc69e32abbe480ba16f664",
+    "q3client.py": "c3191afbbae76b2dfb540c714164ce0e8bf558669cd8eae9c504021255d0ec41",
+    "q4controller.py": "b420c09bf66ec6ffb75e0ad04e01fbc2696d600df3b24c4557b7bf62e0a1d3c8",
+    "q4engine.py": "7063e2900f7917629215ea540f60793d639e6b688b4944c071bb1a8fa26334bf",
+    "qa_package.py": "6d4b3512ccdfe27a9de0c1ffe262bb43c476e16f78b9cccfa4a406231fb9882e",
+    "r2_b_smoke.py": "f22e060d8227e2acc48b9d985805ce9d4e918c5f0b87779baf56ffac22719bb9",
+    "record_experiment.py": "8539b3d1ec919110200718fc5958f3a021323096df0d742dd594c246c5ee9460",
+    "region_quadrature.py": "7bbb6720901761564661792fb094f18ffd0470dd15beba7bd9bc13548defa5d5",
+    "replay_html.py": "6a889d090ee6b6b97b8e5e49aad0812ed8a5f9839fb70ee232f9e3eff1791813",
+    "restore_evidence.py": "3a6dfe10cdc77b8d1ff435c9ffa19bc9fbe9fc99a4e6232c566d026ba9d58952",
+    "reused_negative.py": "c99555ed741d70ba8c76278e4a3f4519c6724526ba5a62fa33a72309005945e9",
+    "revalidate_phase.py": "c6e1fa7d6e6f7e73f286abb29d962c932215a2e7438c03a3f8f7b2e433859716",
+    "round2_gallery.py": "6e29ab35791f270548eb97376376c6f10136e4e9425c59a84b434fceb8f65f35",
+    "routing.py": "6ba3b3364928b78057646f16409cc43e011c708c36b86f56d5c93a69bd5e74ed",
+    "run_case.py": "4494713b11e09c1286d39919ea7675bed784e53f00249df5ef4eccd6882f3d17",
+    "run_harness_regression.py": "9f74d26111a1c334f2b1ff829cd01b2d26e2e99f3d4d74e1a4ffca137d561bad",
+    "run_lm_screen.py": "8ba7b62e15bf9e1a7e5bf3e2b68603314b1d5c7046ca49d165a0a1eaad83e2dc",
+    "run_ml_validation.py": "3f7417faf0c1469936a9036b05f9f2f187bcc71d8581a5f0c55674c22d7670fc",
+    "run_sml_screen.py": "b369622bc17c63cd9b36f7f9e4f7eb521ff1b213b57a9638c2acf877feddc68d",
+    "scan_commit_scheduler.py": "cad142f46659ac7d806748a8d84d80fe7535c541b25ebc5309604e68e8254b70",
+    "scheduling_diagnose.py": "1f01c011e54981a2a39788834336374ffd635c0ac82f2c560f63c9ca8b670d71",
+    "screen_group_sites.py": "f8b0557fc144a6f224cba50cac7690c4d3e127559d7125810c6e4670316c3709",
+    "screen_inner_radii.py": "7ae40f455b71eda585c956ef0f9b9e127cfd525bb8486dbcc94906f08354b5d4",
+    "screen_skeletons.py": "12787c217450e9b4211e31028c7f1153e7cf220eb636278861b8c4df52428ad5",
+    "setup_workers.py": "8f671272c8135604d881ae0c7b7a9f4409b092bc07dee677eda54d238ec65b5a",
+    "snapshot_case.py": "ac3e64332c01738865efbf7fcf0ddf1162e69a63799c1a3e7c40f29606cff816",
+    "task_routing.py": "21d8a03b0b8b25cd854e611fb91cfe27058dfe17199e307d18013e1e73ecf850",
+    "verify_exit.py": "d262976675b96d00bb2c90e96c1858dcfb154d22c21cc24a15d1c7f3f8711362",
+    "verify_freeze.py": "cfa6586fcebfb1d1f5a063ef9cab93d5a34810978e9bd3ccbd9c7ff56230a363",
+    "workers.py": "bf45a7ad5b3905bef14b1de30fbb0d23e845ec8540de4a095671983c03ebf629",
+    "write_active_algorithm.py": "7d5bebfd8ac04d8c5ebf42f4ea72a1fa7ec1dc9460d954822b4afe02eb1171b0",
+    "write_release_readme.py": "5d733689eb3f5246b0ead5367052c6595dddc1a2a61677bf99f036b1f97c59b8"
+  },
+  "configurations": {
+    "R2_S22_ML.json": {
+      "sha256": "968fd8c3d43e1ec914faa10f2b17badf65af2cd7edbe82c748112d7226d7f716",
+      "options": {
+        "version": "R2-s22_ml",
+        "inner_count": 8,
+        "outer_count": 13,
+        "inner_radius": 995.0,
+        "outer_radius": 1860.0,
+        "inner_phase": 0.0,
+        "outer_phase": 0.0,
+        "probe_b": 80.0,
+        "probe_fraction": 0.5,
+        "max_local_rounds": 10,
+        "max_tasks_before_search": 8,
+        "through_clear": true,
+        "shared_bearing": true,
+        "optical_trial": 0.0,
+        "replace_search": false,
+        "forecast_search": false,
+        "commit_radius": 0.0,
+        "probe_order": "nearest",
+        "route_mode": "joint",
+        "lookahead": true,
+        "lookahead_positions": 9,
+        "lookahead_fractions": [
+          0.35,
+          0.5,
+          0.65
+        ],
+        "lookahead_spacings": [
+          40.0,
+          80.0,
+          120.0
+        ],
+        "shared_limit_per_stop": 3,
+        "shared_gain_s": 10.0,
+        "compact_optical": true,
+        "compact_optical_points": 4,
+        "adaptive_single": true,
+        "adaptive_single_gain_s": 1.0,
+        "stable_quadrature": true
+      }
+    },
+    "R2_S22_ML_D3.json": {
+      "sha256": "60a4edab38b4abdcb4562593d2faee5843620a68516a5df316e231f7895d680a",
+      "options": {
+        "version": "R2-s22_ml_d3_stable_recheck",
+        "inner_count": 8,
+        "outer_count": 13,
+        "inner_radius": 995.0,
+        "outer_radius": 1860.0,
+        "inner_phase": 0.0,
+        "outer_phase": 0.0,
+        "probe_b": 80.0,
+        "probe_fraction": 0.5,
+        "max_local_rounds": 10,
+        "max_tasks_before_search": 8,
+        "through_clear": true,
+        "shared_bearing": true,
+        "optical_trial": 0.0,
+        "replace_search": false,
+        "forecast_search": false,
+        "commit_radius": 0.0,
+        "probe_order": "nearest",
+        "route_mode": "joint",
+        "lookahead": true,
+        "lookahead_positions": 9,
+        "lookahead_fractions": [
+          0.35,
+          0.5,
+          0.65
+        ],
+        "lookahead_spacings": [
+          40.0,
+          80.0,
+          120.0
+        ],
+        "shared_limit_per_stop": 3,
+        "shared_gain_s": 10.0,
+        "compact_optical": true,
+        "compact_optical_points": 4,
+        "adaptive_single": true,
+        "adaptive_single_gain_s": 1.0,
+        "stable_quadrature": true,
+        "negative_chords": true,
+        "negative_chord_max_pairs": 96,
+        "negative_chord_positive_limit": 3
+      }
+    }
+  },
+  "seeds": [
+    1441,
+    1442,
+    1443,
+    1444,
+    1445,
+    1446,
+    1447,
+    1448,
+    1449,
+    1450
+  ],
+  "tasks": [
+    {
+      "seed": 1441,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 10
+      },
+      "replay": true
+    },
+    {
+      "seed": 1441,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 10
+      },
+      "replay": true
+    },
+    {
+      "seed": 1442,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 16
+      },
+      "replay": true
+    },
+    {
+      "seed": 1442,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 16
+      },
+      "replay": true
+    },
+    {
+      "seed": 1443,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 10,
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "outward",
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1443,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 10,
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "outward",
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1444,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 16,
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "angle_boundary",
+        "reception": "maximum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1444,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 16,
+        "scenario": "boundary",
+        "source_mix": "directional",
+        "orientation": "angle_boundary",
+        "reception": "maximum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1445,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 14,
+        "scenario": "clustered"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1445,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 14,
+        "scenario": "clustered"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1446,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 10,
+        "source_mix": "omni",
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1446,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 10,
+        "source_mix": "omni",
+        "reception": "minimum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1447,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 16,
+        "source_mix": "omni",
+        "reception": "maximum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1447,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 16,
+        "source_mix": "omni",
+        "reception": "maximum"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1448,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 14,
+        "source_mix": "directional",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1448,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 14,
+        "source_mix": "directional",
+        "error_mode": "plus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1449,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 10,
+        "source_mix": "directional",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1449,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 10,
+        "source_mix": "directional",
+        "error_mode": "minus_one"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1450,
+      "variant": "S22ML",
+      "config": "configs/R2_S22_ML.json",
+      "scene": {
+        "count": 16,
+        "scenario": "clustered",
+        "source_mix": "directional"
+      },
+      "replay": true
+    },
+    {
+      "seed": 1450,
+      "variant": "S22MLD3",
+      "config": "configs/R2_S22_ML_D3.json",
+      "scene": {
+        "count": 16,
+        "scenario": "clustered",
+        "source_mix": "directional"
+      },
+      "replay": true
+    }
+  ],
+  "no_official_execution": true,
+  "other_new_factors_enabled": false,
+  "predeclared_gate": "zero incomplete/illegal cases; >=1% mean/source gain and P95 deterioration<=2%; subsequent development and untouched validation mandatory",
+  "test_count": 157,
+  "initial_test_fixture_error_recorded": true
+}
